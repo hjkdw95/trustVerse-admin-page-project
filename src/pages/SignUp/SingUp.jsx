@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SingUp = props => {
-  return <div>hi</div>;
+  return <div>hid</div>;
 };
 
 export default SingUp;
