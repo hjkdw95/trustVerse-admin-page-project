@@ -52,7 +52,7 @@ const TableData = ({ info, offSet, limit }) => {
     []
   );
 
-  const data = useMemo(() => info.slice(limit, offSet), []);
+  const data = useMemo(() => info.slice(limit, offSet), [limit]);
 
   return <Table columns={columns} data={data} />;
 };
