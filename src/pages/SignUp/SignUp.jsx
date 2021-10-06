@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const SingUp = props => {
+const SignUp = props => {
   const [idValue, setIdValue] = useState('');
   const [pwValue, setPwValue] = useState('');
 
@@ -105,4 +105,4 @@ const SignUpText = styled.div`
   }
 `;
 
-export default SingUp;
+export default SignUp;
