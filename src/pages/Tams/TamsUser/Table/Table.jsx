@@ -7,12 +7,12 @@ const Table = ({ columns, data }) => {
     useTable({ columns, data });
 
   return (
-    <table {...getTableProps()}>
+    <TableSheet {...getTableProps()}>
       <TableHead>
         {headerGroups.map(header => (
           <Header {...header.getHeaderGroupProps()}>
             {header.headers.map(col => (
-              <th {...col.getHeaderProps()}>{col.render('Header')}</th>
+              <Th {...col.getHeaderProps()}>{col.render('Header')}</Th>
             ))}
           </Header>
         ))}
@@ -29,23 +29,29 @@ const Table = ({ columns, data }) => {
           );
         })}
       </tbody>
-    </table>
+    </TableSheet>
   );
 };
 
 export default Table;
 
+const TableSheet = styled.table``;
+
 const TableHead = styled.thead`
-  width: 100%;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 `;
 
-const Header = styled.tr`
-  border: 0.5px solid ${props => props.theme.greyBorder};
+const Header = styled.tr``;
+
+const Th = styled.th`
+  padding: 1rem 1.5rem;
+  border-bottom: 0.5px solid ${props => props.theme.greyBorder};
+  ${({ theme }) => theme.tableFont()};
 `;
 
 const Td = styled.td`
   padding: 1rem 1.5rem;
   background-color: ${props => props.theme.lightGrey};
+  border-top: 2rem solid #fff;
   ${({ theme }) => theme.tableFont()};
 `;

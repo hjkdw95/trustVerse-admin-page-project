@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import TableLib from './Table';
+import Table from './Table';
 
-const TableData = ({ info }) => {
+const TableData = ({ info, offSet, limit }) => {
   const columns = useMemo(
     () => [
       {
@@ -52,9 +52,9 @@ const TableData = ({ info }) => {
     []
   );
 
-  const data = useMemo(() => info, []);
+  const data = useMemo(() => info.slice(limit, offSet), []);
 
-  return <TableLib columns={columns} data={data} />;
+  return <Table columns={columns} data={data} />;
 };
 
 export default TableData;
