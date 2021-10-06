@@ -15,8 +15,8 @@ const SignUp = props => {
   return (
     <div>
       <SingUpBox>
+        <SingUpTitle>Admin SignUp</SingUpTitle>
         <SingUpArticle>
-          <SingUpTitle>Admin SignUp</SingUpTitle>
           <div>
             <IdInput
               placeholder="Name"
@@ -59,7 +59,6 @@ const SingUpTitle = styled.div`
   color: white;
   text-align: center;
   padding-top: 20px;
-  margin-bottom: 20px;
 `;
 
 const SingUpArticle = styled.div`
