@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Table from './UserTable';
+import TableData from './Table/TableData';
 import axios from 'axios';
 import fetchData from '../../../service/data-fetch';
 import styled from 'styled-components';
@@ -15,7 +15,7 @@ const TamsUser = props => {
   return (
     <>
       <H1>Users</H1>
-      {info && <Table info={info} />}
+      {info && <TableData info={info} />}
     </>
   );
 };
