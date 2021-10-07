@@ -9,9 +9,8 @@ const TamsUser = props => {
   // pagenation 필요..현재는 데이터가 적어서 한번에 데이터 받은 후 client측에서 slice 중 (API 작업 중)
   const data = new fetchData();
   const [info, setInfo] = useState();
-  // const [pages, setPages] = useState({ limit: 0, offset: 7 });
-  const [limit, setLimit] = useState(0);
-  const [offSet, setOffset] = useState(7);
+  const STANDARD_OFFSET = 7;
+  const [pages, setPages] = useState({ limit: 0, offset: STANDARD_OFFSET });
 
   useEffect(() => {
     data.getTamUsers().then(item => setInfo(item));
@@ -21,15 +20,13 @@ const TamsUser = props => {
     <Wrapper>
       <H1>Users</H1>
       <Container>
-        {info && <TableData info={info} offSet={offSet} limit={limit} />}
+        {info && <TableData info={info} pages={pages} />}
         {info && (
           <Pagination
             info={info}
-            // pages={pages}
-            offSet={offSet}
-            limit={limit}
-            setLimit={setLimit}
-            setOffset={setOffset}
+            pages={pages}
+            setPages={setPages}
+            STANDARD_OFFSET={STANDARD_OFFSET}
           />
         )}
       </Container>
@@ -49,6 +46,8 @@ const H1 = styled.h1`
 `;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   padding: 3rem;
 `;

@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
 
-const Pagination = ({ info, offSet, limit, setLimit, setOffset }) => {
+const Pagination = ({ info, pages, setPages, STANDARD_OFFSET }) => {
+  const { limit } = pages;
+
   const handleChange = data => {
     let selected;
     let newOffset;
     if (data.selected === 0) {
       selected = 0;
-      newOffset = 7;
+      newOffset = STANDARD_OFFSET;
     } else {
-      selected = data.selected * 7;
-      newOffset = selected + 7;
+      selected = data.selected * STANDARD_OFFSET;
+      newOffset = selected + STANDARD_OFFSET;
     }
-    setLimit(selected);
-    setOffset(newOffset);
+    setPages({ limit: selected, offset: newOffset });
   };
 
   return (
     <Wrapper>
       <ListSummary>
-        Showing {limit + 1} to {limit + 7} of {info.length} entries
+        Showing {limit + 1} to {limit + STANDARD_OFFSET} of {info.length}{' '}
+        entries
       </ListSummary>
       <PageinationWrapper>
         <ReactPaginate
@@ -29,9 +31,9 @@ const Pagination = ({ info, offSet, limit, setLimit, setOffset }) => {
           nextLabel={<AiOutlineArrowRight />}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={Math.ceil(info.length / 7)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          pageCount={Math.ceil(info.length / STANDARD_OFFSET)}
+          marginPagesDisplayed={0}
+          pageRangeDisplayed={6}
           onPageChange={handleChange}
           containerClassName={'pagination'}
           activeClassName={'active'}

@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import Table from './Table';
 
-const TableData = ({ info, offSet, limit }) => {
+const TableData = ({ info, pages }) => {
+  const { limit, offset } = pages;
+
   const columns = useMemo(
     () => [
       {
@@ -52,7 +54,7 @@ const TableData = ({ info, offSet, limit }) => {
     []
   );
 
-  const data = useMemo(() => info.slice(limit, offSet), [limit]);
+  const data = useMemo(() => info.slice(limit, offset), [limit]);
 
   return <Table columns={columns} data={data} />;
 };
