@@ -42,6 +42,11 @@ const theme = {
     color: #6F7A92;
     line-height: 2.1rem;
   `,
+  greenBtn: () => `
+  background-color: #00d82c;
+  box-shadow: 0px 5px 10px rgb(0 216 44 / 30%);
+  color: #fff;
+  `,
 };
 
 export default theme;
