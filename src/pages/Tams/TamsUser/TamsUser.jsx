@@ -2,31 +2,29 @@ import React, { useState, useEffect } from 'react';
 import TableData from './Table/TableData';
 import axios from 'axios';
 import fetchData from '../../../service/data-fetch';
-import Pagination from './Table/Pagination';
+import Pagination from '../../../utils/Pagination';
 import styled from 'styled-components';
 
-const TamsUser = props => {
+const TamsUser = ({ format, getTamUsers }) => {
   // pagenation 필요..현재는 데이터가 적어서 한번에 데이터 받은 후 client측에서 slice 중 (API 작업 중)
-  const data = new fetchData();
-  const [info, setInfo] = useState();
-  const STANDARD_OFFSET = 7;
-  const [pages, setPages] = useState({ limit: 0, offset: STANDARD_OFFSET });
+  const { title, limit, offset, data, rowData } = format;
+  const [pages, setPages] = useState({ limit: limit, offset: offset });
 
   useEffect(() => {
-    data.getTamUsers().then(item => setInfo(item));
+    getTamUsers();
   }, []);
 
   return (
     <Wrapper>
-      <H1>Users</H1>
+      <H1>{title}</H1>
       <Container>
-        {info && <TableData info={info} pages={pages} />}
-        {info && (
+        {data && <TableData data={data} pages={pages} rowData={rowData} />}
+        {data && (
           <Pagination
-            info={info}
+            info={data}
             pages={pages}
             setPages={setPages}
-            STANDARD_OFFSET={STANDARD_OFFSET}
+            STANDARD_OFFSET={offset}
           />
         )}
       </Container>
