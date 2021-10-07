@@ -4,6 +4,260 @@
     "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
     "created_at": "2021-08-03 01:14:47",
     "edited_at": "2021-08-03 01:15:49",
-    "coin_list": ["TRV", "BTC", "BCH", "ETH"]
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
+  },
+  {
+    "email": "haddox.delvon@oolloo.org",
+    "walletID": "afecba2ab72f7b2e54d44631e863519d15cbe8c002cf44ff8fad9cc1ea011db4",
+    "created_at": "2021-08-03 01:14:47",
+    "edited_at": "2021-08-03 01:15:49",
+    "coin_list": ["TRV", "BTC", "BCH", "ETH"],
+    "wallet_balance": [
+      {
+        "coin_name": "TRV",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "BTC",
+        "password": "13cMVo7jM9o9jTN3FRsHRzBuz7irdJB44z",
+        "num": "1.0E-4"
+      },
+      {
+        "coin_name": "BCH",
+        "password": "bitcoincash:qz8lmadf52wfw6c0d9lkvsh0qyhvxcclnu8kf3",
+        "num": "0.0"
+      },
+      {
+        "coin_name": "ETH",
+        "password": "0xeb31b3fa6d35205bc168f26839f65e1aa84fdc97",
+        "num": "0.045189268536276"
+      }
+    ]
   }
 ]

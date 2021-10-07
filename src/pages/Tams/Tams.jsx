@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import TamsUser from './TamsUser/TamsUser';
 import TamsWallet from './TamsWallet/TamsWallet';
-import axios from 'axios';
 import fetchData from '../../service/data-fetch';
+import Balance from './TamsUser/Table/Balance';
+import axios from 'axios';
 
 const Tams = props => {
   const data = new fetchData();
@@ -33,6 +34,7 @@ const Tams = props => {
       {
         accessor: 'coin_list',
         Header: 'Wallet Balance',
+        Cell: ({ cell: { value } }) => <Balance values={value} />,
       },
       {
         accessor: 'created_at',
