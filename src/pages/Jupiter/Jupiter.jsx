@@ -6,7 +6,7 @@ import EditTab from './EditTab';
 
 const Jupiter = props => {
   const [reports, setReports] = useState({});
-  const [tabIndex, setTabIndex] = useState(4);
+  const [tabIndex, setTabIndex] = useState(1);
   useEffect(() => {
     fetch('/data/jupiterData.json', {
       method: 'GET',
@@ -25,6 +25,7 @@ const Jupiter = props => {
     3: <DeleteTab setTabIndex={setTabIndex} />,
     4: <EditTab setTabIndex={setTabIndex} />,
   };
+
   return <div>{MAPPING_JupiterTab[tabIndex]}</div>;
 };
 

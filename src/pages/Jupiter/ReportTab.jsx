@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Paging from './Paging';
 
 const ReportTab = ({ reports, setTabIndex }) => {
+  const [page, setPage] = useState(1);
+  const handlePageChange = page => {
+    setPage(page);
+  };
+
   return (
     <div>
       <Title
@@ -23,20 +29,27 @@ const ReportTab = ({ reports, setTabIndex }) => {
             </tr>
           </thead>
           <tbody>
-            {reports.data?.reports.map(goods => {
-              return (
-                <tr key={goods.report_id}>
-                  <td>{goods.report_id}</td>
-                  <td>{goods.title}</td>
-                  <td>{goods.BRIEF}</td>
-                  <td>{goods.COVER}</td>
-                  <td>{goods.CONTENT}</td>
-                </tr>
-              );
-            })}
+            {reports.data?.reports
+              .slice(page * 10 - 10, page * 10)
+              .map(goods => {
+                return (
+                  <tr key={goods.report_id}>
+                    <td>{goods.report_id}</td>
+                    <td>{goods.title}</td>
+                    <td>{goods.BRIEF}</td>
+                    <td>{goods.COVER}</td>
+                    <td>{goods.CONTENT}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </ReportTable>
       </ReportTableContainer>
+      <Paging
+        page={page}
+        count={reports.data?.reports.length}
+        setPage={setPage}
+      />
     </div>
   );
 };
@@ -50,11 +63,11 @@ const Title = styled.div`
 `;
 
 const ReportTableContainer = styled.div`
+  width: 1000px;
   padding: 30px;
   margin: 0 auto;
-  width: 1000px;
-  background-color: white;
   margin-top: 100px;
+  background-color: white;
 `;
 
 const ReportTable = styled.table`
@@ -62,8 +75,8 @@ const ReportTable = styled.table`
 
   thead tr th {
     padding: 14px;
-    font-size: 14px;
     color: #6f7a92;
+    font-size: 14px;
     text-align: left;
   }
 
@@ -85,4 +98,5 @@ const ReportTable = styled.table`
     }
   }
 `;
+
 export default ReportTab;

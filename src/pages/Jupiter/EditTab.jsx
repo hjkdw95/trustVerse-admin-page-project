@@ -1,43 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const EditTab = ({ setTabIndex }) => {
+  const [values, setValues] = useState({
+    id: '',
+    title: '',
+    description: '',
+  });
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const EditReport = () => {
+    fetch('', {
+      method: 'POST',
+      headers: { Authorization: localStorage.getItem('token') },
+      body: JSON.stringify({
+        id: values.id,
+        title: values.title,
+        description: values.description,
+      }),
+    });
+  };
   return (
     <div>
       <EditTabBox>
         <EditTabBoxTitle>Edit Report</EditTabBoxTitle>
         <EditTabBoxArticle>
-          <div>
-            <InputTitle for="report_id">Report ID</InputTitle>
-            <Input
-              placeholder="Enter the report id to edit"
-              required
-              type="text"
-              name="report_id"
-              id="report_id"
-            />
-          </div>
-          <div>
-            <InputTitle for="title">Title</InputTitle>
-            <Input
-              placeholder="eg. VOL_KR-20-004-JUPITER"
-              required
-              type="text"
-              name="title"
-              id="title"
-            />
-          </div>
-          <div>
-            <InputTitle for="description">Description</InputTitle>
-            <Input
-              placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
-              required
-              type="text"
-              name="description"
-              id="description"
-            />
-          </div>
-          <UpdateBnt>Update</UpdateBnt>
+          <Form onSubmit={EditReport}>
+            <div>
+              <InputTitle for="report_id">Report ID</InputTitle>
+              <Input
+                placeholder="Enter the report id to edit"
+                type="text"
+                name="report_id"
+                id="report_id"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <InputTitle for="title">Title</InputTitle>
+              <Input
+                placeholder="eg. VOL_KR-20-004-JUPITER"
+                type="text"
+                name="title"
+                id="title"
+                onChange={handleChange}
+                minLength="10"
+                required
+              />
+            </div>
+            <div>
+              <InputTitle for="description">Description</InputTitle>
+              <Input
+                placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
+                type="text"
+                name="description"
+                id="description"
+                onChange={handleChange}
+                minLength="10"
+                required
+              />
+            </div>
+            <UpdateBnt type="submit" onClick={EditReport} value="Update" />
+          </Form>
         </EditTabBoxArticle>
         <Caution>
           *If you wish to change the uploaded file, please delete the related
@@ -54,6 +83,7 @@ const EditTab = ({ setTabIndex }) => {
     </div>
   );
 };
+
 const EditTabBox = styled.div`
   width: 800px;
   margin: 0 auto;
@@ -62,6 +92,8 @@ const EditTabBox = styled.div`
   margin-top: 100px;
   background-color: white;
 `;
+
+const Form = styled.form``;
 
 const EditTabBoxTitle = styled.div`
   background-color: #a37bfd;
@@ -93,13 +125,14 @@ const Input = styled.input`
 `;
 
 const UpdateBnt = styled.button`
+  width: 200px;
   height: 45px;
-  border-radius: 130px;
+  margin-bottom: 30px;
   background-color: #373063;
   color: white;
-  width: 200px;
   font-size: 16px;
-  margin-bottom: 30px;
+  border-radius: 130px;
+  border: none;
 
   &:hover {
     cursor: pointer;
@@ -107,10 +140,10 @@ const UpdateBnt = styled.button`
 `;
 
 const BackBnt = styled.div`
-  font-size: 20px;
-  text-align: left;
   margin-bottom: 10px;
   margin-left: 10px;
+  font-size: 20px;
+  text-align: left;
 
   &:hover {
     cursor: pointer;
@@ -118,9 +151,9 @@ const BackBnt = styled.div`
 `;
 
 const Caution = styled.div`
+  margin-bottom: 10px;
   font-size: 15px;
   color: red;
-  margin-bottom: 10px;
 `;
 
 export default EditTab;

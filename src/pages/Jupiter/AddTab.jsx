@@ -1,46 +1,88 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const AddTab = ({ setTabIndex }) => {
+  const [values, setValues] = useState({
+    title: '',
+    description: '',
+    cover: '',
+    comment: '',
+  });
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const postReport = () => {
+    fetch('', {
+      method: 'POST',
+      headers: { Authorization: localStorage.getItem('token') },
+      body: JSON.stringify({
+        title: values.title,
+        description: values.description,
+        cover: values.cover,
+        comment: values.comment,
+      }),
+    });
+  };
+
   return (
     <div>
       <AddTabBox>
         <AddTabBoxTitle>Upload Report</AddTabBoxTitle>
         <AddTabBoxArticle>
-          <div>
-            <InputTitle for="title">Title</InputTitle>
-            <IdInput
-              id="title"
-              name="title"
-              placeholder="eg. VOL_KR-20-004-JUPITER"
-              required
-            />
-          </div>
-          <div>
-            <InputTitle for="description">Description</InputTitle>
-            <PwInput
-              id="description"
-              name="description"
-              placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
-              required
-            ></PwInput>
-          </div>
-          <div>
-            <InputTitle for="cover">Cover*</InputTitle>
-            <FileInput type="file" id="cover" name="cover" required></FileInput>
-            <Caution>*please upload a .png file of the report covers</Caution>
-          </div>
-          <div>
-            <InputTitle for="content">Content*</InputTitle>
-            <FileInput
-              type="file"
-              id="content"
-              name="content"
-              required
-            ></FileInput>
-            <Caution>*please upload a .pdf file of the report content</Caution>
-          </div>
-          <UpLoadBnt>UpLoad</UpLoadBnt>
+          <Form onSubmit={postReport}>
+            <div>
+              <InputTitle for="title">Title</InputTitle>
+              <IdInput
+                placeholder="eg. VOL_KR-20-004-JUPITER"
+                id="title"
+                name="title"
+                minLength="10"
+                onChange={handleChange}
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <InputTitle for="description">Description</InputTitle>
+              <PwInput
+                placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
+                id="description"
+                name="description"
+                minLength="10"
+                onChange={handleChange}
+                type="text"
+                required
+              ></PwInput>
+            </div>
+            <div>
+              <InputTitle for="cover">Cover*</InputTitle>
+              <FileInput
+                type="file"
+                id="cover"
+                name="cover"
+                onChange={handleChange}
+                required
+              ></FileInput>
+              <Caution>*please upload a .png file of the report covers</Caution>
+            </div>
+            <div>
+              <InputTitle for="content">Content*</InputTitle>
+              <FileInput
+                type="file"
+                id="content"
+                name="content"
+                onChange={handleChange}
+                required
+              ></FileInput>
+              <Caution>
+                *please upload a .pdf file of the report content
+              </Caution>
+            </div>
+            <UpLoadBnt type="submit" onClick={postReport} value="UpLoad" />
+          </Form>
         </AddTabBoxArticle>
         <BackBnt
           onClick={() => {
@@ -53,23 +95,26 @@ const AddTab = ({ setTabIndex }) => {
     </div>
   );
 };
+
 const AddTabBox = styled.div`
   width: 800px;
   margin: 0 auto;
+  margin-top: 100px;
   text-align: center;
   border: 1px gray solid;
-  margin-top: 100px;
   background-color: white;
 `;
 
+const Form = styled.form``;
+
 const AddTabBoxTitle = styled.div`
-  background-color: #a37bfd;
   height: 70px;
-  font-size: 30px;
-  color: white;
-  text-align: center;
   padding-top: 20px;
   margin-bottom: 20px;
+  color: white;
+  background-color: #a37bfd;
+  font-size: 30px;
+  text-align: center;
 `;
 
 const AddTabBoxArticle = styled.div`
@@ -78,10 +123,10 @@ const AddTabBoxArticle = styled.div`
 `;
 
 const InputTitle = styled.label`
+  display: block;
+  margin-bottom: 10px;
   font-size: 15px;
   text-align: left;
-  margin-bottom: 10px;
-  display: block;
 `;
 
 const IdInput = styled.input`
@@ -99,30 +144,30 @@ const PwInput = styled.input`
 `;
 
 const FileInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
   width: 100%;
   margin-bottom: 20px;
+  padding: 13px 20px;
+  height: 50px;
   border: 1px gray solid;
   border-radius: 2px;
-  padding-top: 12px;
 `;
 
 const Caution = styled.div`
+  margin-bottom: 10px;
   font-size: 15px;
   color: red;
   text-align: left;
-  margin-bottom: 10px;
 `;
 
-const UpLoadBnt = styled.button`
+const UpLoadBnt = styled.input`
+  width: 200px;
   height: 45px;
+  margin-bottom: 20px;
   border-radius: 130px;
   background-color: #373063;
   color: white;
-  width: 200px;
   font-size: 16px;
-  margin-bottom: 20px;
+  border: none;
 
   &:hover {
     cursor: pointer;
@@ -130,13 +175,14 @@ const UpLoadBnt = styled.button`
 `;
 
 const BackBnt = styled.div`
-  font-size: 20px;
-  text-align: left;
   margin-bottom: 10px;
   margin-left: 10px;
+  font-size: 20px;
+  text-align: left;
 
   &:hover {
     cursor: pointer;
   }
 `;
+
 export default AddTab;
