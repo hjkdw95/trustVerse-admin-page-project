@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import TamsUser from './TamsUser/TamsUser';
-import TamsWallet from './TamsWallet/TamsWallet';
+import TamsArticle from './TamsArticle';
+import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
-import Balance from './TamsUser/Table/Balance';
 import axios from 'axios';
 
 const Tams = props => {
@@ -102,8 +101,7 @@ const Tams = props => {
 
   return (
     <>
-      <TamsUser format={WALLETDATA} getTamUsers={getTamWallet} />
-      {/* <TamsUser format={USERDATA} getTamUsers={getTamUsers} /> */}
+      <TamsArticle format={WALLETDATA} getData={getTamWallet} />
     </>
   );
 };

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import TableData from './Table/TableData';
-import axios from 'axios';
-import fetchData from '../../../service/data-fetch';
-import Pagination from '../../../utils/Pagination';
+import Pagination from '../../utils/Pagination';
 import styled from 'styled-components';
 
-const TamsUser = ({ format, getTamUsers }) => {
+const TamsArticle = ({ format, getData }) => {
   // pagenation 필요..현재는 데이터가 적어서 한번에 데이터 받은 후 client측에서 slice 중 (API 작업 중)
   const { title, limit, offset, data, rowData } = format;
   const [pages, setPages] = useState({ limit: limit, offset: offset });
 
   useEffect(() => {
-    getTamUsers();
+    getData();
   }, []);
 
   return (
@@ -32,9 +30,9 @@ const TamsUser = ({ format, getTamUsers }) => {
   );
 };
 
-export default TamsUser;
+export default TamsArticle;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   padding: 3rem;
 `;
 
