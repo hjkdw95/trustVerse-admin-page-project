@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Paging from './Paging';
 
 const ReportTab = ({ reports, setTabIndex }) => {
   const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(reports.data?.reports.slice(page * 10 - 10, page * 10));
+  }, [page]);
 
   return (
     <div>
@@ -26,22 +30,22 @@ const ReportTab = ({ reports, setTabIndex }) => {
             </tr>
           </thead>
           <tbody>
-            {reports.data?.reports
-              .slice(page * 10 - 10, page * 10)
-              .map(goods => {
-                return (
-                  <tr key={goods.report_id}>
-                    <td>{goods.report_id}</td>
-                    <td>{goods.title}</td>
-                    <td>{goods.BRIEF}</td>
-                    <td>{goods.COVER}</td>
-                    <td>{goods.CONTENT}</td>
-                  </tr>
-                );
-              })}
+            {data.map(goods => {
+              return (
+                <tr key={goods.report_id}>
+                  <td>{goods.report_id}</td>
+                  <td>{goods.title}</td>
+                  <td>{goods.BRIEF}</td>
+                  <td>{goods.COVER}</td>
+                  <td>{goods.CONTENT}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </ReportTable>
-        Showing {page - 1 + '1'} to 10 of {reports.data?.reports.length + 1}
+        Showing {page === 1 ? page : page * 10} to
+        {page === 1 ? page * 10 : (page + 1) * 10} of
+        {reports.data?.reports.length + 1}
         entries
         <Paging
           page={page}

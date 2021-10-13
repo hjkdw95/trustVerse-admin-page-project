@@ -1,18 +1,17 @@
 import axios from 'axios';
+import URL from '../.config';
 
 class fetchData {
-  constructor() {
-    this.getRequestOptions = {
-      method: 'GET',
-    };
+  constructor() {}
 
-    this.postRequestOptions = {
-      method: 'POST',
-    };
+  async getTamUsers() {
+    const response = await axios.get(`/data/userdata.json`);
+    const result = response.data;
+    return result;
   }
 
-  async jupiterView() {
-    const response = await axios.get('/data/jupiterData.json');
+  async getTamWallet() {
+    const response = await axios.get(`/data/userWalletData.json`);
     const result = response.data;
     return result;
   }

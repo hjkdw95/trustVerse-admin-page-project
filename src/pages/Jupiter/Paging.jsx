@@ -1,77 +1,60 @@
 import React from 'react';
-import Pagination from 'react-js-pagination';
+import ReactPaginate from 'react-paginate';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { AiOutlineArrowRight } from 'react-icons/ai';
 const Paging = ({ page, count, setPage }) => {
+  const handleChange = e => {
+    setPage(e.selected + 1);
+    console.log(e);
+  };
   return (
-    <Div>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={10}
-        totalItemsCount={count}
-        pageRangeDisplayed={5}
-        prevPageText={<AiOutlineArrowLeft />}
+    <PaginationWrapper>
+      <ReactPaginate
+        previousLabel={<AiOutlineArrowLeft />}
         nextLabel={<AiOutlineArrowRight />}
-        onChange={setPage}
+        breakLabel={'...'}
+        breakClassName={'break-me'}
+        pageCount={count / 10}
+        marginPagesDisplayed={0}
+        pageRangeDisplayed={6}
+        onPageChange={handleChange}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
       />
-    </Div>
+    </PaginationWrapper>
   );
 };
-const Div = styled.div`
+
+const PaginationWrapper = styled.div`
   .pagination {
     display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+    a {
+      margin: 0 0.5rem;
+      transition: all 0.5s;
+      font-weight: 700;
+    }
 
-  ul.pagination li {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 10px;
-    background-color: #19bc9b;
-
-    &:hover {
+    li > a {
+      display: inline-block;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 0.3rem;
+      font-size: 1.4rem;
+      text-align: center;
+      line-height: 3.2rem;
+      color: ${props => props.theme.black};
       cursor: pointer;
-      background-color: #0e7864;
+
+      &:hover {
+        ${({ theme }) => theme.greenBtn()}
+      }
+    }
+
+    .active > a {
+      ${({ theme }) => theme.greenBtn()}
     }
   }
-
-  ul.pagination li:first-child {
-    border-radius: 5px 0 0 5px;
-  }
-
-  ul.pagination li:last-child {
-    border-radius: 0 5px 5px 0;
-  }
-
-  ul.pagination li a {
-    text-decoration: none;
-    color: white;
-    font-size: 15px;
-  }
-
-  ul.pagination li.active a {
-    color: white;
-  }
-  ul.pagination li.active {
-    background-color: #0e7864;
-  }
-
-  .page-selection {
-    width: 48px;
-    height: 30px;
-    color: #337ab7;
-  }
 `;
+
 export default Paging;
