@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const Balance = ({ values }) => {
   return (
-    <>
+    <div style={{ textAlign: 'center' }}>
       {values.map((coin, idx) => {
         return <Tags key={idx}>{coin}</Tags>;
       })}
-    </>
+    </div>
   );
 };
 
