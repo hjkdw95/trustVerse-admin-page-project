@@ -6,8 +6,6 @@ const Table = ({ columns, data }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
-  console.log(rows);
-
   return (
     <TableSheet {...getTableProps()}>
       <TableHead>
