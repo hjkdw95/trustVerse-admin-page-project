@@ -3,7 +3,7 @@ import fetchData from '../../../service/data-fetch';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const Modal = ({ coinData }) => {
+const Modal = ({ coinData, setModalOn }) => {
   const { name, rowIdx } = coinData;
   const data = new fetchData();
   const [info, setInfo] = useState();
@@ -12,24 +12,43 @@ const Modal = ({ coinData }) => {
     data.getTamWallet().then(item => setInfo(item[rowIdx].wallet_balance));
   }, []);
 
+  const handleWindow = e => {
+    const clicked = e.target.closest('.modal');
+    console.log(clicked);
+    if (clicked === null) {
+      setModalOn(prev => !prev);
+    }
+  };
+
   return (
-    <ModalWrapper>
-      <H1>Coin Details</H1>
-      <Dl>
-        <Dt>Coin Name</Dt>
-        <Dd>{name}</Dd>
-        <Dt>PassWord</Dt>
-        <Dd>{info?.find(el => el.coin_name === name).password}</Dd>
-        <Dt>Balance</Dt>
-        <Dd>{info?.find(el => el.coin_name === name).num}</Dd>
-      </Dl>
-    </ModalWrapper>
+    <Container onClick={handleWindow}>
+      <ModalContainer className="modal">
+        <H1>Coin Details</H1>
+        <Dl>
+          <Dt>Coin Name</Dt>
+          <Dd>{name}</Dd>
+          <Dt>PassWord</Dt>
+          <Dd>{info?.find(el => el.coin_name === name).password}</Dd>
+          <Dt>Balance</Dt>
+          <Dd>{info?.find(el => el.coin_name === name).num}</Dd>
+        </Dl>
+      </ModalContainer>
+    </Container>
   );
 };
 
 export default Modal;
 
-const ModalWrapper = styled.div`
+const Container = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+`;
+
+const ModalContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;

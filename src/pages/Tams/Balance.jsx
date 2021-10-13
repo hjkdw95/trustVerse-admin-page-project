@@ -18,7 +18,7 @@ const Balance = ({ values, data }) => {
       name: e.target.innerHTML,
       rowIdx: rowIdx,
     });
-    setModalOn(!isModalOn);
+    setModalOn(prev => !prev);
   };
 
   return (
@@ -30,7 +30,7 @@ const Balance = ({ values, data }) => {
           </Tags>
         );
       })}
-      {isModalOn && <Modal coinData={coinData} />}
+      {isModalOn && <Modal coinData={coinData} setModalOn={setModalOn} />}
     </div>
   );
 };
