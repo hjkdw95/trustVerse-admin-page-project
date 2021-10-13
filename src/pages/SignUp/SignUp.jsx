@@ -1,7 +1,7 @@
 import React from 'react';
 
-const SingUp = props => {
+const SignUp = props => {
   return <div>hi</div>;
 };
 
-export default SingUp;
+export default SignUp;
