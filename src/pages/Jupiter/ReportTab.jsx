@@ -4,9 +4,6 @@ import Paging from './Paging';
 
 const ReportTab = ({ reports, setTabIndex }) => {
   const [page, setPage] = useState(1);
-  const handlePageChange = page => {
-    setPage(page);
-  };
 
   return (
     <div>
@@ -44,12 +41,14 @@ const ReportTab = ({ reports, setTabIndex }) => {
               })}
           </tbody>
         </ReportTable>
+        Showing {page - 1 + '1'} to 10 of {reports.data?.reports.length + 1}
+        entries
+        <Paging
+          page={page}
+          count={reports.data?.reports.length}
+          setPage={setPage}
+        />
       </ReportTableContainer>
-      <Paging
-        page={page}
-        count={reports.data?.reports.length}
-        setPage={setPage}
-      />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
 import Pagination from 'react-js-pagination';
 import styled from 'styled-components';
-
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 const Paging = ({ page, count, setPage }) => {
   return (
     <Div>
@@ -10,8 +11,8 @@ const Paging = ({ page, count, setPage }) => {
         itemsCountPerPage={10}
         totalItemsCount={count}
         pageRangeDisplayed={5}
-        prevPageText={'‹'}
-        nextPageText={'›'}
+        prevPageText={<AiOutlineArrowLeft />}
+        nextLabel={<AiOutlineArrowRight />}
         onChange={setPage}
       />
     </Div>
@@ -31,13 +32,19 @@ const Div = styled.div`
 
   ul.pagination li {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #e2e2e2;
+    width: 40px;
+    height: 40px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: 10px;
+    background-color: #19bc9b;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #0e7864;
+    }
   }
 
   ul.pagination li:first-child {
@@ -50,20 +57,15 @@ const Div = styled.div`
 
   ul.pagination li a {
     text-decoration: none;
-    color: #337ab7;
-    font-size: 1rem;
+    color: white;
+    font-size: 15px;
   }
 
   ul.pagination li.active a {
     color: white;
   }
   ul.pagination li.active {
-    background-color: #337ab7;
-  }
-
-  ul.pagination li a:hover,
-  ul.pagination li a.active {
-    color: blue;
+    background-color: #0e7864;
   }
 
   .page-selection {

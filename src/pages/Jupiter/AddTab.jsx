@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const AddTab = ({ setTabIndex }) => {
   const [values, setValues] = useState({
     title: '',
     description: '',
-    cover: '',
-    comment: '',
+    cover: null,
+    comment: null,
   });
 
   const handleChange = event => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
+
+  const handleFileOnChange = event => {
+    event.preventDefault();
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+      localStorage.setItem('recent-image', reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  useEffect(() => {
+    console.log(values.cover);
+  }, [values]);
 
   const postReport = () => {
     fetch('', {
@@ -63,7 +77,7 @@ const AddTab = ({ setTabIndex }) => {
                 type="file"
                 id="cover"
                 name="cover"
-                onChange={handleChange}
+                onChange={handleFileOnChange}
                 required
               ></FileInput>
               <Caution>*please upload a .png file of the report covers</Caution>
@@ -74,7 +88,7 @@ const AddTab = ({ setTabIndex }) => {
                 type="file"
                 id="content"
                 name="content"
-                onChange={handleChange}
+                onChange={handleFileOnChange}
                 required
               ></FileInput>
               <Caution>

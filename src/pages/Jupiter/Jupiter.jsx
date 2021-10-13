@@ -6,7 +6,7 @@ import EditTab from './EditTab';
 
 const Jupiter = props => {
   const [reports, setReports] = useState({});
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState(3);
   useEffect(() => {
     fetch('/data/jupiterData.json', {
       method: 'GET',
