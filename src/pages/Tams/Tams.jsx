@@ -8,6 +8,8 @@ const Tams = props => {
   const data = new fetchData();
   const [info, setInfo] = useState();
 
+  // console.log(info?.find(el => el.email === '11'));
+
   const getTamWallet = () => {
     data.getTamWallet().then(item => setInfo(item));
   };
@@ -33,7 +35,7 @@ const Tams = props => {
       {
         accessor: 'coin_list',
         Header: 'Wallet Balance',
-        Cell: ({ cell: { value } }) => <Balance values={value} />,
+        Cell: ({ cell: { value } }) => <Balance values={value} data={info} />,
       },
       {
         accessor: 'created_at',

@@ -18,10 +18,10 @@ const Table = ({ columns, data }) => {
         ))}
       </TableHead>
       <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
+        {rows.map((row, idx) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()}>
+            <tr id={idx} {...row.getRowProps()}>
               {row.cells.map(cell => (
                 <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
               ))}
