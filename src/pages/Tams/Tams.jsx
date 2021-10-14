@@ -3,6 +3,7 @@ import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
 import axios from 'axios';
+import styled from 'styled-components';
 
 const Tams = props => {
   const data = new fetchData();
@@ -102,10 +103,15 @@ const Tams = props => {
   };
 
   return (
-    <>
+    <Section>
       <TamsArticle format={WALLETDATA} getData={getTamWallet} />
-    </>
+    </Section>
   );
 };
 
 export default Tams;
+
+const Section = styled.section`
+  position: relative;
+  padding-left: 15%;
+`;
