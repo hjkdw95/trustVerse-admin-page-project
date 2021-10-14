@@ -28,7 +28,7 @@ const Paging = ({ page, count, setPage }) => {
 const PaginationWrapper = styled.div`
   .pagination {
     display: flex;
-
+    justify-content: right;
     a {
       margin: 0 0.5rem;
       transition: all 0.5s;

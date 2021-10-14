@@ -43,10 +43,10 @@ const ReportTab = ({ reports, setTabIndex }) => {
             })}
           </tbody>
         </ReportTable>
-        Showing {page === 1 ? page : page * 10} to
-        {page === 1 ? page * 10 : (page + 1) * 10} of
-        {reports.data?.reports.length + 1}
-        entries
+        <PageIndex>
+          Showing {page === 1 ? 1 : page - 1 + '1'} to &nbsp;{page * 10} of
+          &nbsp;{reports.data?.reports.length + 1}
+        </PageIndex>
         <Paging
           page={page}
           count={reports.data?.reports.length}
@@ -100,6 +100,14 @@ const ReportTable = styled.table`
       font-size: 14px;
     }
   }
+`;
+
+const PageIndex = styled.div`
+  font-size: 15px;
+  position: relative;
+  top: 20px;
+  color: #6f7a92;
+  width: 300px;
 `;
 
 export default ReportTab;
