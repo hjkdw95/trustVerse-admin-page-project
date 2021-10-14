@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const SignIn = ({ history }) => {
   const [idValue, setIdValue] = useState('');
   const [pwValue, setPwValue] = useState('');
-  const [checkPwValue, setCheckPwValue] = useState('');
 
   const handleInputId = e => {
     setIdValue(e.target.value);
@@ -15,49 +14,33 @@ const SignIn = ({ history }) => {
     setPwValue(e.target.value);
   };
 
-  const handleInputCheckPw = e => {
-    setCheckPwValue(e.target.value);
-  };
-
-  const postSignUp = () => {
-    fetch('', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: idValue,
-        password: pwValue,
-      }),
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.MESSAGE === 'SUCCESS') {
-          alert('가입 축하드립니다.');
-          return history.push('/Signin');
-        } else if (response.MESSAGE === 'DUPLICATED ADMIN NAME') {
-          alert('이미 가입된 아이디 입니다.');
-        }
-      });
+  const postSignIn = () => {
+    if (idValue > 7 && idValue < 17 && pwValue.length >= 8) {
+      fetch('', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: idValue,
+          password: pwValue,
+        }),
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (response.token) {
+            localStorage.setItem('token', response.token);
+            history.push('/');
+          } else if (response.MESSAGE === 'INVALID_USER') {
+            resetInfo();
+          }
+        });
+    } else {
+      resetInfo();
+    }
   };
 
   const resetInfo = () => {
+    alert('아이디와 비밀번호를 다시 확인해주세요');
     setIdValue('');
     setPwValue('');
-    setCheckPwValue('');
-    alert('가입 정보를 다시 확인해 주세요');
-  };
-
-  const checkLogin = () => {
-    const str = /[A-Z]/;
-    const special = /[~!@#$%^&*()_+|<>?:{}]/;
-
-    const formCheck =
-      idValue.length > 7 &&
-      idValue.length < 17 &&
-      str.test(pwValue) &&
-      special.test(pwValue) &&
-      pwValue.length >= 8 &&
-      checkPwValue === pwValue;
-
-    formCheck ? postSignUp() : resetInfo();
   };
 
   return (
@@ -67,7 +50,6 @@ const SignIn = ({ history }) => {
         <SingUpArticle>
           <Form onsubmit="return false;">
             <div>
-              <Caution>8자 이상 16글자 미만</Caution>
               <IdInput
                 placeholder="Id"
                 onChange={handleInputId}
@@ -78,7 +60,6 @@ const SignIn = ({ history }) => {
               ></IdInput>
             </div>
             <div>
-              <Caution>영어, 특수문자 모두 포함 8자 이상</Caution>
               <PwInput
                 placeholder="Password"
                 type="password"
@@ -88,20 +69,10 @@ const SignIn = ({ history }) => {
                 required
               ></PwInput>
             </div>
-            <div>
-              <PwInput
-                placeholder="Check Password"
-                type="password"
-                onChange={handleInputCheckPw}
-                value={checkPwValue}
-                minLength="8"
-                required
-              ></PwInput>
-            </div>
-            <SignUpBnt onClick={checkLogin}>Sign In</SignUpBnt>
+            <SignUpBnt onClick={postSignIn}>Sign In</SignUpBnt>
           </Form>
           <SignUpText>
-            Need an account?<Link to="/Signin">Sign Up</Link>
+            Need an account?<Link to="/SignUp">Sign Up</Link>
           </SignUpText>
         </SingUpArticle>
       </SingUpBox>
@@ -163,11 +134,6 @@ const SignUpBnt = styled.button`
   }
 `;
 
-const Caution = styled.div`
-  font-size: 10px;
-  color: red;
-  text-align: left;
-`;
 const SignUpText = styled.div`
   color: #707070;
   font-size: 20px;
