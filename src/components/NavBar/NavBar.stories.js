@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './NavBar';
-import { withKnobs, color } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 
 export default {
   title: 'Component / NavBar',

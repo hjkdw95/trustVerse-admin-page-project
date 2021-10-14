@@ -1,17 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import ListItem from './ListItem/ListItem';
 
-const NavBar = ({ label, size, background, fontWeight, margin, padding }) => {
+const NavBar = () => {
   const history = useHistory();
 
   const Menus = ['TAMS', 'Jupiter'];
-
-  const style = {
-    fontSize: `${size}px`,
-    fontWeight,
-    paddingTop: padding,
-  };
 
   return (
     <Nav>
@@ -20,9 +15,7 @@ const NavBar = ({ label, size, background, fontWeight, margin, padding }) => {
       </TitleWrapper>
       <Ul>
         {Menus.map((item, idx) => (
-          <Li key={idx} style={style}>
-            {item}
-          </Li>
+          <ListItem item={item} key={idx} />
         ))}
       </Ul>
     </Nav>
@@ -39,6 +32,7 @@ const Nav = styled.nav`
   left: 0;
   background-color: #0f1a34;
   color: #fff;
+  z-index: 1000;
 `;
 
 const TitleWrapper = styled.div`
@@ -48,6 +42,10 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Ul = styled.ul`
