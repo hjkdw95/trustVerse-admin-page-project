@@ -2,39 +2,77 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const SignIn = props => {
+const SignIn = ({ history }) => {
   const [idValue, setIdValue] = useState('');
   const [pwValue, setPwValue] = useState('');
 
   const handleInputId = e => {
     setIdValue(e.target.value);
   };
+
   const handleInputPw = e => {
     setPwValue(e.target.value);
   };
+
+  const postSignIn = () => {
+    if (idValue > 7 && idValue < 17 && pwValue.length >= 8) {
+      fetch('', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: idValue,
+          password: pwValue,
+        }),
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (response.token) {
+            localStorage.setItem('token', response.token);
+            history.push('/');
+          } else if (response.MESSAGE === 'INVALID_USER') {
+            resetInfo();
+          }
+        });
+    } else {
+      resetInfo();
+    }
+  };
+
+  const resetInfo = () => {
+    alert('아이디와 비밀번호를 다시 확인해주세요');
+    setIdValue('');
+    setPwValue('');
+  };
+
   return (
     <div>
       <SingUpBox>
+        <SingUpTitle>Admin Sign In</SingUpTitle>
         <SingUpArticle>
-          <SingUpTitle>Admin SignIn</SingUpTitle>
-          <div>
-            <IdInput
-              placeholder="Name"
-              onChange={handleInputId}
-              value={idValue}
-            ></IdInput>
-          </div>
-          <div>
-            <PwInput
-              placeholder="Password"
-              type="password"
-              onChange={handleInputPw}
-              value={pwValue}
-            ></PwInput>
-          </div>
-          <SignUpBnt>SignIn</SignUpBnt>
+          <Form onsubmit="return false;">
+            <div>
+              <IdInput
+                placeholder="Id"
+                onChange={handleInputId}
+                value={idValue}
+                minLength="8"
+                maxLength="16"
+                required
+              ></IdInput>
+            </div>
+            <div>
+              <PwInput
+                placeholder="Password"
+                type="password"
+                onChange={handleInputPw}
+                value={pwValue}
+                minLength="8"
+                required
+              ></PwInput>
+            </div>
+            <SignUpBnt onClick={postSignIn}>Sign In</SignUpBnt>
+          </Form>
           <SignUpText>
-            Need an account?<Link to="/Signin">Sign Up</Link>
+            Need an account?<Link to="/SignUp">Sign Up</Link>
           </SignUpText>
         </SingUpArticle>
       </SingUpBox>
@@ -52,6 +90,8 @@ const SingUpBox = styled.div`
   background-color: white;
 `;
 
+const Form = styled.form``;
+
 const SingUpTitle = styled.div`
   background-color: #a37bfd;
   height: 70px;
@@ -59,7 +99,6 @@ const SingUpTitle = styled.div`
   color: white;
   text-align: center;
   padding-top: 20px;
-  margin-bottom: 20px;
 `;
 
 const SingUpArticle = styled.div`
@@ -89,6 +128,7 @@ const SignUpBnt = styled.button`
   width: 100%;
   font-size: 16px;
   margin-bottom: 20px;
+
   &:hover {
     cursor: pointer;
   }
