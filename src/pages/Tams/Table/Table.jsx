@@ -6,8 +6,6 @@ const Table = ({ columns, data }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
-  console.log(rows);
-
   return (
     <TableSheet {...getTableProps()}>
       <TableHead>
@@ -20,10 +18,10 @@ const Table = ({ columns, data }) => {
         ))}
       </TableHead>
       <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
+        {rows.map((row, idx) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()}>
+            <tr id={idx} {...row.getRowProps()}>
               {row.cells.map(cell => (
                 <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
               ))}
@@ -56,4 +54,5 @@ const Td = styled.td`
   background-color: ${props => props.theme.lightGrey};
   border-top: 2rem solid #fff;
   ${({ theme }) => theme.tableFont()};
+  text-align: center;
 `;

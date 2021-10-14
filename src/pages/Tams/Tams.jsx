@@ -3,10 +3,13 @@ import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
 import axios from 'axios';
+import styled from 'styled-components';
 
 const Tams = props => {
   const data = new fetchData();
   const [info, setInfo] = useState();
+
+  // console.log(info?.find(el => el.email === '11'));
 
   const getTamWallet = () => {
     data.getTamWallet().then(item => setInfo(item));
@@ -33,7 +36,7 @@ const Tams = props => {
       {
         accessor: 'coin_list',
         Header: 'Wallet Balance',
-        Cell: ({ cell: { value } }) => <Balance values={value} />,
+        Cell: ({ cell: { value } }) => <Balance values={value} data={info} />,
       },
       {
         accessor: 'created_at',
@@ -100,10 +103,15 @@ const Tams = props => {
   };
 
   return (
-    <>
+    <Section>
       <TamsArticle format={WALLETDATA} getData={getTamWallet} />
-    </>
+    </Section>
   );
 };
 
 export default Tams;
+
+const Section = styled.section`
+  position: relative;
+  padding-left: 15%;
+`;

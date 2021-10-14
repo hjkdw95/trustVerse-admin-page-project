@@ -32,7 +32,7 @@ const TamsArticle = ({ format, getData }) => {
 
 export default TamsArticle;
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   padding: 3rem;
 `;
 
