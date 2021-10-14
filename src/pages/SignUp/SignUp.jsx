@@ -2,39 +2,105 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const SignUp = props => {
+const SignUp = ({ history }) => {
   const [idValue, setIdValue] = useState('');
   const [pwValue, setPwValue] = useState('');
+  const [checkPwValue, setCheckPwValue] = useState('');
 
   const handleInputId = e => {
     setIdValue(e.target.value);
   };
+
   const handleInputPw = e => {
     setPwValue(e.target.value);
   };
+
+  const handleInputCheckPw = e => {
+    setCheckPwValue(e.target.value);
+  };
+  const postSignUp = () => {
+    fetch('', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: idValue,
+        password: pwValue,
+      }),
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (response.MESSAGE === 'SUCCESS') {
+          alert('가입 축하드립니다.');
+          return history.push('/Signin');
+        } else if (response.MESSAGE === 'DUPLICATED ADMIN NAME') {
+          alert('이미 가입된 아이디 입니다.');
+        }
+      });
+  };
+
+  const resetInfo = () => {
+    setIdValue('');
+    setPwValue('');
+    setCheckPwValue('');
+    alert('가입 정보를 다시 확인해 주세요');
+  };
+
+  const checkLogin = () => {
+    const str = /[A-Z]/;
+    const special = /[~!@#$%^&*()_+|<>?:{}]/;
+
+    const formCheck =
+      idValue.length > 7 &&
+      idValue.length < 17 &&
+      str.test(pwValue) &&
+      special.test(pwValue) &&
+      pwValue.length >= 8 &&
+      checkPwValue === pwValue;
+
+    formCheck ? postSignUp() : resetInfo();
+  };
+
   return (
     <div>
       <SingUpBox>
         <SingUpArticle>
-          <SingUpTitle>Admin SignIn</SingUpTitle>
-          <div>
-            <IdInput
-              placeholder="Name"
-              onChange={handleInputId}
-              value={idValue}
-            ></IdInput>
-          </div>
-          <div>
-            <PwInput
-              placeholder="Password"
-              type="password"
-              onChange={handleInputPw}
-              value={pwValue}
-            ></PwInput>
-          </div>
-          <SignUpBnt>SignIn</SignUpBnt>
+          <SingUpTitle>Admin Sign Up</SingUpTitle>
+          <Form onsubmit="return false;">
+            <div>
+              <Caution>8자 이상 16글자 미만</Caution>
+              <IdInput
+                placeholder="Id"
+                onChange={handleInputId}
+                value={idValue}
+                minLength="8"
+                maxLength="16"
+                required
+              ></IdInput>
+            </div>
+            <div>
+              <Caution>영어, 특수문자 모두 포함 8자 이상</Caution>
+              <PwInput
+                placeholder="Password"
+                type="password"
+                onChange={handleInputPw}
+                value={pwValue}
+                minLength="8"
+                required
+              ></PwInput>
+            </div>
+            <div>
+              <PwInput
+                placeholder="Check Password"
+                type="password"
+                onChange={handleInputCheckPw}
+                value={checkPwValue}
+                minLength="8"
+                required
+              ></PwInput>
+            </div>
+            <SignUpBnt onClick={checkLogin}>Sign Up</SignUpBnt>
+          </Form>
           <SignUpText>
-            Need an account?<Link to="/Signin">Sign Up</Link>
+            Need an account?<Link to="/Signin">Sign In</Link>
           </SignUpText>
         </SingUpArticle>
       </SingUpBox>
@@ -102,6 +168,13 @@ const SignUpText = styled.div`
     font-size: 20px;
     color: #2d4665;
   }
+`;
+const Form = styled.form``;
+
+const Caution = styled.div`
+  font-size: 10px;
+  color: red;
+  text-align: left;
 `;
 
 export default SignUp;
