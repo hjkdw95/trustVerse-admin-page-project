@@ -17,4 +17,8 @@ Primary.args = {
 };
 
 export const Focused = Template.bind({});
-Focused.args = { ...Primary.args, hoverBg: '#fff', hoverFontColor: '#000' };
+Focused.args = {
+  ...Primary.args,
+  hoverBg: '#091023',
+  hoverFontColor: '#ACB6C4',
+};

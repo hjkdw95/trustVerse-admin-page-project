@@ -8,13 +8,18 @@ const NavBar = () => {
 
   const Menus = ['TAMS', 'Jupiter'];
 
+  const MENU_LIST = [
+    { title: 'TAMS', list: ['Users', 'Wallets'] },
+    { title: 'Jupiter' },
+  ];
+
   return (
     <Nav>
       <TitleWrapper>
         <Title onClick={() => history.push('/')}>DigiFinance</Title>
       </TitleWrapper>
       <Ul>
-        {Menus.map((item, idx) => (
+        {MENU_LIST.map((item, idx) => (
           <ListItem item={item} key={idx} />
         ))}
       </Ul>
@@ -49,12 +54,5 @@ const Title = styled.h1`
 `;
 
 const Ul = styled.ul`
-  padding: 1rem 0;
   background-color: #0f1a34;
-`;
-
-const Li = styled.li`
-  padding: 1rem 2.5rem;
-  font-size: 1.6rem;
-  font-weight: 300;
 `;
