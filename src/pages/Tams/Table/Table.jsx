@@ -54,4 +54,5 @@ const Td = styled.td`
   background-color: ${props => props.theme.lightGrey};
   border-top: 2rem solid #fff;
   ${({ theme }) => theme.tableFont()};
+  text-align: center;
 `;

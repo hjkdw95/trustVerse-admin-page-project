@@ -45,4 +45,9 @@ const Tags = styled.span`
   padding: 1rem 2rem;
   border-radius: 3rem;
   cursor: pointer;
+  transition: all 150ms ease-in;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;

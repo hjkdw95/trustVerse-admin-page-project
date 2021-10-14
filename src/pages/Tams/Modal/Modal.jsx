@@ -14,7 +14,6 @@ const Modal = ({ coinData, setModalOn }) => {
 
   const handleWindow = e => {
     const clicked = e.target.closest('.modal');
-    console.log(clicked);
     if (clicked === null) {
       setModalOn(prev => !prev);
     }
@@ -89,4 +88,5 @@ const Dd = styled.dd`
   margin-bottom: 2rem;
   ${({ theme }) => theme.tableFont()};
   text-align: start;
+  word-break: break-all;
 `;
