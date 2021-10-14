@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Component / NavBar Primary 1`] = `
+<nav
+  className="sc-bdfBQB dcutit"
+>
+  <div
+    className="sc-gsTEea KtjUC"
+  >
+    <h1
+      className="sc-dlfnuX chsdQd"
+      onClick={[Function]}
+    >
+      DigiFinance
+    </h1>
+  </div>
+  <ul
+    className="sc-hKgJUU kKUwQf"
+  >
+    <li
+      className="sc-eCstlR kEsrbP"
+      style={
+        Object {
+          "fontSize": "16px",
+          "fontWeight": 300,
+          "paddingTop": undefined,
+        }
+      }
+    >
+      TAMS
+    </li>
+    <li
+      className="sc-eCstlR kEsrbP"
+      style={
+        Object {
+          "fontSize": "16px",
+          "fontWeight": 300,
+          "paddingTop": undefined,
+        }
+      }
+    >
+      Jupiter
+    </li>
+  </ul>
+</nav>
+`;
