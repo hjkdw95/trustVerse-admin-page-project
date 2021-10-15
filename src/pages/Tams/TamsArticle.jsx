@@ -10,7 +10,7 @@ const TamsArticle = ({ format, getData }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [title]);
 
   return (
     <Wrapper>

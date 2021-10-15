@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { RiDashboardLine } from 'react-icons/ri';
 import styled from 'styled-components';
@@ -15,6 +15,7 @@ const ListItem = ({
   hoverFontColor,
 }) => {
   const history = useHistory();
+  const [clickedIdx, setClickedIdx] = useState();
 
   // const cellStyle = {
   //   backgroundColor: hoverBg,
@@ -27,6 +28,18 @@ const ListItem = ({
 
   const handleClick = () => {
     setActiveIndex(idx);
+    setClickedIdx(null);
+    history.push(`/${title}`);
+  };
+
+  const handleLink = (e, idx) => {
+    setClickedIdx(idx);
+    history.push({
+      pathname: `/${title}`,
+      state: {
+        clicked: `${e.target.innerHTML}`,
+      },
+    });
   };
 
   return (
@@ -38,15 +51,16 @@ const ListItem = ({
           </IconWrapper>
           <Menu>{title}</Menu>
         </FirstMenu>
-        {idx === activeIndex ? (
-          <SecondMenu>
-            {list?.map(menu => (
-              <li>{menu}</li>
-            ))}
-          </SecondMenu>
-        ) : (
-          ''
-        )}
+        <SecondMenu className={idx === activeIndex ? '' : 'closed'}>
+          {list?.map((menu, idx) => (
+            <li
+              onClick={e => handleLink(e, idx)}
+              className={clickedIdx === idx ? 'strong' : ''}
+            >
+              {menu}
+            </li>
+          ))}
+        </SecondMenu>
       </AccodianWrapper>
     </Li>
   );
@@ -70,6 +84,10 @@ const AccodianWrapper = styled.div`
   &.active {
     background-color: #091023;
     color: #acb6c4;
+
+    div {
+      font-weight: 700;
+    }
   }
 `;
 
@@ -98,10 +116,22 @@ const Menu = styled.div`
 const SecondMenu = styled.ul`
   padding-left: 4rem;
 
+  transition: all 1000ms ease-in-out;
+
+  &.closed {
+    height: 0;
+
+    li {
+      display: none;
+    }
+  }
+
   li {
     font-size: 1.4rem;
     padding: 1rem;
 
-    transition: all 300ms ease-in-out;
+    &.strong {
+      font-weight: 700;
+    }
   }
 `;
