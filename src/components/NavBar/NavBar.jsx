@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import ListItem from './ListItem/ListItem';
@@ -6,22 +6,38 @@ import ListItem from './ListItem/ListItem';
 const NavBar = () => {
   const history = useHistory();
 
-  const Menus = ['TAMS', 'Jupiter'];
-
   const MENU_LIST = [
     { title: 'TAMS', list: ['Users', 'Wallets'] },
     { title: 'Jupiter' },
   ];
 
+  const [activeIndex, setActiveIndex] = useState();
+
+  const handleClick = () => {
+    history.push('/');
+    setActiveIndex(null);
+  };
+
   return (
     <Nav>
       <TitleWrapper>
-        <Title onClick={() => history.push('/')}>DigiFinance</Title>
+        <Title onClick={handleClick}>DigiFinance</Title>
       </TitleWrapper>
       <Ul>
-        {MENU_LIST.map((item, idx) => (
-          <ListItem item={item} key={idx} />
-        ))}
+        {MENU_LIST.map((item, idx) => {
+          const active = idx === activeIndex ? 'active' : '';
+          return (
+            <ListItem
+              title={item.title}
+              idx={idx}
+              key={idx}
+              list={item.list}
+              active={active}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            />
+          );
+        })}
       </Ul>
     </Nav>
   );

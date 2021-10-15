@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { RiDashboardLine } from 'react-icons/ri';
 import styled from 'styled-components';
 
-const ListItem = ({ item, iconSize, hoverBg, hoverFontColor }) => {
+const ListItem = ({
+  title,
+  list,
+  active,
+  activeIndex,
+  setActiveIndex,
+  idx,
+  iconSize,
+  hoverBg,
+  hoverFontColor,
+}) => {
   const history = useHistory();
 
   // const cellStyle = {
@@ -15,17 +25,29 @@ const ListItem = ({ item, iconSize, hoverBg, hoverFontColor }) => {
   //   fontSize: `${iconSize}px`,
   // };
 
+  const handleClick = () => {
+    setActiveIndex(idx);
+  };
+
   return (
-    <Li className={item.title} className="focused">
-      <FirstMenu>
-        <IconWrapper>
-          <RiDashboardLine />
-        </IconWrapper>
-        <Menu>{item.title}</Menu>
-      </FirstMenu>
-      <SecondMenu>
-        {item.list && item.list.map(menu => <li>{menu}</li>)}
-      </SecondMenu>
+    <Li>
+      <AccodianWrapper className={active}>
+        <FirstMenu onClick={handleClick}>
+          <IconWrapper>
+            <RiDashboardLine />
+          </IconWrapper>
+          <Menu>{title}</Menu>
+        </FirstMenu>
+        {idx === activeIndex ? (
+          <SecondMenu>
+            {list?.map(menu => (
+              <li>{menu}</li>
+            ))}
+          </SecondMenu>
+        ) : (
+          ''
+        )}
+      </AccodianWrapper>
     </Li>
   );
 };
@@ -33,8 +55,11 @@ const ListItem = ({ item, iconSize, hoverBg, hoverFontColor }) => {
 export default ListItem;
 
 const Li = styled.li`
-  padding: 1rem 2.5rem 1rem 1rem;
   list-style: none;
+`;
+
+const AccodianWrapper = styled.div`
+  padding: 1rem 2.5rem 1rem 1rem;
 
   &:hover {
     cursor: pointer;
@@ -42,7 +67,7 @@ const Li = styled.li`
     color: #acb6c4;
   }
 
-  &.focused {
+  &.active {
     background-color: #091023;
     color: #acb6c4;
   }
@@ -76,5 +101,7 @@ const SecondMenu = styled.ul`
   li {
     font-size: 1.4rem;
     padding: 1rem;
+
+    transition: all 300ms ease-in-out;
   }
 `;
