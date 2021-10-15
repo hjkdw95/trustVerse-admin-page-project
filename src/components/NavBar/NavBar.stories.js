@@ -8,4 +8,12 @@ export default {
   decorators: [withKnobs],
 };
 
-export const primary = () => <NavBar primary />;
+const Template = args => <NavBar {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+  background: '#0f1a34',
+  label: 'DigiFinance',
+  size: 16,
+  fontWeight: 300,
+};

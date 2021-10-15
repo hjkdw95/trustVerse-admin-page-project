@@ -55,4 +55,5 @@ const Td = styled.td`
   border-top: 2rem solid #fff;
   ${({ theme }) => theme.tableFont()};
   text-align: center;
+  word-break: break-all;
 `;

@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import ListItem from './ListItem/ListItem';
 
-const NavBar = ({ size }) => {
+const NavBar = () => {
   const history = useHistory();
+
+  const MENU_LIST = [
+    { title: 'TAMS', list: ['Users', 'Wallets'] },
+    { title: 'Jupiter', list: ['Create', 'Read', 'Update', 'Delete'] },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState();
+
+  const handleClick = () => {
+    history.push('/');
+    setActiveIndex(null);
+  };
 
   return (
     <Nav>
       <TitleWrapper>
-        <Title onClick={() => history.push('/')}>DigiFinance</Title>
+        <Title onClick={handleClick}>DigiFinance</Title>
       </TitleWrapper>
-      <ul>
-        <li>1</li>
-      </ul>
+      <Ul>
+        {MENU_LIST.map((item, idx) => {
+          const active = idx === activeIndex ? 'active' : '';
+          return (
+            <ListItem
+              title={item.title}
+              idx={idx}
+              key={idx}
+              list={item.list}
+              active={active}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            />
+          );
+        })}
+      </Ul>
     </Nav>
   );
 };
@@ -26,7 +52,9 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   background-color: #0f1a34;
-  color: #000;
+  color: #fff;
+  overflow-x: hidden;
+  z-index: 1000;
 `;
 
 const TitleWrapper = styled.div`
@@ -34,4 +62,15 @@ const TitleWrapper = styled.div`
   background-color: #182444;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  font-size: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Ul = styled.ul`
+  background-color: #0f1a34;
+  overflow-y: auto;
+`;
