@@ -5,10 +5,6 @@ import styled from 'styled-components';
 
 const ListItem = ({ item, iconSize, hoverBg, hoverFontColor }) => {
   const history = useHistory();
-  const [isFocused, setFocused] = useState({
-    toBeFocused: '',
-    toBeNotFocused: '',
-  });
 
   // const cellStyle = {
   //   backgroundColor: hoverBg,
@@ -19,23 +15,15 @@ const ListItem = ({ item, iconSize, hoverBg, hoverFontColor }) => {
   //   fontSize: `${iconSize}px`,
   // };
 
-  //? 켜진것 꺼진것 분리해야되는데..
-  //? 1. 켜진것, 꺼진 것 array 따로 만들어야되려나?
-  // const handleClick = e => {
-  //   setFocused(prev => {toBeFocused: e.target.className, toBeNotFocused: prev.toBeFocused});
-  // };
-
   return (
-    <Li onClick={handleClick} className={item.title}>
+    <Li className={item.title} className="focused">
       <MenuWrapper>
         <IconWrapper>
           <RiDashboardLine />
         </IconWrapper>
         <Menu>{item.title}</Menu>
       </MenuWrapper>
-      {isFocused && (
-        <ul>{item.list && item.list.map(menu => <li>{menu}</li>)}</ul>
-      )}
+      <Ul>{item.list && item.list.map(menu => <li>{menu}</li>)}</Ul>
     </Li>
   );
 };
@@ -44,6 +32,7 @@ export default ListItem;
 
 const Li = styled.li`
   padding: 1rem 2.5rem 1rem 1rem;
+  list-style: none;
 
   &:hover {
     cursor: pointer;
@@ -77,4 +66,13 @@ const IconWrapper = styled.div`
 
 const Menu = styled.div`
   font-size: 1.6rem;
+`;
+
+const Ul = styled.ul`
+  padding-left: 4rem;
+
+  li {
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
 `;

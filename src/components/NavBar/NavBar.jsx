@@ -37,6 +37,7 @@ const Nav = styled.nav`
   left: 0;
   background-color: #0f1a34;
   color: #fff;
+  overflow-x: hidden;
   z-index: 1000;
 `;
 
@@ -55,4 +56,5 @@ const Title = styled.h1`
 
 const Ul = styled.ul`
   background-color: #0f1a34;
+  overflow-y: auto;
 `;
