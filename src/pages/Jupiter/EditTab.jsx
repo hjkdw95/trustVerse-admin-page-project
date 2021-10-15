@@ -14,7 +14,7 @@ const EditTab = ({ setTabIndex }) => {
   };
 
   const EditReport = () => {
-    fetch('', {
+    fetch('http://192.168.1.244:8000/admin/edit', {
       method: 'POST',
       headers: { Authorization: localStorage.getItem('token') },
       body: JSON.stringify({
@@ -25,7 +25,7 @@ const EditTab = ({ setTabIndex }) => {
     });
   };
   return (
-    <div>
+    <Section>
       <EditTabBox>
         <EditTabBoxTitle>Edit Report</EditTabBoxTitle>
         <EditTabBoxArticle>
@@ -65,7 +65,9 @@ const EditTab = ({ setTabIndex }) => {
                 required
               />
             </div>
-            <UpdateBnt type="submit" onClick={EditReport} value="Update" />
+            <UpdateBnt type="submit" onClick={EditReport}>
+              Update
+            </UpdateBnt>
           </Form>
         </EditTabBoxArticle>
         <Caution>
@@ -80,9 +82,14 @@ const EditTab = ({ setTabIndex }) => {
           &lt;&#00;-&#08; Back to main
         </BackBnt>
       </EditTabBox>
-    </div>
+    </Section>
   );
 };
+
+const Section = styled.div`
+  position: relative;
+  padding-left: 15%;
+`;
 
 const EditTabBox = styled.div`
   width: 800px;

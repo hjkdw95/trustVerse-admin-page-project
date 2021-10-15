@@ -5,12 +5,13 @@ import Paging from './Paging';
 const ReportTab = ({ reports, setTabIndex }) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+
   useEffect(() => {
-    setData(reports.data?.reports.slice(page * 10 - 10, page * 10));
-  }, [page]);
+    setData(reports.slice(page * 10 - 10, page * 10));
+  }, [page, reports]);
 
   return (
-    <div>
+    <Section>
       <Title
         onClick={() => {
           setTabIndex(2);
@@ -30,14 +31,18 @@ const ReportTab = ({ reports, setTabIndex }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map(goods => {
+            {data?.map(goods => {
               return (
                 <tr key={goods.report_id}>
                   <td>{goods.report_id}</td>
                   <td>{goods.title}</td>
-                  <td>{goods.BRIEF}</td>
-                  <td>{goods.COVER}</td>
-                  <td>{goods.CONTENT}</td>
+                  <td>{goods.brief}</td>
+                  <td>
+                    <a href={goods.cover_link}>{goods.cover}</a>
+                  </td>
+                  <td>
+                    <a href={goods.content_link}>{goods.content}</a>
+                  </td>
                 </tr>
               );
             })}
@@ -45,31 +50,30 @@ const ReportTab = ({ reports, setTabIndex }) => {
         </ReportTable>
         <PageIndex>
           Showing {page === 1 ? 1 : page - 1 + '1'} to &nbsp;{page * 10} of
-          &nbsp;{reports.data?.reports.length + 1}
+          &nbsp;{reports.length + 1}
         </PageIndex>
-        <Paging
-          page={page}
-          count={reports.data?.reports.length}
-          setPage={setPage}
-        />
+        <Paging page={page} count={reports.length} setPage={setPage} />
       </ReportTableContainer>
-    </div>
+    </Section>
   );
 };
+const Section = styled.div`
+  position: relative;
+  padding-left: 15%;
+`;
 
 const Title = styled.div`
   font-size: 30px;
-  position: absolute;
-  top: 70px;
-  left: 220px;
   font-weight: bold;
+  margin-left: 60px;
+  margin-top: 100px;
+  margin-bottom: 20px;
 `;
 
 const ReportTableContainer = styled.div`
-  width: 1000px;
+  width: 1100px;
   padding: 30px;
   margin: 0 auto;
-  margin-top: 100px;
   background-color: white;
 `;
 

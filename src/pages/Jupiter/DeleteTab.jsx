@@ -11,7 +11,7 @@ const DeleteTab = ({ setTabIndex }) => {
   };
 
   const deleteReport = () => {
-    fetch('', {
+    fetch('http://192.168.1.244:8000/admin/delete', {
       method: 'POST',
       headers: { Authorization: localStorage.getItem('token') },
       body: JSON.stringify({
@@ -21,7 +21,7 @@ const DeleteTab = ({ setTabIndex }) => {
   };
 
   return (
-    <div>
+    <Section>
       <DeleteTabBox>
         <DeleteTabBoxTitle>Delete Report</DeleteTabBoxTitle>
         <DeleteTabBoxArticle>
@@ -48,9 +48,14 @@ const DeleteTab = ({ setTabIndex }) => {
           &lt;&#00;-&#08; Back to main
         </BackBnt>
       </DeleteTabBox>
-    </div>
+    </Section>
   );
 };
+
+const Section = styled.div`
+  position: relative;
+  padding-left: 15%;
+`;
 
 const DeleteTabBox = styled.div`
   width: 800px;

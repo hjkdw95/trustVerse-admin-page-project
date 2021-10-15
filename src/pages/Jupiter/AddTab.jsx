@@ -29,7 +29,7 @@ const AddTab = ({ setTabIndex }) => {
   }, [values]);
 
   const postReport = () => {
-    fetch('', {
+    fetch('http://192.168.1.244:8000/admin/add', {
       method: 'POST',
       headers: { Authorization: localStorage.getItem('token') },
       body: JSON.stringify({
@@ -42,7 +42,7 @@ const AddTab = ({ setTabIndex }) => {
   };
 
   return (
-    <div>
+    <Section>
       <AddTabBox>
         <AddTabBoxTitle>Upload Report</AddTabBoxTitle>
         <AddTabBoxArticle>
@@ -106,9 +106,13 @@ const AddTab = ({ setTabIndex }) => {
           &lt;&#00;-&#08; Back to main
         </BackBnt>
       </AddTabBox>
-    </div>
+    </Section>
   );
 };
+const Section = styled.div`
+  position: relative;
+  padding-left: 15%;
+`;
 
 const AddTabBox = styled.div`
   width: 800px;

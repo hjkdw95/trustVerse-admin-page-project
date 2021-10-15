@@ -1,60 +1,50 @@
 import { React, useState } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import fetchData from '../../service/data-fetch';
+import axios from 'axios';
 
+const data = new fetchData();
 const SignUp = ({ history }) => {
-  const [idValue, setIdValue] = useState('');
-  const [pwValue, setPwValue] = useState('');
-  const [checkPwValue, setCheckPwValue] = useState('');
+  const [values, setValues] = useState({
+    id: '',
+    pw: '',
+    checkPw: '',
+  });
 
-  const handleInputId = e => {
-    setIdValue(e.target.value);
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
   };
 
-  const handleInputPw = e => {
-    setPwValue(e.target.value);
-  };
-
-  const handleInputCheckPw = e => {
-    setCheckPwValue(e.target.value);
-  };
   const postSignUp = () => {
-    fetch('', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: idValue,
-        password: pwValue,
-      }),
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.MESSAGE === 'SUCCESS') {
-          alert('가입 축하드립니다.');
-          return history.push('/Signin');
-        } else if (response.MESSAGE === 'DUPLICATED ADMIN NAME') {
-          alert('이미 가입된 아이디 입니다.');
-        }
-      });
+    data.signUp(values).then(res => {
+      if ((res.message = 'SUCCESS')) {
+        alert('가입 축하드립니다.');
+        return history.push('/signIn');
+      } else if (res.MESSAGE === 'DUPLICATED ADMIN NAME') {
+        alert('이미 가입된 아이디 입니다.');
+      }
+    });
   };
 
   const resetInfo = () => {
-    setIdValue('');
-    setPwValue('');
-    setCheckPwValue('');
+    setValues({ id: '', pw: '', checkPw: '' });
     alert('가입 정보를 다시 확인해 주세요');
   };
 
-  const checkLogin = () => {
+  const checkLogin = e => {
+    e.preventDefault();
     const str = /[A-Z]/;
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
 
     const formCheck =
-      idValue.length > 7 &&
-      idValue.length < 17 &&
-      str.test(pwValue) &&
-      special.test(pwValue) &&
-      pwValue.length >= 8 &&
-      checkPwValue === pwValue;
+      values.id.length > 7 &&
+      values.id.length < 17 &&
+      str.test(values.pw) &&
+      special.test(values.pw) &&
+      values.pw.length >= 8 &&
+      values.checkPw === values.pw;
 
     formCheck ? postSignUp() : resetInfo();
   };
@@ -62,28 +52,28 @@ const SignUp = ({ history }) => {
   return (
     <div>
       <SingUpBox>
+        <SingUpTitle>Admin Sign Up</SingUpTitle>
         <SingUpArticle>
-          <SingUpTitle>Admin Sign Up</SingUpTitle>
           <Form onsubmit="return false;">
             <div>
               <Caution>8자 이상 16글자 미만</Caution>
               <IdInput
                 placeholder="Id"
-                onChange={handleInputId}
-                value={idValue}
+                onChange={handleChange}
                 minLength="8"
                 maxLength="16"
+                name="id"
                 required
               ></IdInput>
             </div>
             <div>
-              <Caution>영어, 특수문자 모두 포함 8자 이상</Caution>
+              <Caution>대문자, 특수문자 모두 포함 8자 이상</Caution>
               <PwInput
                 placeholder="Password"
                 type="password"
-                onChange={handleInputPw}
-                value={pwValue}
+                onChange={handleChange}
                 minLength="8"
+                name="pw"
                 required
               ></PwInput>
             </div>
@@ -91,16 +81,16 @@ const SignUp = ({ history }) => {
               <PwInput
                 placeholder="Check Password"
                 type="password"
-                onChange={handleInputCheckPw}
-                value={checkPwValue}
+                onChange={handleChange}
                 minLength="8"
+                name="checkPw"
                 required
               ></PwInput>
             </div>
             <SignUpBnt onClick={checkLogin}>Sign Up</SignUpBnt>
           </Form>
           <SignUpText>
-            Need an account?<Link to="/Signin">Sign In</Link>
+            Need an account?&nbsp;<Link to="/signIn">Sign In</Link>
           </SignUpText>
         </SingUpArticle>
       </SingUpBox>
@@ -110,7 +100,7 @@ const SignUp = ({ history }) => {
 
 const SingUpBox = styled.div`
   width: 500px;
-  margin: 0 auto;
+  margin-left: 550px;
   color: white;
   text-align: center;
   border: 1px gray solid;
@@ -125,7 +115,6 @@ const SingUpTitle = styled.div`
   color: white;
   text-align: center;
   padding-top: 20px;
-  margin-bottom: 20px;
 `;
 
 const SingUpArticle = styled.div`
@@ -155,6 +144,7 @@ const SignUpBnt = styled.button`
   width: 100%;
   font-size: 16px;
   margin-bottom: 20px;
+
   &:hover {
     cursor: pointer;
   }

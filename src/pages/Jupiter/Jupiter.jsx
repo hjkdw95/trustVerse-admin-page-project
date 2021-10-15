@@ -3,20 +3,17 @@ import ReportTab from './ReportTab';
 import AddTab from './AddTab';
 import DeleteTab from './DeleteTab';
 import EditTab from './EditTab';
+import fetchData from '../../service/data-fetch';
+import axios from 'axios';
 
 const Jupiter = props => {
-  const [reports, setReports] = useState({});
-  const [tabIndex, setTabIndex] = useState(3);
+  const [reports, setReports] = useState([]);
+  const [tabIndex, setTabIndex] = useState(1);
+  const data = new fetchData();
+  const token = sessionStorage.getItem('token');
+
   useEffect(() => {
-    fetch('/data/jupiterData.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setReports({
-          data,
-        });
-      });
+    data.getJupiterReports(token).then(item => setReports(item.reports));
   }, []);
 
   const MAPPING_JupiterTab = {

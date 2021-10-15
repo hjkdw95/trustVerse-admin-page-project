@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const Paging = ({ page, count, setPage }) => {
   const handleChange = e => {
     setPage(e.selected + 1);
-    console.log(e);
   };
+
   return (
     <PaginationWrapper>
       <ReactPaginate
@@ -29,6 +29,7 @@ const PaginationWrapper = styled.div`
   .pagination {
     display: flex;
     justify-content: right;
+
     a {
       margin: 0 0.5rem;
       transition: all 0.5s;
