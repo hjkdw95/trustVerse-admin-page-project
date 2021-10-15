@@ -37,7 +37,7 @@ const ListItem = ({
     history.push({
       pathname: `/${title}`,
       state: {
-        clicked: `${e.target.innerHTML}`,
+        clicked: idx,
       },
     });
   };

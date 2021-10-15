@@ -11,7 +11,7 @@ const Tams = props => {
   const location = useLocation();
   const [info, setInfo] = useState();
 
-  const dataName = location.state?.clicked;
+  const dataIdx = location.state?.clicked;
 
   const getTamWallet = () => {
     data.getTamWallet().then(item => setInfo(item));
@@ -107,8 +107,8 @@ const Tams = props => {
   return (
     <Section>
       <TamsArticle
-        format={dataName === 'Wallets' ? WALLETDATA : USERDATA}
-        getData={dataName === 'Wallets' ? getTamWallet : getTamUsers}
+        format={dataIdx === 1 ? WALLETDATA : USERDATA}
+        getData={dataIdx === 1 ? getTamWallet : getTamUsers}
       />
     </Section>
   );
