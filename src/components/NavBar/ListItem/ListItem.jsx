@@ -17,13 +17,15 @@ const ListItem = ({ item, iconSize, hoverBg, hoverFontColor }) => {
 
   return (
     <Li className={item.title} className="focused">
-      <MenuWrapper>
+      <FirstMenu>
         <IconWrapper>
           <RiDashboardLine />
         </IconWrapper>
         <Menu>{item.title}</Menu>
-      </MenuWrapper>
-      <Ul>{item.list && item.list.map(menu => <li>{menu}</li>)}</Ul>
+      </FirstMenu>
+      <SecondMenu>
+        {item.list && item.list.map(menu => <li>{menu}</li>)}
+      </SecondMenu>
     </Li>
   );
 };
@@ -46,7 +48,7 @@ const Li = styled.li`
   }
 `;
 
-const MenuWrapper = styled.div`
+const FirstMenu = styled.div`
   display: grid;
   grid-template-columns: 2.4rem auto;
   grid-gap: 1.5rem;
@@ -68,7 +70,7 @@ const Menu = styled.div`
   font-size: 1.6rem;
 `;
 
-const Ul = styled.ul`
+const SecondMenu = styled.ul`
   padding-left: 4rem;
 
   li {
