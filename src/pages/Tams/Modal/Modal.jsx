@@ -45,10 +45,11 @@ export default Modal;
 const Container = styled.div`
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1000;
+  right: 0;
+  margin-left: 15%;
+  z-index: 100000;
 `;
 
 const ModalContainer = styled.div`
