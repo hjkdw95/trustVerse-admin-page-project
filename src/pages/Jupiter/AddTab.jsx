@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const AddTab = ({ setTabIndex }) => {
+const AddTab = () => {
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -98,13 +98,6 @@ const AddTab = ({ setTabIndex }) => {
             <UpLoadBnt type="submit" onClick={postReport} value="UpLoad" />
           </Form>
         </AddTabBoxArticle>
-        <BackBnt
-          onClick={() => {
-            setTabIndex(1);
-          }}
-        >
-          &lt;&#00;-&#08; Back to main
-        </BackBnt>
       </AddTabBox>
     </Section>
   );
@@ -186,17 +179,6 @@ const UpLoadBnt = styled.input`
   color: white;
   font-size: 16px;
   border: none;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const BackBnt = styled.div`
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-size: 20px;
-  text-align: left;
 
   &:hover {
     cursor: pointer;

@@ -23,7 +23,7 @@ const Balance = ({ values, data }) => {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      {values.map((coin, idx) => {
+      {values?.map((coin, idx) => {
         return (
           <Tags key={idx} onClick={handleClick}>
             {coin}

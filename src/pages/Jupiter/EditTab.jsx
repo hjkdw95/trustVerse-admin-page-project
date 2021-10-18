@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const EditTab = ({ setTabIndex }) => {
+const EditTab = () => {
   const [values, setValues] = useState({
     id: '',
     title: '',
@@ -74,13 +74,6 @@ const EditTab = ({ setTabIndex }) => {
           *If you wish to change the uploaded file, please delete the related
           file and then upload again.
         </Caution>
-        <BackBnt
-          onClick={() => {
-            setTabIndex(1);
-          }}
-        >
-          &lt;&#00;-&#08; Back to main
-        </BackBnt>
       </EditTabBox>
     </Section>
   );
@@ -140,17 +133,6 @@ const UpdateBnt = styled.button`
   font-size: 16px;
   border-radius: 130px;
   border: none;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const BackBnt = styled.div`
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-size: 20px;
-  text-align: left;
 
   &:hover {
     cursor: pointer;

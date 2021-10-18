@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Paging from './Paging';
 
-const ReportTab = ({ reports, setTabIndex }) => {
+const ReportTab = ({ reports }) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
 
@@ -12,13 +12,7 @@ const ReportTab = ({ reports, setTabIndex }) => {
 
   return (
     <Section>
-      <Title
-        onClick={() => {
-          setTabIndex(2);
-        }}
-      >
-        All reports
-      </Title>
+      <Title>All reports</Title>
       <ReportTableContainer>
         <ReportTable>
           <thead>

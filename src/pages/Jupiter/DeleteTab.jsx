@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const DeleteTab = ({ setTabIndex }) => {
+const DeleteTab = () => {
   const [IdValue, setIdValue] = useState({
     id: '',
   });
@@ -40,13 +40,6 @@ const DeleteTab = ({ setTabIndex }) => {
             <DeleteBnt type="submit" onClick={deleteReport} value="Delete" />
           </Form>
         </DeleteTabBoxArticle>
-        <BackBnt
-          onClick={() => {
-            setTabIndex(1);
-          }}
-        >
-          &lt;&#00;-&#08; Back to main
-        </BackBnt>
       </DeleteTabBox>
     </Section>
   );
@@ -106,17 +99,6 @@ const DeleteBnt = styled.input`
   color: white;
   font-size: 16px;
   border: none;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const BackBnt = styled.div`
-  margin-bottom: 10px;
-  margin-left: 10px;
-  font-size: 20px;
-  text-align: left;
 
   &:hover {
     cursor: pointer;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
@@ -7,9 +8,10 @@ import styled from 'styled-components';
 
 const Tams = props => {
   const data = new fetchData();
+  const location = useLocation();
   const [info, setInfo] = useState();
 
-  // console.log(info?.find(el => el.email === '11'));
+  const dataIdx = location.state?.clicked;
 
   const getTamWallet = () => {
     data.getTamWallet().then(item => setInfo(item));
@@ -104,7 +106,10 @@ const Tams = props => {
 
   return (
     <Section>
-      <TamsArticle format={WALLETDATA} getData={getTamWallet} />
+      <TamsArticle
+        format={dataIdx === 1 ? WALLETDATA : USERDATA}
+        getData={dataIdx === 1 ? getTamWallet : getTamUsers}
+      />
     </Section>
   );
 };

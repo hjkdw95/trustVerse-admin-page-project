@@ -2,7 +2,8 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
-const Paging = ({ page, count, setPage }) => {
+
+const Paging = ({ count, setPage }) => {
   const handleChange = e => {
     setPage(e.selected + 1);
   };
