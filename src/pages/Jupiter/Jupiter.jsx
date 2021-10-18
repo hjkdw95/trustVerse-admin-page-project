@@ -6,6 +6,7 @@ import DeleteTab from './DeleteTab';
 import EditTab from './EditTab';
 import fetchData from '../../service/data-fetch';
 import axios from 'axios';
+import styled from 'styled-components';
 
 const Jupiter = props => {
   const [reports, setReports] = useState([]);
@@ -25,7 +26,10 @@ const Jupiter = props => {
     4: <EditTab />,
   };
 
-  return <div>{MAPPING_JupiterTab[dataIdx ? dataIdx + 1 : 1]}</div>;
+  return <Section>{MAPPING_JupiterTab[dataIdx ? dataIdx + 1 : 1]}</Section>;
 };
-
+const Section = styled.section`
+  position: relative;
+  padding-left: 15%;
+`;
 export default Jupiter;

@@ -102,15 +102,12 @@ const AddTab = () => {
     </Section>
   );
 };
-const Section = styled.div`
-  position: relative;
-  padding-left: 15%;
-`;
+const Section = styled.div``;
 
 const AddTabBox = styled.div`
   width: 800px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 50px;
   text-align: center;
   border: 1px gray solid;
   background-color: white;
