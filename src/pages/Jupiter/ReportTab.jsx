@@ -51,24 +51,21 @@ const ReportTab = ({ reports }) => {
     </Section>
   );
 };
+
 const Section = styled.div`
-  position: relative;
-  padding-left: 15%;
+  padding: 3rem;
 `;
 
-const Title = styled.div`
-  font-size: 30px;
-  font-weight: bold;
-  margin-left: 60px;
-  margin-top: 100px;
-  margin-bottom: 20px;
+const Title = styled.h1`
+  margin-bottom: 2rem;
+  ${({ theme }) => theme.title()}
 `;
 
 const ReportTableContainer = styled.div`
-  width: 1100px;
-  padding: 30px;
-  margin: 0 auto;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 3rem;
 `;
 
 const ReportTable = styled.table`

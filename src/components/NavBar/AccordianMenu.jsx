@@ -8,7 +8,10 @@ const AccordianMenu = () => {
 
   const MENU_LIST = [
     { title: 'TAMS', list: ['Users', 'Wallets'] },
-    { title: 'Jupiter', list: ['Create', 'Read', 'Update', 'Delete'] },
+    {
+      title: 'Jupiter',
+      list: ['All Reports', 'Add', 'Deletet', 'Edit'],
+    },
   ];
 
   const [activeIndex, setActiveIndex] = useState();
