@@ -19,6 +19,10 @@ const Modal = ({ coinData, setModalOn }) => {
     }
   };
 
+  const walletName = info?.find(el => el.coin_name === name).password;
+  const rawBalance = info?.find(el => el.coin_name === name).num;
+  const balance = +rawBalance;
+
   return (
     <Container onClick={handleWindow}>
       <ModalContainer className="modal">
@@ -26,10 +30,10 @@ const Modal = ({ coinData, setModalOn }) => {
         <Dl>
           <Dt>Coin Name</Dt>
           <Dd>{name}</Dd>
-          <Dt>PassWord</Dt>
-          <Dd>{info?.find(el => el.coin_name === name).password}</Dd>
+          <Dt>Wallet Name</Dt>
+          <Dd>{walletName}</Dd>
           <Dt>Balance</Dt>
-          <Dd>{info?.find(el => el.coin_name === name).num}</Dd>
+          <Dd>{balance}</Dd>
         </Dl>
       </ModalContainer>
     </Container>
