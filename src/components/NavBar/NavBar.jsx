@@ -8,7 +8,7 @@ const NavBar = () => {
 
   const MENU_LIST = [
     { title: 'TAMS', list: ['Users', 'Wallets'] },
-    { title: 'Jupiter', list: ['Create', 'Read', 'Update', 'Delete'] },
+    { title: 'Jupiter', list: ['All reports', 'Add', 'Delete', 'Edit'] },
   ];
 
   const [activeIndex, setActiveIndex] = useState();
