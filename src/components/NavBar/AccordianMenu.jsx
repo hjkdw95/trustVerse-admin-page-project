@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import ListItem from './ListItem/ListItem';
+import styled from 'styled-components';
 
 const AccordianMenu = () => {
   const history = useHistory();
