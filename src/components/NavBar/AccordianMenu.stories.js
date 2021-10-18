@@ -1,14 +1,14 @@
 import React from 'react';
-import NavBar from './NavBar';
 import { withKnobs } from '@storybook/addon-knobs';
+import AccordianMenu from './AccordianMenu';
 
 export default {
   title: 'Component / NavBar',
-  component: NavBar,
+  component: AccordianMenu,
   decorators: [withKnobs],
 };
 
-const Template = args => <NavBar {...args} />;
+const Template = args => <AccordianMenu {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
