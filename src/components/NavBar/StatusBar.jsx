@@ -14,7 +14,7 @@ const StatusBar = props => {
   return (
     <BarWrapper>
       <TitleWrapper>
-        안녕하세요, <span>위고두</span>님
+        안녕하세요, <span>Admin</span>님
       </TitleWrapper>
       <Button type="button" onClick={handleLogOut}>
         Log Out
