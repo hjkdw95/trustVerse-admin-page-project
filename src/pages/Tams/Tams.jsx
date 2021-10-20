@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router';
+import axios from 'axios';
 import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
-import axios from 'axios';
 import styled from 'styled-components';
 
 const Tams = props => {
   const data = new fetchData();
   const location = useLocation();
+  const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
 
   const dataIdx = location.state?.clicked;
 
-  const getTamWallet = () => {
-    data.getTamWallet().then(item => setInfo(item));
+  const getTamWallet = page => {
+    data.getTamWallet(page).then(item => setInfo(item));
   };
 
-  const getTamUsers = () => {
-    data.getTamUsers().then(item => setInfo(item));
+  const getTamUsers = page => {
+    data.getTamUsers(page).then(item => setInfo(item));
   };
 
   const WALLETDATA = {
     title: 'Wallets',
-    limit: 0,
-    offset: 7,
     data: info,
+    page: page,
+    setPage: setPage,
     rowData: [
       {
         accessor: 'email',
@@ -53,9 +54,9 @@ const Tams = props => {
 
   const USERDATA = {
     title: 'Users',
-    limit: 0,
-    offset: 7,
     data: info,
+    page: page,
+    setPage: setPage,
     rowData: [
       {
         accessor: 'email',
@@ -108,7 +109,9 @@ const Tams = props => {
     <Section>
       <TamsArticle
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
-        getData={dataIdx === 1 ? getTamWallet : getTamUsers}
+        getData={() => {
+          dataIdx === 1 ? getTamWallet(page) : getTamUsers(page);
+        }}
       />
     </Section>
   );

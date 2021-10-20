@@ -4,14 +4,18 @@ import URL from '../.config';
 class fetchData {
   constructor() {}
 
-  async getTamUsers() {
-    const response = await axios.get(`/data/userdata.json`);
-    const result = response.data;
+  async getTamUsers(page) {
+    const response = await axios.get(
+      `http://192.168.1.246:8000/users?page=${page}`
+    );
+    const result = response.data.results;
     return result;
   }
 
-  async getTamWallet() {
-    const response = await axios.get(`/data/userWalletData.json`);
+  async getTamWallet(page) {
+    const response = await axios.get(
+      `http://192.168.1.246:8000/wallet?page=${page}`
+    );
     const result = response.data;
     return result;
   }

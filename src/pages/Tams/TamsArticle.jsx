@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import TableData from './Table/TableData';
 import Pagination from '../../utils/Pagination';
 import styled from 'styled-components';
 
 const TamsArticle = ({ format, getData }) => {
-  // pagenation 필요..현재는 데이터가 적어서 한번에 데이터 받은 후 client측에서 slice 중 (API 작업 중)
-  const { title, limit, offset, data, rowData } = format;
-  const [pages, setPages] = useState({ limit: limit, offset: offset });
+  const { title, page, setPage, data, rowData } = format;
 
   useEffect(() => {
     getData();
-  }, [title]);
+  }, [title, page]);
 
   return (
     <Wrapper>
       <H1>{title}</H1>
       <Container>
-        {data && <TableData data={data} pages={pages} rowData={rowData} />}
         {data && (
-          <Pagination
-            info={data}
-            pages={pages}
-            setPages={setPages}
-            STANDARD_OFFSET={offset}
-          />
+          <>
+            <TableData data={data.trv_user} rowData={rowData} />
+            <Pagination info={data} page={page} setPage={setPage} />
+          </>
         )}
       </Container>
     </Wrapper>
