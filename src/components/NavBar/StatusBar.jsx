@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const StatusBar = props => {
   const history = useHistory();
+  const USER_TOKEN = 'token';
+  const [token, setToken] = useState();
 
   const handleLogOut = () => {
     sessionStorage.removeItem('token');
@@ -11,13 +13,25 @@ const StatusBar = props => {
     history.push('/signIn');
   };
 
+  useEffect(() => {
+    setToken(sessionStorage.getItem(USER_TOKEN));
+  }, []);
+
   return (
     <BarWrapper>
-      <TitleWrapper>
-        안녕하세요, <span>위고두</span>님
-      </TitleWrapper>
-      <Button type="button" onClick={handleLogOut}>
-        Log Out
+      {token && (
+        <>
+          <TitleWrapper>
+            안녕하세요, <span>Admin</span>님
+          </TitleWrapper>
+          <Button type="button" onClick={handleLogOut}>
+            Log Out
+          </Button>
+        </>
+      )}
+      <TitleWrapper>로그인을 진행해주세요</TitleWrapper>
+      <Button type="button" onClick={() => history.push('/signIn')}>
+        Log In
       </Button>
     </BarWrapper>
   );
