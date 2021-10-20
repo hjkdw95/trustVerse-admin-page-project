@@ -82,53 +82,64 @@ const EditTab = () => {
 const Section = styled.div``;
 
 const EditTabBox = styled.div`
-  width: 800px;
+  width: 80rem;
   margin: 0 auto;
+  margin-top: 5rem;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 5px;
   text-align: center;
-  border: 1px gray solid;
-  margin-top: 50px;
   background-color: white;
+  overflow: hidden;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
 `;
 
 const Form = styled.form``;
 
 const EditTabBoxTitle = styled.div`
+  height: 7rem;
+  padding-top: 2rem;
+  margin-bottom: 7rem;
   background-color: #a37bfd;
-  height: 70px;
-  font-size: 30px;
+  font-size: 3rem;
   color: white;
   text-align: center;
-  padding-top: 20px;
-  margin-bottom: 70px;
 `;
 
 const EditTabBoxArticle = styled.div`
-  padding: 0 100px;
-  border: #f0f3f5;
+  padding: 0 10rem;
 `;
 
 const InputTitle = styled.label`
-  font-size: 15px;
-  text-align: left;
-  margin-bottom: 10px;
   display: block;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: left;
 `;
 
 const Input = styled.input`
-  padding: 10px 20px;
-  height: 50px;
   width: 100%;
-  margin-bottom: 40px;
+  padding: 1rem 2rem;
+  height: 5rem;
+  margin-bottom: 4rem;
+  border: 1px solid #f1f3f5;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #707070;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const UpdateBnt = styled.button`
-  width: 200px;
-  height: 45px;
-  margin-bottom: 30px;
+  width: 20rem;
+  height: 4.5rem;
+  margin-bottom: 3rem;
   background-color: #373063;
   color: white;
-  font-size: 16px;
-  border-radius: 130px;
+  font-size: 1.6rem;
+  border-radius: 13rem;
   border: none;
 
   &:hover {
@@ -137,8 +148,8 @@ const UpdateBnt = styled.button`
 `;
 
 const Caution = styled.div`
-  margin-bottom: 10px;
-  font-size: 15px;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   color: red;
 `;
 

@@ -49,32 +49,32 @@ const SignIn = ({ history }) => {
   };
 
   return (
-    <div>
+    <Container>
       <SingInBox>
         <SingInTitle>Admin Sign In</SingInTitle>
         <SingInArticle>
           <Form onsubmit="return false;">
             <div>
               <Caution>8자 이상 16글자 미만</Caution>
-              <IdInput
+              <Input
                 placeholder="Id"
                 onChange={handleChange}
                 minLength="8"
                 maxLength="16"
                 required
                 name="id"
-              ></IdInput>
+              ></Input>
             </div>
             <Caution>대문자, 특수문자 모두 포함 8자 이상</Caution>
             <div>
-              <PwInput
+              <Input
                 placeholder="Password"
                 type="password"
                 onChange={handleChange}
                 minLength="8"
                 required
                 name="pw"
-              ></PwInput>
+              ></Input>
             </div>
             <SignInBnt onClick={postSignIn}>Sign In</SignInBnt>
           </Form>
@@ -83,58 +83,68 @@ const SignIn = ({ history }) => {
           </SignInText>
         </SingInArticle>
       </SingInBox>
-    </div>
+    </Container>
   );
 };
+const Container = styled.div`
+  position: relative;
+  padding-left: 15%;
+`;
 
 const SingInBox = styled.div`
-  width: 500px;
-  margin-left: 550px;
-  color: white;
+  width: 50rem;
+  margin: 0 auto;
+  margin-top: 10rem;
   text-align: center;
-  border: 1px gray solid;
-  margin-top: 100px;
+  overflow: hidden;
+  color: white;
   background-color: white;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
 `;
 
 const Form = styled.form``;
 
 const SingInTitle = styled.div`
+  height: 7rem;
+  padding-top: 2rem;
   background-color: #a37bfd;
-  height: 70px;
-  font-size: 30px;
   color: white;
+  font-size: 3rem;
   text-align: center;
-  padding-top: 20px;
 `;
 
 const SingInArticle = styled.div`
-  padding: 20px;
-  border: #f0f3f5;
+  padding: 2rem;
+  border: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 `;
 
-const IdInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
+const Input = styled.input`
+  height: 5rem;
   width: 100%;
-  margin-bottom: 20px;
-`;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid #f1f3f5;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #707070;
 
-const PwInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
-  width: 100%;
-  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const SignInBnt = styled.button`
-  height: 45px;
-  border-radius: 130px;
+  width: 100%;
+  height: 4.5rem;
+  margin-bottom: 2rem;
+  border-radius: 13rem;
   background-color: #373063;
   color: white;
-  width: 100%;
-  font-size: 16px;
-  margin-bottom: 20px;
+  font-size: 1.6rem;
 
   &:hover {
     cursor: pointer;
@@ -143,17 +153,18 @@ const SignInBnt = styled.button`
 
 const SignInText = styled.div`
   color: #707070;
-  font-size: 20px;
+  font-size: 2rem;
 
   a {
-    font-size: 20px;
+    font-size: 2rem;
     color: #2d4665;
   }
 `;
 
 const Caution = styled.div`
-  font-size: 10px;
+  font-size: 1rem;
   color: red;
   text-align: left;
 `;
+
 export default SignIn;

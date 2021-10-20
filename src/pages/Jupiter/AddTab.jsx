@@ -6,7 +6,7 @@ const AddTab = () => {
     title: '',
     description: '',
     cover: null,
-    comment: null,
+    content: null,
   });
 
   const handleChange = event => {
@@ -14,29 +14,33 @@ const AddTab = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleFileOnChange = event => {
+  const handleFileOnChange = async event => {
     event.preventDefault();
-    let reader = new FileReader();
-    let file = event.target.files[0];
-    reader.onloadend = () => {
-      localStorage.setItem('recent-image', reader.result);
-    };
-    reader.readAsDataURL(file);
+    const { name, files } = event.target;
+    setValues({ ...values, [name]: files });
+    console.log(values);
   };
 
-  useEffect(() => {
-    console.log(values.cover);
-  }, [values]);
-
   const postReport = () => {
+    const formData = new FormData();
+    formData.append(
+      'uploadImages',
+      values.cover,
+      values.content,
+      this.state.selectedFiles.name
+    );
     fetch('http://192.168.1.244:8000/admin/add', {
       method: 'POST',
-      headers: { Authorization: localStorage.getItem('token') },
+      headers: {
+        Authorization: localStorage.getItem('token'),
+        'content-type': 'multipart/form-data',
+      },
       body: JSON.stringify({
         title: values.title,
         description: values.description,
         cover: values.cover,
         comment: values.comment,
+        formData,
       }),
     });
   };
@@ -49,7 +53,7 @@ const AddTab = () => {
           <Form onSubmit={postReport}>
             <div>
               <InputTitle for="title">Title</InputTitle>
-              <IdInput
+              <Input
                 placeholder="eg. VOL_KR-20-004-JUPITER"
                 id="title"
                 name="title"
@@ -61,7 +65,7 @@ const AddTab = () => {
             </div>
             <div>
               <InputTitle for="description">Description</InputTitle>
-              <PwInput
+              <Input
                 placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
                 id="description"
                 name="description"
@@ -69,7 +73,7 @@ const AddTab = () => {
                 onChange={handleChange}
                 type="text"
                 required
-              ></PwInput>
+              ></Input>
             </div>
             <div>
               <InputTitle for="cover">Cover*</InputTitle>
@@ -105,76 +109,80 @@ const AddTab = () => {
 const Section = styled.div``;
 
 const AddTabBox = styled.div`
-  width: 800px;
+  width: 80rem;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 5rem;
   text-align: center;
-  border: 1px gray solid;
   background-color: white;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
 `;
 
 const Form = styled.form``;
 
 const AddTabBoxTitle = styled.div`
-  height: 70px;
-  padding-top: 20px;
-  margin-bottom: 20px;
+  height: 7rem;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 3rem;
   color: white;
   background-color: #a37bfd;
-  font-size: 30px;
   text-align: center;
 `;
 
 const AddTabBoxArticle = styled.div`
-  padding: 0 100px;
-  border: #f0f3f5;
+  padding: 0 10rem;
 `;
 
 const InputTitle = styled.label`
   display: block;
-  margin-bottom: 10px;
-  font-size: 15px;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   text-align: left;
 `;
 
-const IdInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
+const Input = styled.input`
   width: 100%;
-  margin-bottom: 20px;
-`;
+  padding: 1rem 2rem;
+  height: 5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #f1f3f5;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #707070;
 
-const PwInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
-  width: 100%;
-  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const FileInput = styled.input`
   width: 100%;
-  margin-bottom: 20px;
-  padding: 13px 20px;
-  height: 50px;
-  border: 1px gray solid;
+  margin-bottom: 2rem;
+  padding: 1.3rem 2rem;
+  height: 5rem;
+  border: 1px solid #f1f3f5;
   border-radius: 2px;
 `;
 
 const Caution = styled.div`
-  margin-bottom: 10px;
-  font-size: 15px;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   color: red;
   text-align: left;
 `;
 
 const UpLoadBnt = styled.input`
-  width: 200px;
-  height: 45px;
-  margin-bottom: 20px;
-  border-radius: 130px;
+  width: 20rem;
+  height: 4.5rem;
+  margin-bottom: 2rem;
+  border-radius: 13rem;
   background-color: #373063;
   color: white;
-  font-size: 16px;
+  font-size: 1.6rem;
   border: none;
 
   &:hover {
