@@ -50,42 +50,42 @@ const SignUp = ({ history }) => {
   };
 
   return (
-    <div>
+    <Container>
       <SingUpBox>
         <SingUpTitle>Admin Sign Up</SingUpTitle>
         <SingUpArticle>
           <Form onsubmit="return false;">
             <div>
               <Caution>8자 이상 16글자 미만</Caution>
-              <IdInput
+              <Input
                 placeholder="Id"
                 onChange={handleChange}
                 minLength="8"
                 maxLength="16"
                 name="id"
                 required
-              ></IdInput>
+              ></Input>
             </div>
             <div>
               <Caution>대문자, 특수문자 모두 포함 8자 이상</Caution>
-              <PwInput
+              <Input
                 placeholder="Password"
                 type="password"
                 onChange={handleChange}
                 minLength="8"
                 name="pw"
                 required
-              ></PwInput>
+              ></Input>
             </div>
             <div>
-              <PwInput
+              <Input
                 placeholder="Check Password"
                 type="password"
                 onChange={handleChange}
                 minLength="8"
                 name="checkPw"
                 required
-              ></PwInput>
+              ></Input>
             </div>
             <SignUpBnt onClick={checkLogin}>Sign Up</SignUpBnt>
           </Form>
@@ -94,56 +94,65 @@ const SignUp = ({ history }) => {
           </SignUpText>
         </SingUpArticle>
       </SingUpBox>
-    </div>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  position: relative;
+  padding-left: 15%;
+`;
+
 const SingUpBox = styled.div`
-  width: 500px;
-  margin-left: 550px;
-  color: white;
+  width: 50rem;
+  margin: 0 auto;
+  margin-top: 10rem;
   text-align: center;
-  border: 1px gray solid;
-  margin-top: 100px;
+  color: white;
   background-color: white;
+  overflow: hidden;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 5px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
 `;
 
 const SingUpTitle = styled.div`
-  background-color: #a37bfd;
-  height: 70px;
-  font-size: 30px;
+  padding-top: 2rem;
+  height: 7rem;
+  font-size: 3rem;
   color: white;
+  background-color: #a37bfd;
   text-align: center;
-  padding-top: 20px;
 `;
 
 const SingUpArticle = styled.div`
-  padding: 20px;
-  border: #f0f3f5;
+  padding: 2rem;
 `;
 
-const IdInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
+const Input = styled.input`
   width: 100%;
+  height: 50px;
+  padding: 10px 20px;
   margin-bottom: 20px;
-`;
+  border: 1px solid #f1f3f5;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #707070;
 
-const PwInput = styled.input`
-  padding: 10px 20px;
-  height: 50px;
-  width: 100%;
-  margin-bottom: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const SignUpBnt = styled.button`
+  width: 100%;
   height: 45px;
+  margin-bottom: 20px;
   border-radius: 130px;
   background-color: #373063;
   color: white;
-  width: 100%;
   font-size: 16px;
-  margin-bottom: 20px;
 
   &:hover {
     cursor: pointer;

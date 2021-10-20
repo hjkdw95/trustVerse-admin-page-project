@@ -7,7 +7,7 @@ const ReportTab = ({ reports }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(reports.slice(page * 10 - 10, page * 10));
+    setData(reports?.slice(page * 10 - 10, page * 10));
   }, [page, reports]);
 
   return (
@@ -44,9 +44,9 @@ const ReportTab = ({ reports }) => {
         </ReportTable>
         <PageIndex>
           Showing {page === 1 ? 1 : page - 1 + '1'} to &nbsp;{page * 10} of
-          &nbsp;{reports.length + 1}
+          &nbsp;{reports?.length + 1}
         </PageIndex>
-        <Paging page={page} count={reports.length} setPage={setPage} />
+        <Paging page={page} count={reports?.length} setPage={setPage} />
       </ReportTableContainer>
     </Section>
   );
@@ -72,9 +72,9 @@ const ReportTable = styled.table`
   margin: 0 auto;
 
   thead tr th {
-    padding: 14px;
+    padding: 1.4rem;
     color: #6f7a92;
-    font-size: 14px;
+    font-size: 1.4rem;
     text-align: left;
   }
 
@@ -84,25 +84,25 @@ const ReportTable = styled.table`
   }
 
   tbody tr td {
-    font-size: 14px;
-    padding: 14px;
+    font-size: 1.4rem;
+    padding: 1.4rem;
     font-weight: bold;
     display: table-cell;
     vertical-align: middle;
-    border-top: 20px solid white;
+    border-top: 2rem solid white;
 
     a {
-      font-size: 14px;
+      font-size: 1.4rem;
     }
   }
 `;
 
 const PageIndex = styled.div`
-  font-size: 15px;
+  font-size: 1.5rem;
   position: relative;
-  top: 20px;
+  top: 2rem;
   color: #6f7a92;
-  width: 300px;
+  width: 30rem;
 `;
 
 export default ReportTab;
