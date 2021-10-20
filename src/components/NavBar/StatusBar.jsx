@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import styled from 'styled-components';
 
 const StatusBar = props => {
   const history = useHistory();
+  const location = useLocation();
   const USER_TOKEN = 'token';
-  const [token, setToken] = useState();
-
-  const handleLogOut = () => {
-    sessionStorage.removeItem('token');
-    alert('로그아웃 되었습니다.');
-    history.push('/signIn');
-  };
+  const [isLogin, setLogin] = useState(false);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem(USER_TOKEN));
-  }, []);
+    if (sessionStorage.getItem(USER_TOKEN)) {
+      setLogin(true);
+    }
+  }, [location.pathname]);
+
+  const handleLogOut = () => {
+    sessionStorage.removeItem(USER_TOKEN);
+    alert('로그아웃되었습니다.');
+    setLogin(false);
+    history.push('/signin');
+  };
 
   return (
     <BarWrapper>
-      {token && (
+      {isLogin ? (
         <>
           <TitleWrapper>
             안녕하세요, <span>Admin</span>님
@@ -28,11 +32,14 @@ const StatusBar = props => {
             Log Out
           </Button>
         </>
+      ) : (
+        <>
+          <TitleWrapper>로그인을 진행해주세요</TitleWrapper>
+          <Button type="button" onClick={() => history.push('/signIn')}>
+            Log In
+          </Button>
+        </>
       )}
-      <TitleWrapper>로그인을 진행해주세요</TitleWrapper>
-      <Button type="button" onClick={() => history.push('/signIn')}>
-        Log In
-      </Button>
     </BarWrapper>
   );
 };
