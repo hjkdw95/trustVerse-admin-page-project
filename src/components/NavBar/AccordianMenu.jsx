@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ListItem from './ListItem/ListItem';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
-const AccordianMenu = () => {
+const AccordianMenu = props => {
   const history = useHistory();
+  const value = useContext(OpenContext);
 
   const MENU_LIST = [
     { title: 'TAMS', list: ['Users', 'Wallets'] },
     {
       title: 'Jupiter',
-      list: ['All Reports', 'Add', 'Deletet', 'Edit'],
     },
   ];
 
@@ -22,7 +23,7 @@ const AccordianMenu = () => {
   };
 
   return (
-    <Nav>
+    <Nav className={value.isNavOpened ? '' : 'closed'}>
       <TitleWrapper>
         <Title onClick={handleClick}>DigiFinance</Title>
       </TitleWrapper>
@@ -49,7 +50,7 @@ const AccordianMenu = () => {
 export default AccordianMenu;
 
 const Nav = styled.nav`
-  width: 15%;
+  width: 10%;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -58,10 +59,15 @@ const Nav = styled.nav`
   color: #fff;
   overflow-x: hidden;
   z-index: 1000;
+  transition: all 300ms ease-in-out;
+
+  &.closed {
+    width: 0;
+  }
 `;
 
 const TitleWrapper = styled.div`
-  padding: 2.5rem;
+  padding: 2.9rem 2rem;
   background-color: #182444;
 `;
 
