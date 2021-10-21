@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AccordianMenu from './AccordianMenu';
 import StatusBar from './StatusBar';
 
 const NavBar = props => {
+  const [isNavOpened, setNavOpen] = useState(true);
+
   return (
     <>
-      <AccordianMenu />
-      <StatusBar />
+      <AccordianMenu isNavOpened={isNavOpened} />
+      <StatusBar isNavOpened={isNavOpened} setNavOpen={setNavOpen} />
     </>
   );
 };
