@@ -6,6 +6,8 @@ import Main from './pages/Main/Main';
 import SignUp from './pages/SignUp/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import Tams from './pages/Tams/Tams';
+import PrivateRoutes from './components/PrivateRoutes';
+import PublicRoutes from './components/PublicRoutes';
 
 export default class Routes extends Component {
   render() {
@@ -13,11 +15,11 @@ export default class Routes extends Component {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={Main} />
-          <Route exact path="/signUp" component={SignUp} />
-          <Route exact path="/signIn" component={SignIn} />
-          <Route exact path="/jupiter" component={Jupiter} />
-          <Route exact path="/tams" component={Tams} />
+          <PrivateRoutes exact path="/" component={Main} />
+          <PublicRoutes exact path="/signUp" component={SignUp} />
+          <PublicRoutes exact path="/signIn" component={SignIn} />
+          <PrivateRoutes exact path="/jupiter" component={Jupiter} />
+          <PrivateRoutes exact path="/tams" component={Tams} />
         </Switch>
       </Router>
     );
