@@ -25,7 +25,7 @@ const Tams = props => {
 
   const WALLETDATA = {
     title: 'Wallets',
-    data: info,
+    data: info?.wallets,
     page: page,
     setPage: setPage,
     rowData: [
@@ -34,7 +34,7 @@ const Tams = props => {
         Header: 'Email',
       },
       {
-        accessor: 'walletID',
+        accessor: 'wallet_id',
         Header: 'Wallet ID',
       },
       {
@@ -55,7 +55,7 @@ const Tams = props => {
 
   const USERDATA = {
     title: 'Users',
-    data: info,
+    data: info?.trv_user,
     page: page,
     setPage: setPage,
     rowData: [

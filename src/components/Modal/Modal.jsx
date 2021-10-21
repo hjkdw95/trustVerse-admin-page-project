@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import fetchData from '../../../service/data-fetch';
-import axios from 'axios';
 import styled from 'styled-components';
 
-const Modal = ({ coinData, setModalOn }) => {
+const Modal = ({ coinData, setModalOn, data }) => {
   const { name, rowIdx } = coinData;
-  const data = new fetchData();
   const [info, setInfo] = useState();
 
+  const TITLE = 'Coin Details';
+
   useEffect(() => {
-    data.getTamWallet().then(item => setInfo(item[rowIdx].wallet_balance));
+    setInfo(data[rowIdx].wallet_balance);
   }, []);
 
   const handleWindow = e => {
@@ -26,7 +25,7 @@ const Modal = ({ coinData, setModalOn }) => {
   return (
     <Container onClick={handleWindow}>
       <ModalContainer className="modal">
-        <H1>Coin Details</H1>
+        <H1>{TITLE}</H1>
         <Dl>
           <Dt>Coin Name</Dt>
           <Dd>{name}</Dd>

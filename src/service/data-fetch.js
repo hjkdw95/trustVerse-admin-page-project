@@ -48,12 +48,12 @@ class fetchData {
   }
 
   async signIn(refs) {
-    const response = await axios.post(`${URL}admin/signin`, {
+    const response = await axios.get(`${URL}admin/signin`, {
       name: refs.id,
       password: refs.pw,
     });
     const result = response.data;
-    return result;
+    return Object.keys(result);
   }
 }
 

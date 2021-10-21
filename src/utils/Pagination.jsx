@@ -9,8 +9,6 @@ const Pagination = ({ info, page, setPage }) => {
     setPage(selected);
   };
 
-  console.log(page);
-
   const FIRST_PAGE = (page - 1) * 7;
   const LAST_PAGE = FIRST_PAGE + 7;
 
