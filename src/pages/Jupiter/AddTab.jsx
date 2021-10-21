@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const AddTab = () => {
+const AddTab = ({ showModal, closeModal }) => {
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -46,69 +46,95 @@ const AddTab = () => {
   };
 
   return (
-    <Section>
-      <AddTabBox>
-        <AddTabBoxTitle>Upload Report</AddTabBoxTitle>
-        <AddTabBoxArticle>
-          <Form onSubmit={postReport}>
-            <div>
-              <InputTitle for="title">Title</InputTitle>
-              <Input
-                placeholder="eg. VOL_KR-20-004-JUPITER"
-                id="title"
-                name="title"
-                minLength="10"
-                onChange={handleChange}
-                type="text"
-                required
-              />
-            </div>
-            <div>
-              <InputTitle for="description">Description</InputTitle>
-              <Input
-                placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
-                id="description"
-                name="description"
-                minLength="10"
-                onChange={handleChange}
-                type="text"
-                required
-              ></Input>
-            </div>
-            <div>
-              <InputTitle for="cover">Cover*</InputTitle>
-              <FileInput
-                type="file"
-                id="cover"
-                name="cover"
-                onChange={handleFileOnChange}
-                required
-              ></FileInput>
-              <Caution>*please upload a .png file of the report covers</Caution>
-            </div>
-            <div>
-              <InputTitle for="content">Content*</InputTitle>
-              <FileInput
-                type="file"
-                id="content"
-                name="content"
-                onChange={handleFileOnChange}
-                required
-              ></FileInput>
-              <Caution>
-                *please upload a .pdf file of the report content
-              </Caution>
-            </div>
-            <UpLoadBnt type="submit" onClick={postReport} value="UpLoad" />
-          </Form>
-        </AddTabBoxArticle>
-      </AddTabBox>
-    </Section>
+    <>
+      {showModal[0] ? (
+        <Background onClick={closeModal}>
+          <Section>
+            <AddTabBox>
+              <AddTabBoxTitle>Upload Report</AddTabBoxTitle>
+              <AddTabBoxArticle>
+                <Form onSubmit={postReport}>
+                  <div>
+                    <InputTitle for="title">Title</InputTitle>
+                    <Input
+                      placeholder="eg. VOL_KR-20-004-JUPITER"
+                      id="title"
+                      name="title"
+                      minLength="10"
+                      onChange={handleChange}
+                      type="text"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <InputTitle for="description">Description</InputTitle>
+                    <Input
+                      placeholder="eg. It now appears that traders are targeting a movement up towards $8,100"
+                      id="description"
+                      name="description"
+                      minLength="10"
+                      onChange={handleChange}
+                      type="text"
+                      required
+                    ></Input>
+                  </div>
+                  <div>
+                    <InputTitle for="cover">Cover*</InputTitle>
+                    <FileInput
+                      type="file"
+                      id="cover"
+                      name="cover"
+                      onChange={handleFileOnChange}
+                      required
+                    ></FileInput>
+                    <Caution>
+                      *please upload a .png file of the report covers
+                    </Caution>
+                  </div>
+                  <div>
+                    <InputTitle for="content">Content*</InputTitle>
+                    <FileInput
+                      type="file"
+                      id="content"
+                      name="content"
+                      onChange={handleFileOnChange}
+                      required
+                    ></FileInput>
+                    <Caution>
+                      *please upload a .pdf file of the report content
+                    </Caution>
+                  </div>
+                  <UpLoadBnt
+                    type="submit"
+                    onClick={postReport}
+                    value="UpLoad"
+                  />
+                </Form>
+              </AddTabBoxArticle>
+            </AddTabBox>
+          </Section>
+        </Background>
+      ) : null}
+    </>
   );
 };
 const Section = styled.div``;
 
+const Background = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+`;
+
 const AddTabBox = styled.div`
+  position: fixed;
+  left: 57%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 80rem;
   margin: 0 auto;
   margin-top: 5rem;

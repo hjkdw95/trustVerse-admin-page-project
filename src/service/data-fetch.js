@@ -32,7 +32,8 @@ class fetchData {
     const response = await axios.post(
       `http://192.168.1.244:8000/admin/signup`,
       {
-        name: refs.id,
+        email: refs.email,
+        username: refs.userName,
         password: refs.pw,
       }
     );
@@ -44,7 +45,8 @@ class fetchData {
     const response = await axios.post(
       `http://192.168.1.244:8000/admin/signin`,
       {
-        name: refs.id,
+        username: refs.userName,
+        email: refs.email,
         password: refs.pw,
       }
     );
