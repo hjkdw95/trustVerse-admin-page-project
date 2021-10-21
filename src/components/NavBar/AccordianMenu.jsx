@@ -49,7 +49,7 @@ const AccordianMenu = () => {
 export default AccordianMenu;
 
 const Nav = styled.nav`
-  width: 15%;
+  width: 10%;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -61,7 +61,7 @@ const Nav = styled.nav`
 `;
 
 const TitleWrapper = styled.div`
-  padding: 2.5rem;
+  padding: 2rem;
   background-color: #182444;
 `;
 

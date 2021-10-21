@@ -122,5 +122,5 @@ export default Tams;
 
 const Section = styled.section`
   position: relative;
-  padding-left: 15%;
+  padding-left: 10%;
 `;
