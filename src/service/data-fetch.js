@@ -1,29 +1,39 @@
 import axios from 'axios';
-import URL from '../.config';
+import URL from '../config';
 
 class fetchData {
-  constructor() {}
+  async getTamUsers(page, token) {
+    const HEADERS = {
+      Authorization: token,
+    };
 
-  async getTamUsers() {
-    const response = await axios.get(`/data/userdata.json`);
-    const result = response.data;
+    const response = await axios.get(`${URL}users?page=${page}`, {
+      headers: HEADERS,
+    });
+    const result = response.data.results;
     return result;
   }
 
-  async getTamWallet() {
-    const response = await axios.get(`/data/userWalletData.json`);
-    const result = response.data;
+  async getTamWallet(page, token) {
+    const HEADERS = {
+      Authorization: token,
+    };
+
+    const response = await axios.get(`${URL}wallets?page=${page}`, {
+      headers: HEADERS,
+    });
+    const result = response.data.results;
     return result;
   }
 
-  async getJupiterReports() {
-    const response = await axios.get(`/data/jupiterData.json`);
-    // const HEADERS = {
-    //   Authorization: token,
-    // };
-    // const response = await axios.get(`http://192.168.1.244:8000/jupiter`, {
-    //   headers: HEADERS,
-    // });
+  async getJupiterReports(token) {
+    // const response = await axios.get(`/data/jupiterData.json`);
+    const HEADERS = {
+      Authorization: token,
+    };
+    const response = await axios.get(`${URL}jupiter`, {
+      headers: HEADERS,
+    });
     const result = response.data;
     return result;
   }

@@ -3,27 +3,21 @@ import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
 
-const Pagination = ({ info, pages, setPages, STANDARD_OFFSET }) => {
-  const { limit } = pages;
-
+const Pagination = ({ info, page, setPage }) => {
   const handleChange = data => {
-    let selected;
-    let newOffset;
-    if (data.selected === 0) {
-      selected = 0;
-      newOffset = STANDARD_OFFSET;
-    } else {
-      selected = data.selected * STANDARD_OFFSET;
-      newOffset = selected + STANDARD_OFFSET;
-    }
-    setPages({ limit: selected, offset: newOffset });
+    const selected = data.selected + 1;
+    setPage(selected);
   };
+
+  console.log(page);
+
+  const FIRST_PAGE = (page - 1) * 7;
+  const LAST_PAGE = FIRST_PAGE + 7;
 
   return (
     <Wrapper>
       <ListSummary>
-        Showing {limit + 1} to {limit + STANDARD_OFFSET} of {info.length}{' '}
-        entries
+        Showing {FIRST_PAGE} to {LAST_PAGE} of {info.total_count} entries
       </ListSummary>
       <PageinationWrapper>
         <ReactPaginate
@@ -31,9 +25,9 @@ const Pagination = ({ info, pages, setPages, STANDARD_OFFSET }) => {
           nextLabel={<AiOutlineArrowRight />}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={Math.ceil(info.length / STANDARD_OFFSET)}
+          pageCount={info.page_count}
           marginPagesDisplayed={0}
-          pageRangeDisplayed={6}
+          pageRangeDisplayed={5}
           onPageChange={handleChange}
           containerClassName={'pagination'}
           activeClassName={'active'}
