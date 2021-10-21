@@ -2,15 +2,27 @@ import axios from 'axios';
 import URL from '../config';
 
 class fetchData {
-  async getTamUsers(page) {
-    const response = await axios.get(`${URL}users?page=${page}`);
+  async getTamUsers(page, token) {
+    const HEADERS = {
+      Authorization: token,
+    };
+
+    const response = await axios.get(`${URL}users?page=${page}`, {
+      headers: HEADERS,
+    });
     const result = response.data.results;
     return result;
   }
 
-  async getTamWallet(page) {
-    const response = await axios.get(`/data/userWalletData.json`);
-    const result = response.data;
+  async getTamWallet(page, token) {
+    const HEADERS = {
+      Authorization: token,
+    };
+
+    const response = await axios.get(`${URL}wallets?page=${page}`, {
+      headers: HEADERS,
+    });
+    const result = response.data.results;
     return result;
   }
 
