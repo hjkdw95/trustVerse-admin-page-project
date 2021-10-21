@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ListItem from './ListItem/ListItem';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
-const AccordianMenu = ({ isNavOpened }) => {
+const AccordianMenu = props => {
   const history = useHistory();
+  const value = useContext(OpenContext);
 
   const MENU_LIST = [
     { title: 'TAMS', list: ['Users', 'Wallets'] },
@@ -21,7 +23,7 @@ const AccordianMenu = ({ isNavOpened }) => {
   };
 
   return (
-    <Nav className={isNavOpened ? '' : 'closed'}>
+    <Nav className={value.isNavOpened ? '' : 'closed'}>
       <TitleWrapper>
         <Title onClick={handleClick}>DigiFinance</Title>
       </TitleWrapper>

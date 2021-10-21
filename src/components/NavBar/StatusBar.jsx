@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { BsList } from 'react-icons/bs';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
-const StatusBar = ({ isNavOpened, setNavOpen }) => {
+const StatusBar = () => {
+  // history
   const history = useHistory();
   const location = useLocation();
+
+  // context api
+  const { controlNav } = useContext(OpenContext);
+  const value = useContext(OpenContext);
+
   const USER_TOKEN = 'token';
   const [isLogin, setLogin] = useState(false);
 
@@ -23,8 +30,8 @@ const StatusBar = ({ isNavOpened, setNavOpen }) => {
   };
 
   return (
-    <BarWrapper className={isNavOpened ? '' : 'expand'}>
-      <IconWrapper onClick={() => setNavOpen(prev => !prev)}>
+    <BarWrapper className={value.isNavOpened ? '' : 'expand'}>
+      <IconWrapper onClick={controlNav}>
         <BsList />
       </IconWrapper>
       {isLogin ? (

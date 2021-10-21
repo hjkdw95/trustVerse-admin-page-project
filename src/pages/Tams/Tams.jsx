@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation } from 'react-router';
 import axios from 'axios';
 import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
 const Tams = props => {
-  const data = new fetchData();
+  // locations
   const location = useLocation();
+  const dataIdx = location.state?.clicked;
+
+  // states
   const token = sessionStorage.getItem('token');
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
+  const value = useContext(OpenContext);
 
-  const dataIdx = location.state?.clicked;
-
+  // fetch data
+  const data = new fetchData();
   const getTamWallet = (page, token) => {
     data.getTamWallet(page, token).then(item => setInfo(item));
   };
@@ -107,7 +112,7 @@ const Tams = props => {
   };
 
   return (
-    <Section>
+    <Section className={value.isNavOpened ? '' : 'expand'}>
       <TamsArticle
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
         getData={() => {
@@ -123,4 +128,9 @@ export default Tams;
 const Section = styled.section`
   position: relative;
   padding-left: 10%;
+  transition: all 300ms ease-in-out;
+
+  &.expand {
+    padding-left: 0;
+  }
 `;
