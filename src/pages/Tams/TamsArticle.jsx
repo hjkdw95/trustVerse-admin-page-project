@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import TableData from './Table/TableData';
 import Pagination from '../../utils/Pagination';
+import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
 
 const TamsArticle = ({ format, getData }) => {
@@ -12,7 +13,11 @@ const TamsArticle = ({ format, getData }) => {
 
   return (
     <Wrapper>
-      <H1>{title}</H1>
+      <Title>{title}</Title>
+      <form>
+        <input type="text" />
+        <Buttons title="Search" />
+      </form>
       <Container>
         {data && (
           <>
@@ -31,7 +36,7 @@ const Wrapper = styled.div`
   padding: 3rem;
 `;
 
-const H1 = styled.h1`
+const Title = styled.h1`
   margin-bottom: 2rem;
   ${({ theme }) => theme.title()}
 `;
