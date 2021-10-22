@@ -2,26 +2,20 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import styled from 'styled-components';
 
-const UserCountry = props => {
-  const COUNTRY_DATA = {
-    labels: ['Korea', 'Japan', 'China', 'Singapore', 'Others'],
+const UserPerApp = props => {
+  const APP_DATA = {
+    labels: ['Mars', 'Jupiter', 'Masterkey', 'canvas'],
     datasets: [
       {
         // data 바꿔줘야함
-        data: [300, 200, 100, 50, 20],
+        data: [300, 200, 100, 50],
         borderwidth: 1,
-        backgroundColor: [
-          '#f75927',
-          '#fd6a3c',
-          '#f88a6a',
-          '#fbac96',
-          '#ededed',
-        ],
+        backgroundColor: ['#47dfd4', '#66d9d0', '#97e3de', '#b6e5e2'],
       },
     ],
   };
 
-  const COUNTRY_DATA_OPTIONS = {
+  const APP_DATA_OPTIONS = {
     plugins: {
       legend: {
         position: 'bottom',
@@ -35,13 +29,12 @@ const UserCountry = props => {
 
   return (
     <Wrapper>
-      <Title>Nationality</Title>
-      <Pie data={COUNTRY_DATA} options={COUNTRY_DATA_OPTIONS} />
+      <Title>Users per App</Title>
+      <Pie data={APP_DATA} options={APP_DATA_OPTIONS} />
     </Wrapper>
   );
 };
-
-export default UserCountry;
+export default UserPerApp;
 
 const Wrapper = styled.div`
   background-color: #fff;

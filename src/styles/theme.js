@@ -24,7 +24,8 @@ const theme = {
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 1.2;
-  color: ${color}
+  color: ${color};
+  text-transform: capitalize;
   `,
   navBarFont: () => `
     font-size: 1.6rem;

@@ -10,7 +10,7 @@ const TotalAccount = props => {
 
   return (
     <Wrapper>
-      <Title>Membership Status</Title>
+      <Title>Current Members</Title>
       <DescContainer>
         {ACCOUNT_DATA.map(item => (
           <AccountInfo data={item} />
