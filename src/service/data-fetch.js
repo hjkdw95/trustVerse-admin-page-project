@@ -2,8 +2,9 @@ import axios from 'axios';
 import { USER_URL, WALLET_URL, JUPITER_URL, ADMIN_URL } from '../config';
 
 class fetchData {
-  async getDashBoard(token) {
-    const response = await axios.get(`${USER_URL}/dashboard`);
+  // 헤더 넣어줘야함
+  async getDashBoard() {
+    const response = await axios.get('/data/dashBoardData.json');
     const result = response.data.result;
     return result;
   }

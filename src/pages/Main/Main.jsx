@@ -15,23 +15,13 @@ const Main = props => {
     <Section className={value.isNavOpened ? '' : 'expand'}>
       <Container>
         <Header>
-          <div>
-            <UserPerApp />
-          </div>
-          <div>
-            <UserStatusJoinType />
-          </div>
-          <div>
-            <UserCountry />
-          </div>
+          <UserPerApp />
+          <UserStatusJoinType />
+          <UserCountry />
         </Header>
         <Middle>
-          <div>
-            <TotalAccount />
-          </div>
-          <div>
-            <UserStatusAppType />
-          </div>
+          <TotalAccount />
+          <UserStatusAppType />
         </Middle>
         <Footer>
           <CumulativeSubscription />
