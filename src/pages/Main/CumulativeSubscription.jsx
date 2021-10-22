@@ -32,7 +32,7 @@ const CumulativeSubscription = props => {
     datasets: [
       {
         stack: 'Stack 0',
-        indexAxis: 'y',
+
         label: '가입 회원',
         data: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
           return qwe.count1;
@@ -42,7 +42,7 @@ const CumulativeSubscription = props => {
       },
       {
         stack: 'Stack 0',
-        indexAxis: 'y',
+
         label: '탈퇴 회원',
         data: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
           return qwe.count2;

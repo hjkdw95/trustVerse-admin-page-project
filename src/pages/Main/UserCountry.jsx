@@ -5,11 +5,11 @@ import styled from 'styled-components';
 
 const UserCountry = props => {
   const COUNTRY_DATA = {
-    labels: ['Korea', 'Japan', 'China', 'Singapore', 'Others'],
+    labels: ['Korea', 'Japan', 0, 'Singapore', 'UT'],
     datasets: [
       {
         // data 바꿔줘야함
-        data: [300, 200, 100, 50, 20],
+        data: [300, 0, 100, 50, 0],
         borderwidth: 1,
         backgroundColor: [
           '#f75927',

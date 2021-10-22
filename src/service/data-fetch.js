@@ -1,13 +1,19 @@
 import axios from 'axios';
-import URL from '../config';
+import { USER_URL, WALLET_URL, JUPITER_URL, ADMIN_URL } from '../config';
 
 class fetchData {
+  async getDashBoard(token) {
+    const response = await axios.get(`${USER_URL}/dashboard`);
+    const result = response.data.result;
+    return result;
+  }
+
   async getTamUsers(page, token) {
     const HEADERS = {
       Authorization: token,
     };
 
-    const response = await axios.get(`${URL}users?page=${page}`, {
+    const response = await axios.get(`${USER_URL}?page=${page}`, {
       headers: HEADERS,
     });
     const result = response.data.results;
@@ -19,7 +25,7 @@ class fetchData {
       Authorization: token,
     };
 
-    const response = await axios.get(`${URL}wallets?page=${page}`, {
+    const response = await axios.get(`${WALLET_URL}?page=${page}`, {
       headers: HEADERS,
     });
     const result = response.data.results;
@@ -31,7 +37,7 @@ class fetchData {
     const HEADERS = {
       Authorization: token,
     };
-    const response = await axios.get(`${URL}jupiter`, {
+    const response = await axios.get(`${JUPITER_URL}`, {
       headers: HEADERS,
     });
     const result = response.data;
@@ -39,27 +45,21 @@ class fetchData {
   }
 
   async signUp(refs) {
-    const response = await axios.post(
-      `http://192.168.1.244:8000/admin/signup`,
-      {
-        email: refs.email,
-        username: refs.userName,
-        password: refs.pw,
-      }
-    );
+    const response = await axios.post(`${ADMIN_URL}/signup`, {
+      email: refs.email,
+      username: refs.userName,
+      password: refs.pw,
+    });
     const result = response.data;
     return result;
   }
 
   async signIn(refs) {
-    const response = await axios.post(
-      `http://192.168.1.244:8000/admin/signin`,
-      {
-        username: refs.userName,
-        email: refs.email,
-        password: refs.pw,
-      }
-    );
+    const response = await axios.post(`${ADMIN_URL}/signin`, {
+      username: refs.userName,
+      email: refs.email,
+      password: refs.pw,
+    });
     const result = response.data;
     return Object.keys(result);
   }
