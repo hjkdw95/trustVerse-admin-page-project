@@ -26,7 +26,7 @@ const Main = props => {
           <Header>
             <UserPerApp ratio={dashBoardData.User_Appratio} />
             <UserStatusJoinType types={dashBoardData.User_Socialtype} />
-            <UserCountry />
+            <UserCountry countries={dashBoardData.Country} />
           </Header>
           <Middle>
             <TotalAccount accounts={dashBoardData.Total} />

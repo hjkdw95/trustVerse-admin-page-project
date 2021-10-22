@@ -5,15 +5,22 @@ import styled from 'styled-components';
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserPerApp = ({ ratio }) => {
-  const AppDataArr = useDashBoardArr(ratio, 'appname', 'user_ratio');
+  const appDataArr = useDashBoardArr(ratio, 'appname', 'user_ratio');
 
   const APP_DATA = {
-    labels: AppDataArr.AllKeyArr,
+    labels: appDataArr.AllKeyArr,
     datasets: [
       {
-        data: AppDataArr.ArrValues,
+        data: appDataArr.ArrValues,
         borderwidth: 1,
-        backgroundColor: ['#47dfd4', '#66d9d0', '#97e3de', '#b6e5e2'],
+        backgroundColor: [
+          '#47dfd4',
+          '#66d9d0',
+          '#97e3de',
+          '#b6e5e2',
+          '#c2e9e6',
+          '#dae9e8',
+        ],
       },
     ],
   };
