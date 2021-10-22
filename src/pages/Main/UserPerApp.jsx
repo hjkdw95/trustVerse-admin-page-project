@@ -2,23 +2,32 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { APP_DATA_OPTIONS } from '../../utils/chartConfig';
 import styled from 'styled-components';
+import useDashBoardArr from '../../utils/useDashBoardArr';
 
-const UserPerApp = props => {
+const UserPerApp = ({ ratio }) => {
+  const appDataArr = useDashBoardArr(ratio, 'appname', 'user_ratio');
+
   const APP_DATA = {
-    labels: ['Mars', 'Jupiter', 'Masterkey', 'canvas'],
+    labels: appDataArr.AllKeyArr,
     datasets: [
       {
-        // data 바꿔줘야함
-        data: [300, 200, 100, 50],
+        data: appDataArr.ArrValues,
         borderwidth: 1,
-        backgroundColor: ['#47dfd4', '#66d9d0', '#97e3de', '#b6e5e2'],
+        backgroundColor: [
+          '#47dfd4',
+          '#66d9d0',
+          '#97e3de',
+          '#b6e5e2',
+          '#c2e9e6',
+          '#dae9e8',
+        ],
       },
     ],
   };
 
   return (
     <Wrapper>
-      <Title>Users per App</Title>
+      <Title>Subscribers per App</Title>
       <Pie data={APP_DATA} options={APP_DATA_OPTIONS} />
     </Wrapper>
   );

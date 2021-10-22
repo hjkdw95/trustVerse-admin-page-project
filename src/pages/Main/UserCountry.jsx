@@ -2,14 +2,16 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { COUNTRY_DATA_OPTIONS } from '../../utils/chartConfig';
 import styled from 'styled-components';
+import useDashBoardArr from '../../utils/useDashBoardArr';
 
-const UserCountry = props => {
+const UserCountry = ({ countries }) => {
+  const countryArr = useDashBoardArr(countries, 'country', 'country_count');
+
   const COUNTRY_DATA = {
-    labels: ['Korea', 'Japan', 0, 'Singapore', 'UT'],
+    labels: countryArr.AllKeyArr,
     datasets: [
       {
-        // data 바꿔줘야함
-        data: [300, 0, 100, 50, 0],
+        data: countryArr.ArrValues,
         borderwidth: 1,
         backgroundColor: [
           '#f75927',

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CumulativeSubscription from './CumulativeSubscription';
 import UserStatusAppType from './UserStatusAppType';
 import UserStatusJoinType from './UserStatusJoinType';
@@ -6,27 +6,37 @@ import OpenContext from '../../context/Open.context';
 import TotalAccount from './TotalAccount/TotalAccount';
 import UserCountry from './UserCountry';
 import UserPerApp from './UserPerApp';
+import fetchData from '../../service/data-fetch';
 import styled from 'styled-components';
 
 const Main = props => {
+  const dataFactory = new fetchData();
   const value = useContext(OpenContext);
+
+  const [dashBoardData, setDashBoardData] = useState();
+
+  useEffect(() => {
+    dataFactory.getDashBoard().then(data => setDashBoardData(data));
+  }, []);
 
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>
-      <Container>
-        <Header>
-          <UserPerApp />
-          <UserStatusJoinType />
-          <UserCountry />
-        </Header>
-        <Middle>
-          <TotalAccount />
-          <UserStatusAppType />
-        </Middle>
-        <Footer>
-          <CumulativeSubscription />
-        </Footer>
-      </Container>
+      {dashBoardData && (
+        <Container>
+          <Header>
+            <UserPerApp ratio={dashBoardData.User_Appratio} />
+            <UserStatusJoinType types={dashBoardData.User_Socialtype} />
+            <UserCountry countries={dashBoardData.Country} />
+          </Header>
+          <Middle>
+            <TotalAccount accounts={dashBoardData.Total} />
+            <UserStatusAppType appType={dashBoardData.User_App} />
+          </Middle>
+          <Footer>
+            <CumulativeSubscription subscriptions={dashBoardData.Monthly} />
+          </Footer>
+        </Container>
+      )}
     </Section>
   );
 };

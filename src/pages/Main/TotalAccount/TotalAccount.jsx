@@ -2,10 +2,10 @@ import React from 'react';
 import AccountInfo from './AccountInfo';
 import styled from 'styled-components';
 
-const TotalAccount = props => {
+const TotalAccount = ({ accounts }) => {
   const ACCOUNT_DATA = [
-    { title: '총 가입자 수', accountNum: 707 },
-    { title: '누적 가입자 수', accountNum: 719 },
+    { title: '총 가입자 수', accountNum: accounts[0].total_register_num },
+    { title: '누적 가입자 수', accountNum: accounts[0].cumulative_num },
   ];
 
   return (

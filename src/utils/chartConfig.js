@@ -16,7 +16,7 @@ export const APP_DATA_OPTIONS = {
       position: 'bottom',
       labels: {
         boxWidth: 15,
-        padding: 20,
+        padding: 15,
       },
     },
   },
