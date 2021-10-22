@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import AccountInfo from './AccountInfo';
+import styled from 'styled-components';
 
 const TotalAccount = props => {
   const ACCOUNT_DATA = [

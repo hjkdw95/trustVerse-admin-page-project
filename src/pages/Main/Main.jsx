@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import OpenContext from '../../context/Open.context';
 import TotalAccount from './TotalAccount/TotalAccount';
 import UserCountry from './UserCountry';
 import UserPerApp from './UserPerApp';
+import styled from 'styled-components';
 
 const Main = props => {
   const value = useContext(OpenContext);

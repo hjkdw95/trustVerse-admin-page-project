@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
+import { COUNTRY_DATA_OPTIONS } from '../../utils/chartConfig';
 import styled from 'styled-components';
 
 const UserCountry = props => {
@@ -19,18 +20,6 @@ const UserCountry = props => {
         ],
       },
     ],
-  };
-
-  const COUNTRY_DATA_OPTIONS = {
-    plugins: {
-      legend: {
-        position: 'bottom',
-        labels: {
-          boxWidth: 15,
-          padding: 20,
-        },
-      },
-    },
   };
 
   return (
