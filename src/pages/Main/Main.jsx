@@ -13,12 +13,30 @@ const Main = props => {
 
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>
-      <TotalAccount />
-      <UserCountry />
-      <UserPerApp />
-      <UserStatusAppType />
-      <UserStatusJoinType />
-      <CumulativeSubscription />
+      <Container>
+        <Header>
+          <div>
+            <UserPerApp />
+          </div>
+          <div>
+            <UserStatusJoinType />
+          </div>
+          <div>
+            <UserCountry />
+          </div>
+        </Header>
+        <Middle>
+          <div>
+            <TotalAccount />
+          </div>
+          <div>
+            <UserStatusAppType />
+          </div>
+        </Middle>
+        <Footer>
+          <CumulativeSubscription />
+        </Footer>
+      </Container>
     </Section>
   );
 };
@@ -34,4 +52,29 @@ const Section = styled.section`
   &.expand {
     padding-left: 0;
   }
+`;
+
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: 400px 400px 400px;
+  gap: 20px 20px;
+  margin-top: 20px;
+`;
+
+const Header = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px 20px;
+`;
+
+const Middle = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 20px;
+`;
+
+const Footer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px 20px;
 `;
