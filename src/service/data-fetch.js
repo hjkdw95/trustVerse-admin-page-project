@@ -61,7 +61,7 @@ class fetchData {
       }
     );
     const result = response.data;
-    return result;
+    return Object.keys(result);
   }
 }
 

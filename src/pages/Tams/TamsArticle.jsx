@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import TableData from './Table/TableData';
+import React, { useEffect, useState } from 'react';
+import TableData from '../../components/Table/TableData';
 import Pagination from '../../utils/Pagination';
 import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ const TamsArticle = ({ format, getData }) => {
       <Container>
         {data && (
           <>
-            <TableData data={data.trv_user} rowData={rowData} />
+            <TableData data={data} rowData={rowData} />
             <Pagination info={data} page={page} setPage={setPage} />
           </>
         )}
