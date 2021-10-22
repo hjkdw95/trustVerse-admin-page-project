@@ -16,16 +16,17 @@ const options = {
   },
   plugins: {
     datalabels: { color: 'black' },
-    title: {
-      display: true,
-      text: '앱별 유저현황',
-      fontSize: 20,
+    legend: {
+      position: 'bottom',
+      labels: {
+        boxWidth: 15,
+        padding: 20,
+      },
     },
   },
 
   // false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
   // true : 크기가 알아서 결정됨.
-  maintainAspectRatio: false,
 };
 const data = {
   // 각 막대별 라벨
@@ -43,20 +44,26 @@ const data = {
 
 const UserStatusJoinType = props => {
   return (
-    <Div>
+    <Wrapper>
+      <Title>Users Join Type</Title>
       <Bar
         data={data}
         options={options}
-        height={300}
         plugins={[ChartDataLabels]}
+        height={300}
       />
-    </Div>
+    </Wrapper>
   );
 };
 
 export default UserStatusJoinType;
 
-const Div = styled.div`
-  ${({ theme }) => theme.flexMixin()};
-  ${({ theme }) => theme.title()};
+const Wrapper = styled.div`
+  background-color: #fff;
+  padding: 30px;
+`;
+
+const Title = styled.h3`
+  padding-bottom: 2.2rem;
+  ${({ theme }) => theme.smallTitle('#302D43')};
 `;

@@ -17,11 +17,16 @@ const options = {
       },
     ],
   },
-  // false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
-  // true : 크기가 알아서 결정됨.
-  maintainAspectRatio: false,
+
   plugins: {
     datalabels: { color: 'black' },
+    legend: {
+      position: 'bottom',
+      labels: {
+        boxWidth: 15,
+        padding: 20,
+      },
+    },
   },
 };
 const data = {
@@ -40,20 +45,28 @@ const data = {
 
 const UserStatusAppType = props => {
   return (
-    <Div>
-      <Bar
-        data={data}
-        options={options}
-        height={300}
-        plugins={[ChartDataLabels]}
-      />
-    </Div>
+    <Wrapper>
+      <Title>Users Per App</Title>
+      <Container>
+        <Bar data={data} options={options} plugins={[ChartDataLabels]} />
+      </Container>
+    </Wrapper>
   );
 };
 
 export default UserStatusAppType;
 
-const Div = styled.div`
-  ${({ theme }) => theme.flexMixin()};
-  ${({ theme }) => theme.title()};
+const Wrapper = styled.div`
+  background-color: #fff;
+  padding: 3rem;
+  height: 100%;
+`;
+
+const Title = styled.h3`
+  padding-bottom: 2.2rem;
+  ${({ theme }) => theme.smallTitle('#302D43')};
+`;
+
+const Container = styled.div`
+  padding-top: 20px;
 `;
