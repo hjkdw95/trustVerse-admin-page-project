@@ -1,14 +1,28 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import theme from '../../styles/theme';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
+import TotalAccount from './TotalAccount';
 
 const Main = props => {
-  return <Div>hi</Div>;
+  const value = useContext(OpenContext);
+
+  return (
+    <Section className={value.isNavOpened ? '' : 'expand'}>
+      <TotalAccount />
+    </Section>
+  );
 };
 
 export default Main;
 
-const Div = styled.div`
+const Section = styled.section`
+  position: relative;
+  padding-left: 10%;
+  transition: all 300ms ease-in-out;
   ${({ theme }) => theme.flexMixin()};
   ${({ theme }) => theme.title()};
+
+  &.expand {
+    padding-left: 0;
+  }
 `;
