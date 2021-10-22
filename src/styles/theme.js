@@ -20,6 +20,12 @@ const theme = {
   font-weight: 700;
   line-height: 1.2
   `,
+  smallTitle: color => `
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: ${color}
+  `,
   navBarFont: () => `
     font-size: 1.6rem;
     font-weight: 300;

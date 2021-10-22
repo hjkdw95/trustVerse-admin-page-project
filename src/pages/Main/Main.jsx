@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import OpenContext from '../../context/Open.context';
-import TotalAccount from './TotalAccount';
+import TotalAccount from './TotalAccount/TotalAccount';
 
 const Main = props => {
   const value = useContext(OpenContext);
@@ -16,7 +16,6 @@ const Main = props => {
 export default Main;
 
 const Section = styled.section`
-  position: relative;
   padding-left: 10%;
   transition: all 300ms ease-in-out;
   ${({ theme }) => theme.flexMixin()};
