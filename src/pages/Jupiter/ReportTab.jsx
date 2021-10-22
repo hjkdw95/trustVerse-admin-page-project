@@ -1,18 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Paging from './Paging';
+import AddTab from './AddTab';
+import EditTab from './EditTab';
 
 const ReportTab = ({ reports }) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
-
+  const [showModal, setShowModal] = useState([false, false]);
+  const [reportId, setReportId] = useState('');
   useEffect(() => {
     setData(reports?.slice(page * 10 - 10, page * 10));
   }, [page, reports]);
 
+  const openModal = (e, id) => {
+    if (e.target.name === 'Edit') {
+      setShowModal([false, true]);
+      setReportId(id);
+    } else {
+      setShowModal([true, false]);
+    }
+  };
+
+  const closeModal = e => {
+    setShowModal([false, false]);
+  };
+
+  const deleteReport = (id, title) => {
+    if (window.confirm(`${title} 정말로 삭제하시겠습니까?`)) {
+      fetch('http://192.168.1.244:8000/admin/delete', {
+        method: 'Delete',
+        headers: { Authorization: localStorage.getItem('token') },
+        body: JSON.stringify({
+          id: id,
+        }),
+      });
+    }
+  };
+
   return (
     <Section>
       <Title>All reports</Title>
+      <AddBnt onClick={openModal}>Report Add</AddBnt>
       <ReportTableContainer>
         <ReportTable>
           <thead>
@@ -37,11 +66,37 @@ const ReportTab = ({ reports }) => {
                   <td>
                     <a href={goods.content_link}>{goods.content}</a>
                   </td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        deleteReport(goods.report_id, goods.title);
+                      }}
+                      name="Delete"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={e => {
+                        openModal(e, goods.report_id);
+                      }}
+                      name="Edit"
+                    >
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </ReportTable>
+        <AddTab showModal={showModal} closeModal={closeModal}></AddTab>
+        <EditTab
+          showModal={showModal}
+          closeModal={closeModal}
+          reportId={reportId}
+        ></EditTab>
         <PageIndex>
           Showing {page === 1 ? 1 : page - 1 + '1'} to &nbsp;{page * 10} of
           &nbsp;{reports?.length + 1}
@@ -54,6 +109,18 @@ const ReportTab = ({ reports }) => {
 
 const Section = styled.div`
   padding: 3rem;
+`;
+
+const AddBnt = styled.button`
+  background-color: #00d82b;
+  left: 1320px;
+
+  top: 110px;
+  border-radius: 3px;
+  height: 30px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.h1`
@@ -81,6 +148,15 @@ const ReportTable = styled.table`
   tbody {
     background-color: #f9f9f9;
     color: #6f7a92;
+  }
+
+  tbody button {
+    background-color: #00d82b;
+    border-radius: 3px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   tbody tr td {

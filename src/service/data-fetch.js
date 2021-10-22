@@ -39,19 +39,27 @@ class fetchData {
   }
 
   async signUp(refs) {
-    const response = await axios.post(`${URL}admin/signup`, {
-      name: refs.id,
-      password: refs.pw,
-    });
+    const response = await axios.post(
+      `http://192.168.1.244:8000/admin/signup`,
+      {
+        email: refs.email,
+        username: refs.userName,
+        password: refs.pw,
+      }
+    );
     const result = response.data;
     return result;
   }
 
   async signIn(refs) {
-    const response = await axios.get(`${URL}admin/signin`, {
-      name: refs.id,
-      password: refs.pw,
-    });
+    const response = await axios.post(
+      `http://192.168.1.244:8000/admin/signin`,
+      {
+        username: refs.userName,
+        email: refs.email,
+        password: refs.pw,
+      }
+    );
     const result = response.data;
     return Object.keys(result);
   }

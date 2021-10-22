@@ -7,7 +7,8 @@ import axios from 'axios';
 const data = new fetchData();
 const SignIn = ({ history }) => {
   const [values, setValues] = useState({
-    id: '',
+    userName: '',
+    email: '',
     pw: '',
   });
 
@@ -19,8 +20,9 @@ const SignIn = ({ history }) => {
   const postSignIn = e => {
     e.preventDefault();
     if (
-      values.id.length > 7 &&
-      values.id.length < 17 &&
+      values.userName.length > 7 &&
+      values.userName.length < 51 &&
+      values.email.length < 201 &&
       values.pw.length >= 8
     ) {
       data.signIn(values).then(res => {
@@ -45,7 +47,7 @@ const SignIn = ({ history }) => {
   };
 
   const resetInfo = () => {
-    setValues({ id: '', pw: '' });
+    setValues({ userName: '', email: '', pw: '' });
   };
 
   return (
@@ -54,13 +56,20 @@ const SignIn = ({ history }) => {
         <SingInTitle>Admin Sign In</SingInTitle>
         <SingInArticle>
           <Form onsubmit="return false;">
+            <Input
+              placeholder="UserName"
+              onChange={handleChange}
+              minLength="8"
+              maxLength="50"
+              required
+              name="id"
+            ></Input>
             <div>
-              <Caution>8자 이상 16글자 미만</Caution>
               <Input
-                placeholder="Id"
+                placeholder="Email"
                 onChange={handleChange}
-                minLength="8"
-                maxLength="16"
+                minLength="1"
+                maxLength="200"
                 required
                 name="id"
               ></Input>
