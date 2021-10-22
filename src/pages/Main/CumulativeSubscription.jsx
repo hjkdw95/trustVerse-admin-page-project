@@ -5,13 +5,18 @@ import fetchData from '../../service/data-fetch';
 import axios from 'axios';
 
 const options = {
-  legend: {
-    display: false, // label 보이기 여부
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        boxWidth: 15,
+        padding: 20,
+      },
+    },
   },
 
   // false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
   // true : 크기가 알아서 결정됨.
-  maintainAspectRatio: false,
 };
 
 const CumulativeSubscription = props => {
@@ -32,7 +37,6 @@ const CumulativeSubscription = props => {
     datasets: [
       {
         stack: 'Stack 0',
-        indexAxis: 'y',
         label: '가입 회원',
         data: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
           return qwe.count1;
@@ -42,7 +46,6 @@ const CumulativeSubscription = props => {
       },
       {
         stack: 'Stack 0',
-        indexAxis: 'y',
         label: '탈퇴 회원',
         data: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
           return qwe.count2;
@@ -53,15 +56,22 @@ const CumulativeSubscription = props => {
   };
 
   return (
-    <Div>
-      <Bar data={data} options={options} height={300} />
-    </Div>
+    <Wrapper>
+      <Title>Regist Status</Title>
+      <Bar data={data} options={options} />
+    </Wrapper>
   );
 };
 
 export default CumulativeSubscription;
 
-const Div = styled.div`
-  ${({ theme }) => theme.flexMixin()};
-  ${({ theme }) => theme.title()};
+const Wrapper = styled.div`
+  background-color: #fff;
+  padding: 3rem;
+  height: 100%;
+`;
+
+const Title = styled.h3`
+  padding-bottom: 2.2rem;
+  ${({ theme }) => theme.smallTitle('#302D43')};
 `;

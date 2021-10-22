@@ -25,6 +25,7 @@ export default TotalAccount;
 const Wrapper = styled.div`
   background-color: #fff;
   padding: 3rem;
+  height: 100%;
 `;
 
 const Title = styled.h3`
@@ -35,4 +36,5 @@ const Title = styled.h3`
 const DescContainer = styled.div`
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 `;
