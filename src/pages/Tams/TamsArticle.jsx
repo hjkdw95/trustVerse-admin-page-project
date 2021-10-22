@@ -13,11 +13,14 @@ const TamsArticle = ({ format, getData }) => {
 
   return (
     <Wrapper>
-      <Title>{title}</Title>
-      <form>
-        <input type="text" />
-        <Buttons title="Search" />
-      </form>
+      <TitleWrapper>
+        <Title>{title}</Title>
+        <form>
+          <SearchInput type="text" placeholder="Search..." />
+          <Buttons title="Search" size="Big" />
+        </form>
+      </TitleWrapper>
+
       <Container>
         {data && (
           <>
@@ -36,9 +39,23 @@ const Wrapper = styled.div`
   padding: 3rem;
 `;
 
-const Title = styled.h1`
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 2rem;
+`;
+
+const Title = styled.h1`
   ${({ theme }) => theme.title()}
+`;
+
+const SearchInput = styled.input`
+  width: 20rem;
+  height: 4.5rem;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #091023;
+  margin-right: 1rem;
 `;
 
 const Container = styled.div`

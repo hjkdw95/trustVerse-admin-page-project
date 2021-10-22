@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Buttons = ({ title, clickAction }) => {
+const Buttons = ({ title, clickAction, size }) => {
   return (
-    <Button type="button" onClick={clickAction}>
+    <Button className={size} type="button" onClick={clickAction}>
       {title}
     </Button>
   );
@@ -20,6 +20,13 @@ const Button = styled.button`
   border-radius: 0.4rem;
   cursor: pointer;
   transition: all 150ms ease-in-out;
+
+  &.Big {
+    width: 7rem;
+    height: 4.5rem;
+    font-size: 1.5rem;
+  }
+
   &:hover {
     background-color: #373063e6;
   }
