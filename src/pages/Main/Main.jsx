@@ -1,4 +1,7 @@
 import React, { useContext } from 'react';
+import CumulativeSubscription from './CumulativeSubscription';
+import UserStatusAppType from './UserStatusAppType';
+import UserStatusJoinType from './UserStatusJoinType';
 import OpenContext from '../../context/Open.context';
 import TotalAccount from './TotalAccount/TotalAccount';
 import UserCountry from './UserCountry';
@@ -13,6 +16,9 @@ const Main = props => {
       <TotalAccount />
       <UserCountry />
       <UserPerApp />
+      <UserStatusAppType />
+      <UserStatusJoinType />
+      <CumulativeSubscription />
     </Section>
   );
 };

@@ -63,6 +63,12 @@ class fetchData {
     const result = response.data;
     return Object.keys(result);
   }
+
+  async cumulativeSubscription() {
+    const response = await axios.get(`/data/CumulativeSubscriptionData.json`);
+    const result = response.data;
+    return result;
+  }
 }
 
 export default fetchData;
