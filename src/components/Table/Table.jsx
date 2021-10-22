@@ -51,6 +51,7 @@ const Th = styled.th`
 
 const Td = styled.td`
   padding: 1rem 1.5rem;
+  max-width: 30rem;
   background-color: ${props => props.theme.lightGrey};
   border-top: 2rem solid #fff;
   ${({ theme }) => theme.tableFont()};
