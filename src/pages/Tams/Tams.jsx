@@ -19,16 +19,26 @@ const Tams = props => {
   const [searchValue, setValue] = useState();
   const value = useContext(OpenContext);
 
-  console.log(searchValue);
-
   // fetch data
   const data = new fetchData();
   const getTamWallet = (page, token) => {
-    data.getTamWallet(page, token).then(item => setInfo(item));
+    if (searchValue) {
+      data
+        .getTamWalletSearch(page, token, searchValue)
+        .then(item => setInfo(item));
+    } else {
+      data.getTamWallet(page, token).then(item => setInfo(item));
+    }
   };
 
   const getTamUsers = (page, token) => {
-    data.getTamUsers(page, token).then(item => setInfo(item));
+    if (searchValue) {
+      data
+        .getTamUserSearch(page, token, searchValue)
+        .then(item => setInfo(item));
+    } else {
+      data.getTamUsers(page, token).then(item => setInfo(item));
+    }
   };
 
   const WALLETDATA = {
