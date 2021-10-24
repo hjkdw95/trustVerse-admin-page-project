@@ -14,6 +14,15 @@ class fetchData {
     return result;
   }
 
+  async getTamUserSearchResults(page, token, item) {
+    const HEADERS = {
+      Authorization: token,
+    };
+    const response = await axios.get(`${URL}users?page=${page}&search=${item}`);
+    const result = response.data.results;
+    return result;
+  }
+
   async getTamWallet(page, token) {
     const HEADERS = {
       Authorization: token,

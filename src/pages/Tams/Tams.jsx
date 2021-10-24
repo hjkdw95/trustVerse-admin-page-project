@@ -16,7 +16,10 @@ const Tams = props => {
   const token = sessionStorage.getItem('token');
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
+  const [searchValue, setValue] = useState();
   const value = useContext(OpenContext);
+
+  console.log(searchValue);
 
   // fetch data
   const data = new fetchData();
@@ -114,6 +117,7 @@ const Tams = props => {
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>
       <TamsArticle
+        setValue={setValue}
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
         getData={() => {
           dataIdx === 1 ? getTamWallet(page, token) : getTamUsers(page, token);

@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import TableData from '../../components/Table/TableData';
 import Pagination from '../../utils/Pagination';
 import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
 
-const TamsArticle = ({ format, getData }) => {
+const TamsArticle = ({ format, getData, setValue }) => {
   const { title, page, setPage, data, rowData } = format;
 
   useEffect(() => {
     getData();
   }, [title, page]);
 
+  const handleChange = e => {
+    const { value } = e.target;
+    setValue(value);
+  };
+
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>{title}</Title>
-        <form>
-          <SearchInput type="text" placeholder="Search..." />
+        <SearchForm>
+          <SearchInput
+            type="text"
+            placeholder="Search..."
+            onChange={handleChange}
+          />
           <Buttons title="Search" size="Big" />
-        </form>
+        </SearchForm>
       </TitleWrapper>
 
       <Container>
@@ -48,6 +57,8 @@ const TitleWrapper = styled.div`
 const Title = styled.h1`
   ${({ theme }) => theme.title()}
 `;
+
+const SearchForm = styled.form``;
 
 const SearchInput = styled.input`
   width: 20rem;
