@@ -8,16 +8,6 @@ const UserStatusJoinType = ({ types }) => {
   const SocialData = useDashBoardArr(types, 'social_type', 'type_count');
 
   const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            min: 0, // y축 스케일에 대한 최소값 설정
-            stepSize: 1, // y축 그리드 한 칸당 수치
-          },
-        },
-      ],
-    },
     plugins: {
       datalabels: { color: 'black' },
       legend: {
@@ -28,26 +18,22 @@ const UserStatusJoinType = ({ types }) => {
         },
       },
     },
-    // false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
-    // true : 크기가 알아서 결정됨.
   };
   const data = {
-    // 각 막대별 라벨
-
     labels: SocialData.AllKeyArr,
     datasets: [
       {
         label: 'SocialType',
-        borderWidth: 1, // 테두리 두께
-        data: SocialData.ArrValues, // 수치
-        backgroundColor: ['#7298FF', '#55FFFF', '#2639FF'], // 각 막대 색
+        borderWidth: 1,
+        data: SocialData.ArrValues,
+        backgroundColor: ['#8F00FF', '#DB98FF', '#EDBBDE'],
       },
     ],
   };
 
   return (
     <Wrapper>
-      <Title>Users Join Type</Title>
+      <Title>Subscribe Social Type</Title>
       <Bar
         data={data}
         options={options}
