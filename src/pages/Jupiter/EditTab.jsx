@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const EditTab = ({ showModal, closeModal, reportId }) => {
   const [values, setValues] = useState({
-    id: '',
     title: '',
     description: '',
   });
@@ -18,11 +17,12 @@ const EditTab = ({ showModal, closeModal, reportId }) => {
       method: 'POST',
       headers: { Authorization: localStorage.getItem('token') },
       body: JSON.stringify({
-        id: values.id,
+        id: reportId,
         title: values.title,
         description: values.description,
       }),
     });
+    closeModal();
   };
   return (
     <>
@@ -34,13 +34,7 @@ const EditTab = ({ showModal, closeModal, reportId }) => {
               <EditTabBoxArticle>
                 <Form onSubmit={EditReport}>
                   <div>
-                    <InputTitle for="report_id">Report ID</InputTitle>
-                    <Input
-                      type="text"
-                      value={reportId}
-                      onChange={handleChange}
-                      readOnly
-                    />
+                    <InputTitle>Report ID : {reportId}</InputTitle>
                   </div>
                   <div>
                     <InputTitle for="title">Title</InputTitle>
