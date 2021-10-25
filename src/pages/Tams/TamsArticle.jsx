@@ -23,6 +23,8 @@ const TamsArticle = ({
     setValue(value);
   };
 
+  console.log(data);
+
   return (
     <Wrapper>
       <TitleWrapper>

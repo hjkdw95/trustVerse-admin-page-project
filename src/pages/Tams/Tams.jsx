@@ -38,8 +38,6 @@ const Tams = props => {
     }
   };
 
-  console.log(searchValue);
-
   const WALLETDATA = {
     title: 'Wallets',
     data: info?.wallets,
