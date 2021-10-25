@@ -8,7 +8,7 @@ import SignIn from './pages/SignIn/SignIn';
 import Tams from './pages/Tams/Tams';
 import PrivateRoutes from './components/PrivateRoutes';
 import PublicRoutes from './components/PublicRoutes';
-import StatusProvider from './components/StatusProvider.js/StatusProvider';
+import StatusProvider from './components/Providers/StatusProvider';
 
 export default class Routes extends Component {
   render() {
