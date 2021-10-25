@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import axios from 'axios';
 import TamsArticle from './TamsArticle';
@@ -12,10 +12,13 @@ const Tams = props => {
   const location = useLocation();
   const dataIdx = location.state?.clicked;
 
+  console.log(dataIdx);
+
   // states
   const token = sessionStorage.getItem('token');
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
+  const [searchValue, setValue] = useState();
   const value = useContext(OpenContext);
 
   // fetch data
@@ -28,10 +31,24 @@ const Tams = props => {
     data.getTamUsers(page, token).then(item => setInfo(item));
   };
 
+  const getSearchResult = () => {
+    if (searchValue) {
+      if (dataIdx === 1) {
+        data.getTamWalletSearch(searchValue).then(item => setInfo(item));
+      } else {
+        data.getTamUserSearch(searchValue).then(item => setInfo(item));
+      }
+      setValue('');
+    } else if (searchValue === '') {
+      data.getTamUsers(1, token).then(item => setInfo(item));
+    }
+  };
+
   const WALLETDATA = {
     title: 'Wallets',
     data: info?.wallets,
     page: page,
+    page_count: info?.page_count,
     setPage: setPage,
     rowData: [
       {
@@ -62,6 +79,7 @@ const Tams = props => {
     title: 'Users',
     data: info?.trv_user,
     page: page,
+    page_count: info?.page_count,
     setPage: setPage,
     rowData: [
       {
@@ -114,6 +132,9 @@ const Tams = props => {
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>
       <TamsArticle
+        searchValue={searchValue}
+        setValue={setValue}
+        getSearchResult={getSearchResult}
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
         getData={() => {
           dataIdx === 1 ? getTamWallet(page, token) : getTamUsers(page, token);

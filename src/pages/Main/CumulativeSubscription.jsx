@@ -18,13 +18,8 @@ const options = {
 };
 
 const CumulativeSubscription = ({ subscriptions }) => {
-  const subscriptionArr = useDashBoardArr(
-    subscriptions,
-    'id',
-    'year_month',
-    'monthly_num',
-    'monthly_num2'
-  );
+  console.log(subscriptions);
+  const subscriptionArr = useDashBoardArr(subscriptions, 'id', 'year_month');
 
   const data = {
     labels: subscriptionArr.ArrValues?.map(qwe => {
