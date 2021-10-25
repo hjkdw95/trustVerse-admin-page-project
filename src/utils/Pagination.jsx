@@ -9,13 +9,23 @@ const Pagination = ({ info, page, setPage }) => {
     setPage(selected);
   };
 
-  const FIRST_PAGE = (page - 1) * 7;
-  const LAST_PAGE = FIRST_PAGE + 7;
+  const FIRST_PAGE = page => {
+    if (page === 1) {
+      return page;
+    }
+    return (page - 1) * 7;
+  };
+  const LAST_PAGE = page => {
+    if (page === 1) {
+      return 7;
+    }
+    return FIRST_PAGE(page) + 7;
+  };
 
   return (
     <Wrapper>
       <ListSummary>
-        Showing {FIRST_PAGE} to {LAST_PAGE} of {info.total_count} entries
+        Showing {FIRST_PAGE(page)} to {LAST_PAGE(page)} of {info.length} entries
       </ListSummary>
       <PageinationWrapper>
         <ReactPaginate

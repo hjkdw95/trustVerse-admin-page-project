@@ -4,7 +4,7 @@ import Pagination from '../../utils/Pagination';
 import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
 
-const TamsArticle = ({ format, getData, setValue }) => {
+const TamsArticle = ({ format, getData, setValue, getSearchResult }) => {
   const { title, page, setPage, data, rowData } = format;
 
   useEffect(() => {
@@ -12,6 +12,7 @@ const TamsArticle = ({ format, getData, setValue }) => {
   }, [title, page]);
 
   const handleChange = e => {
+    e.preventDefault();
     const { value } = e.target;
     setValue(value);
   };
@@ -20,13 +21,18 @@ const TamsArticle = ({ format, getData, setValue }) => {
     <Wrapper>
       <TitleWrapper>
         <Title>{title}</Title>
-        <SearchForm>
+        <SearchForm
+          onSubmit={e => {
+            e.preventDefault();
+            getSearchResult();
+          }}
+        >
           <SearchInput
             type="text"
-            placeholder="Search..."
+            placeholder="Search Email..."
             onChange={handleChange}
           />
-          <Buttons title="Search" size="Big" />
+          <Buttons title="Search" size="Big" type="submit" />
         </SearchForm>
       </TitleWrapper>
 

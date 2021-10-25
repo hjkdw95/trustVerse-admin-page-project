@@ -27,16 +27,11 @@ class fetchData {
     return result;
   }
 
-  async getTamUserSearch(page, token, item) {
-    const HEADERS = {
-      Authorization: token,
-    };
-    const response = await axios.get(
-      `${URL}users?page=${page}&search=${item}`,
-      {
-        headers: HEADERS,
-      }
-    );
+  async getTamUserSearch(item) {
+    // const HEADERS = {
+    //   Authorization: token,
+    // };
+    const response = await axios.get(`${USER_URL}?keyword=${item}`);
     const result = response.data.results;
     return result;
   }
@@ -58,12 +53,9 @@ class fetchData {
       Authorization: token,
     };
 
-    const response = await axios.get(
-      `${WALLET_URL}?page=${page}&search=${item}`,
-      {
-        headers: HEADERS,
-      }
-    );
+    const response = await axios.get(`${WALLET_URL}?keyword=${item}`, {
+      headers: HEADERS,
+    });
     const result = response.data.results;
     return result;
   }

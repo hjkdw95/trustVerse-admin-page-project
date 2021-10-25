@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import axios from 'axios';
 import TamsArticle from './TamsArticle';
@@ -17,28 +17,28 @@ const Tams = props => {
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
   const [searchValue, setValue] = useState();
+  const [submitting, setSubmitting] = useState(false);
   const value = useContext(OpenContext);
 
   // fetch data
   const data = new fetchData();
   const getTamWallet = (page, token) => {
-    if (searchValue) {
-      data
-        .getTamWalletSearch(page, token, searchValue)
-        .then(item => setInfo(item));
-    } else {
-      data.getTamWallet(page, token).then(item => setInfo(item));
-    }
+    data.getTamWallet(page, token).then(item => setInfo(item));
   };
 
-  const getTamUsers = (page, token) => {
+  const getSearchResult = () => {
     if (searchValue) {
-      data
-        .getTamUserSearch(page, token, searchValue)
-        .then(item => setInfo(item));
-    } else {
-      data.getTamUsers(page, token).then(item => setInfo(item));
+      data.getTamUserSearch(searchValue).then(item => setInfo(item));
+      setValue(undefined);
     }
+    data.getTamWallet(1, token).then(item => setInfo(item));
+  };
+  // setSubmitting(false)
+
+  console.log(searchValue);
+
+  const getTamUsers = (page, token) => {
+    data.getTamUsers(page, token).then(item => setInfo(item));
   };
 
   const WALLETDATA = {
@@ -128,6 +128,7 @@ const Tams = props => {
     <Section className={value.isNavOpened ? '' : 'expand'}>
       <TamsArticle
         setValue={setValue}
+        getSearchResult={getSearchResult}
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
         getData={() => {
           dataIdx === 1 ? getTamWallet(page, token) : getTamUsers(page, token);

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Buttons = ({ title, clickAction, size }) => {
+const Buttons = ({ title, size, type }) => {
   return (
-    <Button className={size} type="button" onClick={clickAction}>
+    <Button className={size} type={type}>
       {title}
     </Button>
   );
