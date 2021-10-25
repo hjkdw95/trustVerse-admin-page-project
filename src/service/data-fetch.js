@@ -48,14 +48,12 @@ class fetchData {
     return result;
   }
 
-  async getTamWalletSearch(page, token, item) {
-    const HEADERS = {
-      Authorization: token,
-    };
+  async getTamWalletSearch(item) {
+    // const HEADERS = {
+    //   Authorization: token,
+    // };
 
-    const response = await axios.get(`${WALLET_URL}?keyword=${item}`, {
-      headers: HEADERS,
-    });
+    const response = await axios.get(`${WALLET_URL}?keyword=${item}`);
     const result = response.data.results;
     return result;
   }

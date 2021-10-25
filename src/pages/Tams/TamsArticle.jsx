@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import TableData from '../../components/Table/TableData';
 import Pagination from '../../utils/Pagination';
-import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
+import Search from './Search';
 
 const TamsArticle = ({
   format,
@@ -17,43 +17,17 @@ const TamsArticle = ({
     getData();
   }, [title, page]);
 
-  const handleChange = e => {
-    e.preventDefault();
-    const { value } = e.target;
-    setValue(value);
-  };
-
-  console.log(data);
-
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>{title}</Title>
-        <SearchForm
-          onSubmit={e => {
-            e.preventDefault();
-            getSearchResult();
-          }}
-        >
-          <SearchInput
-            type="text"
-            placeholder="Search Email..."
-            value={searchValue}
-            onChange={handleChange}
-          />
-          <Buttons title="Search" size="Big" type="submit" />
-          <Buttons
-            title="Refresh!"
-            size="Big"
-            type="button"
-            clickEvent={e => {
-              e.preventDefault();
-              getData();
-            }}
-          />
-        </SearchForm>
+        <Search
+          getData={getData}
+          setValue={setValue}
+          searchValue={searchValue}
+          getSearchResult={getSearchResult}
+        />
       </TitleWrapper>
-
       <Container>
         {data && (
           <>
@@ -85,16 +59,6 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h1`
   ${({ theme }) => theme.title()}
-`;
-
-const SearchForm = styled.form``;
-
-const SearchInput = styled.input`
-  width: 20rem;
-  height: 4.5rem;
-  padding: 0 1.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #091023;
 `;
 
 const Container = styled.div`
