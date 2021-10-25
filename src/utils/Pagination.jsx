@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
 
-const Pagination = ({ info, page, setPage }) => {
+const Pagination = ({ info, page, setPage, page_count }) => {
   const handleChange = data => {
     const selected = data.selected + 1;
     setPage(selected);
@@ -16,8 +16,8 @@ const Pagination = ({ info, page, setPage }) => {
     return (page - 1) * 7;
   };
   const LAST_PAGE = page => {
-    if (page === 1) {
-      return 7;
+    if (page <= 7) {
+      return (page + 7) % 7;
     }
     return FIRST_PAGE(page) + 7;
   };
@@ -33,7 +33,7 @@ const Pagination = ({ info, page, setPage }) => {
           nextLabel={<AiOutlineArrowRight />}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={info.page_count}
+          pageCount={page_count}
           marginPagesDisplayed={0}
           pageRangeDisplayed={5}
           onPageChange={handleChange}

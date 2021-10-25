@@ -17,7 +17,6 @@ const Tams = props => {
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
   const [searchValue, setValue] = useState();
-  const [submitting, setSubmitting] = useState(false);
   const value = useContext(OpenContext);
 
   // fetch data
@@ -26,25 +25,26 @@ const Tams = props => {
     data.getTamWallet(page, token).then(item => setInfo(item));
   };
 
-  const getSearchResult = () => {
-    if (searchValue) {
-      data.getTamUserSearch(searchValue).then(item => setInfo(item));
-      setValue(undefined);
-    }
-    data.getTamWallet(1, token).then(item => setInfo(item));
-  };
-  // setSubmitting(false)
-
-  console.log(searchValue);
-
   const getTamUsers = (page, token) => {
     data.getTamUsers(page, token).then(item => setInfo(item));
   };
+
+  const getSearchResult = () => {
+    if (searchValue) {
+      data.getTamUserSearch(searchValue).then(item => setInfo(item));
+      setValue('');
+    } else if (searchValue === '') {
+      data.getTamUsers(1, token).then(item => setInfo(item));
+    }
+  };
+
+  console.log(searchValue);
 
   const WALLETDATA = {
     title: 'Wallets',
     data: info?.wallets,
     page: page,
+    page_count: info?.page_count,
     setPage: setPage,
     rowData: [
       {
@@ -75,6 +75,7 @@ const Tams = props => {
     title: 'Users',
     data: info?.trv_user,
     page: page,
+    page_count: info?.page_count,
     setPage: setPage,
     rowData: [
       {
@@ -127,6 +128,7 @@ const Tams = props => {
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>
       <TamsArticle
+        searchValue={searchValue}
         setValue={setValue}
         getSearchResult={getSearchResult}
         format={dataIdx === 1 ? WALLETDATA : USERDATA}

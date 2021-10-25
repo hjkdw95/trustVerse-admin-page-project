@@ -4,8 +4,14 @@ import Pagination from '../../utils/Pagination';
 import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
 
-const TamsArticle = ({ format, getData, setValue, getSearchResult }) => {
-  const { title, page, setPage, data, rowData } = format;
+const TamsArticle = ({
+  format,
+  getData,
+  setValue,
+  searchValue,
+  getSearchResult,
+}) => {
+  const { title, page, page_count, setPage, data, rowData } = format;
 
   useEffect(() => {
     getData();
@@ -30,9 +36,19 @@ const TamsArticle = ({ format, getData, setValue, getSearchResult }) => {
           <SearchInput
             type="text"
             placeholder="Search Email..."
+            value={searchValue}
             onChange={handleChange}
           />
           <Buttons title="Search" size="Big" type="submit" />
+          <Buttons
+            title="Refresh!"
+            size="Big"
+            type="button"
+            clickEvent={e => {
+              e.preventDefault();
+              getData();
+            }}
+          />
         </SearchForm>
       </TitleWrapper>
 
@@ -40,7 +56,12 @@ const TamsArticle = ({ format, getData, setValue, getSearchResult }) => {
         {data && (
           <>
             <TableData data={data} rowData={rowData} />
-            <Pagination info={data} page={page} setPage={setPage} />
+            <Pagination
+              info={data}
+              page={page}
+              setPage={setPage}
+              page_count={page_count}
+            />
           </>
         )}
       </Container>
@@ -72,7 +93,6 @@ const SearchInput = styled.input`
   padding: 0 1.5rem;
   border-radius: 0.5rem;
   border: 1px solid #091023;
-  margin-right: 1rem;
 `;
 
 const Container = styled.div`
