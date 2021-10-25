@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Bar } from 'react-chartjs-2';
-import fetchData from '../../service/data-fetch';
-import axios from 'axios';
+import useDashBoardArr from '../../utils/useDashBoardArr';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const options = {
   plugins: {
+    datalabels: { color: 'black' },
     legend: {
       position: 'bottom',
       labels: {
@@ -14,51 +15,46 @@ const options = {
       },
     },
   },
-
-  // false : 사용자 정의 크기에 따라 그래프 크기가 결정됨.
-  // true : 크기가 알아서 결정됨.
 };
 
-const CumulativeSubscription = props => {
-  const [cumulativeSubscriptionData, setCumulativeSubscription] = useState([]);
-  const data2 = new fetchData();
-
-  useEffect(() => {
-    data2
-      .cumulativeSubscription()
-      .then(item => setCumulativeSubscription(item.result));
-  }, []);
+const CumulativeSubscription = ({ subscriptions }) => {
+  const subscriptionArr = useDashBoardArr(
+    subscriptions,
+    'id',
+    'year_month',
+    'monthly_num',
+    'monthly_num2'
+  );
 
   const data = {
-    labels: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
-      return qwe.month;
+    labels: subscriptionArr.ArrValues?.map(qwe => {
+      return qwe[0] + '년' + qwe[1] + '월';
     }),
 
     datasets: [
       {
         stack: 'Stack 0',
-        label: '가입 회원',
-        data: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
-          return qwe.count1;
+        label: 'Member',
+        data: subscriptions?.map(qwe => {
+          return qwe.monthly_num;
         }),
-
-        backgroundColor: '#2639FF',
+        backgroundColor: '#D6832A',
       },
       {
         stack: 'Stack 0',
-        label: '탈퇴 회원',
-        data: cumulativeSubscriptionData[0]?.CumulativeRegister.map(qwe => {
-          return qwe.count2;
+        label: 'Withdrawal Member',
+        data: subscriptions?.map(qwe => {
+          return qwe.monthly_num2;
         }),
-        backgroundColor: '#7298FF',
+        backgroundColor: '#F3B45B',
       },
     ],
   };
 
   return (
     <Wrapper>
-      <Title>Regist Status</Title>
-      <Bar data={data} options={options} />
+      <Title>Subscribers Status</Title>
+      <Bar data={data} options={options} plugins={[ChartDataLabels]} />
     </Wrapper>
   );
 };

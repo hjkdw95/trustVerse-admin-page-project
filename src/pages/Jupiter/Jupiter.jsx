@@ -20,7 +20,7 @@ const Jupiter = props => {
 
   useEffect(() => {
     data.getJupiterReports(token).then(item => setReports(item.reports));
-  }, []);
+  }, [reports]);
 
   const MAPPING_JupiterTab = {
     1: <ReportTab reports={reports} />,
