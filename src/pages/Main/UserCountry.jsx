@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserCountry = ({ countries }) => {
-  const countryArr = useDashBoardArr(countries, 'country', 'country_count');
+  const countryArr = useDashBoardArr(countries, 'country', 'country_num');
 
   const COUNTRY_DATA = {
     labels: countryArr.AllKeyArr,
