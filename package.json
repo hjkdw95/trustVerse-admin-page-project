@@ -12,6 +12,7 @@
     "chart.js": "^3.5.1",
     "chartjs-plugin-datalabels": "^2.0.0",
     "dotenv": "^10.0.0",
+    "http-proxy-middleware": "^2.0.1",
     "mobx": "^6.3.5",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.2.0",
@@ -61,6 +62,7 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "https://jupiterapiserver-dev.azurewebsites.net/main/reports",
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",

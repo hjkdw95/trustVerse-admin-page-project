@@ -7,7 +7,6 @@ import axios from 'axios';
 const data = new fetchData();
 const SignIn = ({ history }) => {
   const [values, setValues] = useState({
-    userName: '',
     email: '',
     pw: '',
   });
@@ -17,14 +16,13 @@ const SignIn = ({ history }) => {
     setValues({ ...values, [name]: value });
   };
 
+  const resetInfo = () => {
+    setValues({ email: '', pw: '' });
+  };
+
   const postSignIn = e => {
     e.preventDefault();
-    if (
-      values.userName.length > 7 &&
-      values.userName.length < 51 &&
-      values.email.length < 201 &&
-      values.pw.length >= 8
-    ) {
+    if (values.email.length < 201 && values.pw.length >= 8) {
       data.signIn(values).then(res => {
         if (res.token) {
           sessionStorage.setItem('token', res.token);
@@ -46,24 +44,12 @@ const SignIn = ({ history }) => {
     }
   };
 
-  const resetInfo = () => {
-    setValues({ userName: '', email: '', pw: '' });
-  };
-
   return (
     <Container>
       <SingInBox>
         <SingInTitle>Admin Sign In</SingInTitle>
         <SingInArticle>
           <Form onsubmit="return false;">
-            <Input
-              placeholder="UserName"
-              onChange={handleChange}
-              minLength="8"
-              maxLength="50"
-              required
-              name="id"
-            ></Input>
             <div>
               <Input
                 placeholder="Email"
@@ -71,7 +57,8 @@ const SignIn = ({ history }) => {
                 minLength="1"
                 maxLength="200"
                 required
-                name="id"
+                name="email"
+                value={values.email}
               ></Input>
             </div>
             <Caution>대문자, 특수문자 모두 포함 8자 이상</Caution>
@@ -83,6 +70,7 @@ const SignIn = ({ history }) => {
                 minLength="8"
                 required
                 name="pw"
+                value={values.pw}
               ></Input>
             </div>
             <SignInBnt onClick={postSignIn}>Sign In</SignInBnt>

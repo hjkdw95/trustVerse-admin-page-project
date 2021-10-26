@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 import Paging from './Paging';
 import AddTab from './AddTab';
 import EditTab from './EditTab';
 
-const ReportTab = ({ reports }) => {
+const ReportTab = ({ reports, getData }) => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState([false, false]);
@@ -22,19 +23,22 @@ const ReportTab = ({ reports }) => {
     }
   };
 
-  const closeModal = e => {
+  const closeModal = () => {
     setShowModal([false, false]);
   };
 
   const deleteReport = (id, title) => {
     if (window.confirm(`${title} 정말로 삭제하시겠습니까?`)) {
-      fetch('http://192.168.1.244:8000/admin/delete', {
-        method: 'Delete',
+      fetch('http://192.168.1.238:8000/jupiter/delete', {
+        method: 'DELETE',
         headers: { Authorization: localStorage.getItem('token') },
         body: JSON.stringify({
-          id: id,
+          report_id: id,
         }),
       });
+      setTimeout(() => {
+        getData();
+      }, 1500);
     }
   };
 
@@ -57,16 +61,16 @@ const ReportTab = ({ reports }) => {
             {data?.map(goods => {
               return (
                 <tr key={goods.report_id}>
-                  <td>{goods.report_id}</td>
-                  <td>{goods.title}</td>
-                  <td>{goods.brief}</td>
-                  <td>
+                  <td class="id">{goods.report_id}</td>
+                  <td class="title">{goods.title}</td>
+                  <td class="brief">{goods.brief}</td>
+                  <td class="cover">
                     <a href={goods.cover_link}>{goods.cover}</a>
                   </td>
-                  <td>
+                  <td class="content">
                     <a href={goods.content_link}>{goods.content}</a>
                   </td>
-                  <td>
+                  <td class="button">
                     <button
                       onClick={() => {
                         deleteReport(goods.report_id, goods.title);
@@ -76,7 +80,7 @@ const ReportTab = ({ reports }) => {
                       Delete
                     </button>
                   </td>
-                  <td>
+                  <td class="button">
                     <button
                       onClick={e => {
                         openModal(e, goods.report_id);
@@ -91,11 +95,16 @@ const ReportTab = ({ reports }) => {
             })}
           </tbody>
         </ReportTable>
-        <AddTab showModal={showModal} closeModal={closeModal}></AddTab>
+        <AddTab
+          showModal={showModal}
+          closeModal={closeModal}
+          getData={getData}
+        ></AddTab>
         <EditTab
           showModal={showModal}
           closeModal={closeModal}
           reportId={reportId}
+          getData={getData}
         ></EditTab>
         <PageIndex>
           Showing {page === 1 ? 1 : page - 1 + '1'} to &nbsp;{page * 10} of
@@ -144,7 +153,21 @@ const ReportTable = styled.table`
     font-size: 1.4rem;
     text-align: left;
   }
-
+  .title {
+    min-width: 226.55px;
+  }
+  .brief {
+    min-width: 286px;
+  }
+  .cover {
+    min-width: 208px;
+  }
+  .content {
+    min-width: 258px;
+    a {
+      max-width: 208px;
+    }
+  }
   tbody {
     background-color: #f9f9f9;
     color: #6f7a92;

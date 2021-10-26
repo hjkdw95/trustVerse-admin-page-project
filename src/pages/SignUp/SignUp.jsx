@@ -63,7 +63,8 @@ const SignUp = ({ history }) => {
               onChange={handleChange}
               minLength="1"
               required
-              name="email"
+              name="userName"
+              value={values.userName}
             ></Input>
             <div>
               <Caution>200글자 미만</Caution>
@@ -72,8 +73,9 @@ const SignUp = ({ history }) => {
                 onChange={handleChange}
                 minLength="3"
                 maxLength="50"
-                name="id"
+                name="email"
                 required
+                value={values.email}
               ></Input>
             </div>
             <div>
@@ -85,6 +87,7 @@ const SignUp = ({ history }) => {
                 minLength="8"
                 name="pw"
                 required
+                value={values.pw}
               ></Input>
             </div>
             <div>
@@ -95,6 +98,7 @@ const SignUp = ({ history }) => {
                 minLength="8"
                 name="checkPw"
                 required
+                value={values.checkPw}
               ></Input>
             </div>
             <SignUpBnt onClick={checkLogin}>Sign Up</SignUpBnt>

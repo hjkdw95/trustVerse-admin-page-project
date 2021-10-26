@@ -2,11 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Bar } from 'react-chartjs-2';
 import useDashBoardArr from '../../utils/useDashBoardArr';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const options = {
   plugins: {
-    datalabels: { color: 'black' },
     legend: {
       position: 'bottom',
       labels: {
@@ -18,7 +16,6 @@ const options = {
 };
 
 const CumulativeSubscription = ({ subscriptions }) => {
-  console.log(subscriptions);
   const subscriptionArr = useDashBoardArr(subscriptions, 'id', 'year_month');
 
   const data = {
@@ -49,7 +46,7 @@ const CumulativeSubscription = ({ subscriptions }) => {
   return (
     <Wrapper>
       <Title>Subscribers Status</Title>
-      <Bar data={data} options={options} plugins={[ChartDataLabels]} />
+      <Bar data={data} options={options} />
     </Wrapper>
   );
 };
