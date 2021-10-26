@@ -33,7 +33,9 @@ const Main = props => {
             <UserStatusAppType appType={dashBoardData.User_App} />
           </Middle>
           <Footer>
-            <CumulativeSubscription subscriptions={dashBoardData.Monthly} />
+            <CumulativeSubscription
+              subscriptions={dashBoardData.Monthly_User}
+            />
           </Footer>
         </Container>
       )}
