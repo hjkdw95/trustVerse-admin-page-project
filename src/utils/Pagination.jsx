@@ -3,19 +3,29 @@ import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import styled from 'styled-components';
 
-const Pagination = ({ info, page, setPage }) => {
+const Pagination = ({ info, page, setPage, page_count }) => {
   const handleChange = data => {
     const selected = data.selected + 1;
     setPage(selected);
   };
 
-  const FIRST_PAGE = (page - 1) * 7;
-  const LAST_PAGE = FIRST_PAGE + 7;
+  const FIRST_PAGE = page => {
+    if (page === 1) {
+      return page;
+    }
+    return (page - 1) * 7;
+  };
+  const LAST_PAGE = page => {
+    if (page <= 7) {
+      return (page + 7) % 7;
+    }
+    return FIRST_PAGE(page) + 7;
+  };
 
   return (
     <Wrapper>
       <ListSummary>
-        Showing {FIRST_PAGE} to {LAST_PAGE} of {info.total_count} entries
+        Showing {FIRST_PAGE(page)} to {LAST_PAGE(page)} of {info.length} entries
       </ListSummary>
       <PageinationWrapper>
         <ReactPaginate
@@ -23,7 +33,7 @@ const Pagination = ({ info, page, setPage }) => {
           nextLabel={<AiOutlineArrowRight />}
           breakLabel={'...'}
           breakClassName={'break-me'}
-          pageCount={info.page_count}
+          pageCount={page_count}
           marginPagesDisplayed={0}
           pageRangeDisplayed={5}
           onPageChange={handleChange}

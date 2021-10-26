@@ -9,4 +9,4 @@ const TableData = ({ data, rowData }) => {
   return <Table columns={columns} data={tableData} />;
 };
 
-export default TableData;
+export default React.memo(TableData);

@@ -59,6 +59,11 @@ button{
 	border: none;
 	background-color: transparent;
 }
+input {
+	&:focus {
+		outline: none;
+	}
+}
 `;
 
 export default GlobalStyles;

@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import axios from 'axios';
 import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
 import styled from 'styled-components';
+import SearchContext from '../../context/Search.context';
 import OpenContext from '../../context/Open.context';
 
 const Tams = props => {
@@ -16,7 +17,11 @@ const Tams = props => {
   const token = sessionStorage.getItem('token');
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
-  const value = useContext(OpenContext);
+
+  // context API
+  const stateValue = useContext(OpenContext);
+  const searchedValue = useContext(SearchContext);
+  const { controlValue } = useContext(SearchContext);
 
   // fetch data
   const data = new fetchData();
@@ -28,10 +33,28 @@ const Tams = props => {
     data.getTamUsers(page, token).then(item => setInfo(item));
   };
 
+  const getSearchResult = () => {
+    if (searchedValue.searchValue) {
+      if (dataIdx === 1) {
+        data
+          .getTamWalletSearch(searchedValue.searchValue)
+          .then(item => setInfo(item));
+      } else {
+        data
+          .getTamUserSearch(searchedValue.searchValue)
+          .then(item => setInfo(item));
+      }
+      controlValue('');
+    } else if (searchedValue.searchValue === '') {
+      data.getTamUsers(1, token).then(item => setInfo(item));
+    }
+  };
+
   const WALLETDATA = {
     title: 'Wallets',
     data: info?.wallets,
     page: page,
+    page_count: info?.page_count,
     setPage: setPage,
     rowData: [
       {
@@ -62,6 +85,7 @@ const Tams = props => {
     title: 'Users',
     data: info?.trv_user,
     page: page,
+    page_count: info?.page_count,
     setPage: setPage,
     rowData: [
       {
@@ -112,8 +136,9 @@ const Tams = props => {
   };
 
   return (
-    <Section className={value.isNavOpened ? '' : 'expand'}>
+    <Section className={stateValue.isNavOpened ? '' : 'expand'}>
       <TamsArticle
+        getSearchResult={getSearchResult}
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
         getData={() => {
           dataIdx === 1 ? getTamWallet(page, token) : getTamUsers(page, token);
