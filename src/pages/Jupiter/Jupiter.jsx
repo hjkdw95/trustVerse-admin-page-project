@@ -28,7 +28,7 @@ const Jupiter = props => {
 };
 const Section = styled.section`
   position: relative;
-  padding-left: 10%;
+  padding-left: 20rem;
   transition: all 300ms ease-in-out;
 
   &.expand {

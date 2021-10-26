@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 import Paging from './Paging';
 import AddTab from './AddTab';
@@ -121,12 +120,13 @@ const Section = styled.div`
 `;
 
 const AddBnt = styled.button`
-  background-color: #00d82b;
   left: 1320px;
-
   top: 110px;
-  border-radius: 3px;
   height: 30px;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  ${({ theme }) => theme.greenBtn()}
+
   &:hover {
     cursor: pointer;
   }
@@ -174,8 +174,7 @@ const ReportTable = styled.table`
   }
 
   tbody button {
-    background-color: #00d82b;
-    border-radius: 3px;
+    ${({ theme }) => theme.greenBtn()}
 
     &:hover {
       cursor: pointer;

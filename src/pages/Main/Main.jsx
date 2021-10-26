@@ -48,7 +48,7 @@ const Main = props => {
 export default Main;
 
 const Section = styled.section`
-  padding-left: 10%;
+  padding-left: 20rem;
   transition: all 300ms ease-in-out;
   ${({ theme }) => theme.flexMixin()};
   ${({ theme }) => theme.title()};
