@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const AddTab = ({ showModal, closeModal }) => {
+const AddTab = ({ showModal, closeModal, getData }) => {
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -17,40 +17,48 @@ const AddTab = ({ showModal, closeModal }) => {
   const handleFileOnChange = async event => {
     event.preventDefault();
     const { name, files } = event.target;
-    setValues({ ...values, [name]: files });
-    console.log(values);
+    setValues({ ...values, [name]: files[0] });
   };
 
-  const postReport = () => {
-    const formData = new FormData();
-    formData.append(
-      'uploadImages',
-      values.cover,
-      values.content,
-      this.state.selectedFiles.name
-    );
-    fetch('http://192.168.1.244:8000/admin/add', {
-      method: 'POST',
-      headers: {
-        Authorization: localStorage.getItem('token'),
-        'content-type': 'multipart/form-data',
-      },
-      body: JSON.stringify({
-        title: values.title,
-        description: values.description,
-        cover: values.cover,
-        comment: values.comment,
-        formData,
-      }),
-    });
-    closeModal();
+  const postReport = event => {
+    event.preventDefault();
+    if (
+      values.title > 9 &&
+      values.description > 9 &&
+      values.cover &&
+      values.content
+    ) {
+      let formData = new FormData();
+      formData.append('cover', values.cover, values.cover.name);
+      formData.append('type', values.cover.type);
+      formData.append('content', values.content, values.content.name);
+      formData.append('type', values.content.type);
+
+      let requestOptions = {
+        method: 'POST',
+        body: formData,
+        redirect: 'follow',
+      };
+      fetch(
+        `https://cors-anywhere.herokuapp.com/https://jupiterapiserver-dev.azurewebsites.net/main/reports?title=${values.title}&description=${values.description}`,
+        requestOptions
+      );
+
+      setTimeout(() => {
+        getData();
+      }, 1500);
+
+      closeModal();
+    } else {
+      alert('Title, Description 10글자 이상 입력해주세요.');
+    }
   };
 
   return (
     <>
       {showModal[0] ? (
         <Background onClick={closeModal}>
-          <Section>
+          <Section onClick={e => e.stopPropagation()}>
             <AddTabBox>
               <AddTabBoxTitle>Upload Report</AddTabBoxTitle>
               <AddTabBoxArticle>
@@ -61,9 +69,9 @@ const AddTab = ({ showModal, closeModal }) => {
                       placeholder="eg. VOL_KR-20-004-JUPITER"
                       id="title"
                       name="title"
-                      minLength="10"
                       onChange={handleChange}
                       type="text"
+                      minLength="10"
                       required
                     />
                   </div>
@@ -76,7 +84,6 @@ const AddTab = ({ showModal, closeModal }) => {
                       minLength="10"
                       onChange={handleChange}
                       type="text"
-                      required
                     ></Input>
                   </div>
                   <div>
@@ -86,7 +93,6 @@ const AddTab = ({ showModal, closeModal }) => {
                       id="cover"
                       name="cover"
                       onChange={handleFileOnChange}
-                      required
                     ></FileInput>
                     <Caution>
                       *please upload a .png file of the report covers
@@ -99,17 +105,14 @@ const AddTab = ({ showModal, closeModal }) => {
                       id="content"
                       name="content"
                       onChange={handleFileOnChange}
-                      required
                     ></FileInput>
                     <Caution>
                       *please upload a .pdf file of the report content
                     </Caution>
                   </div>
-                  <UpLoadBnt
-                    type="submit"
-                    onClick={postReport}
-                    value="UpLoad"
-                  />
+                  <UpLoadBnt type="submit" onClick={postReport}>
+                    UpLoad
+                  </UpLoadBnt>
                 </Form>
               </AddTabBoxArticle>
             </AddTabBox>
@@ -202,7 +205,7 @@ const Caution = styled.div`
   text-align: left;
 `;
 
-const UpLoadBnt = styled.input`
+const UpLoadBnt = styled.button`
   width: 20rem;
   height: 4.5rem;
   margin-bottom: 2rem;

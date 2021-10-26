@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Bar } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserStatusJoinType = ({ types }) => {
@@ -9,7 +8,6 @@ const UserStatusJoinType = ({ types }) => {
 
   const options = {
     plugins: {
-      datalabels: { color: 'black' },
       legend: {
         position: 'bottom',
         labels: {
@@ -34,12 +32,7 @@ const UserStatusJoinType = ({ types }) => {
   return (
     <Wrapper>
       <Title>Subscribe Social Type</Title>
-      <Bar
-        data={data}
-        options={options}
-        plugins={[ChartDataLabels]}
-        height={300}
-      />
+      <Bar data={data} options={options} height={300} />
     </Wrapper>
   );
 };

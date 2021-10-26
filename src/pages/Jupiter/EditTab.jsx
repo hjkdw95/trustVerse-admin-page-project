@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const EditTab = ({ showModal, closeModal, reportId }) => {
+const EditTab = ({ showModal, closeModal, reportId, getData }) => {
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -12,17 +12,26 @@ const EditTab = ({ showModal, closeModal, reportId }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const EditReport = () => {
-    fetch('http://192.168.1.244:8000/admin/edit', {
-      method: 'POST',
-      headers: { Authorization: localStorage.getItem('token') },
-      body: JSON.stringify({
-        id: reportId,
-        title: values.title,
-        description: values.description,
-      }),
-    });
-    closeModal();
+  const editReport = () => {
+    if (values.title > 9 && values.description > 9) {
+      fetch('http://192.168.1.238:8000/jupiter/edit', {
+        method: 'PUT',
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          report_id: reportId,
+          title: values.title,
+          brief: values.description,
+        }),
+      });
+      setTimeout(() => {
+        getData();
+      }, 1000);
+      closeModal();
+    } else {
+      alert('Title, Description 10글자 이상 입력해주세요.');
+    }
   };
   return (
     <>
@@ -32,7 +41,7 @@ const EditTab = ({ showModal, closeModal, reportId }) => {
             <EditTabBox>
               <EditTabBoxTitle>Edit Report</EditTabBoxTitle>
               <EditTabBoxArticle>
-                <Form onSubmit={EditReport}>
+                <Form onSubmit={editReport} method="put">
                   <div>
                     <InputTitle>Report ID : {reportId}</InputTitle>
                   </div>
@@ -60,7 +69,7 @@ const EditTab = ({ showModal, closeModal, reportId }) => {
                       required
                     />
                   </div>
-                  <UpdateBnt type="submit" onClick={EditReport}>
+                  <UpdateBnt type="submit" onClick={editReport}>
                     Update
                   </UpdateBnt>
                 </Form>
