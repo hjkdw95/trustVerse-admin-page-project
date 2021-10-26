@@ -58,7 +58,7 @@ const BarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 10%;
+  margin-left: 20rem;
   background-color: #fff;
   padding: 2.65rem 3rem;
   transition: all 300ms ease-in-out;
