@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Bar } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserStatusAppType = ({ appType }) => {
@@ -9,7 +9,6 @@ const UserStatusAppType = ({ appType }) => {
 
   const options = {
     plugins: {
-      datalabels: { color: 'black' },
       legend: {
         position: 'bottom',
         labels: {
@@ -42,7 +41,7 @@ const UserStatusAppType = ({ appType }) => {
     <Wrapper>
       <Title>Subscribers Num App</Title>
       <Container>
-        <Bar data={data} options={options} plugins={[ChartDataLabels]} />
+        <Bar data={data} options={options} />
       </Container>
     </Wrapper>
   );

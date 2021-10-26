@@ -4,13 +4,7 @@ import Pagination from '../../utils/Pagination';
 import styled from 'styled-components';
 import Search from './Search';
 
-const TamsArticle = ({
-  format,
-  getData,
-  setValue,
-  searchValue,
-  getSearchResult,
-}) => {
+const TamsArticle = ({ format, getData, getSearchResult }) => {
   const { title, page, page_count, setPage, data, rowData } = format;
 
   useEffect(() => {
@@ -21,12 +15,7 @@ const TamsArticle = ({
     <Wrapper>
       <TitleWrapper>
         <Title>{title}</Title>
-        <Search
-          getData={getData}
-          setValue={setValue}
-          searchValue={searchValue}
-          getSearchResult={getSearchResult}
-        />
+        <Search getData={getData} getSearchResult={getSearchResult} />
       </TitleWrapper>
       <Container>
         {data && (

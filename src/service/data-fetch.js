@@ -59,13 +59,13 @@ class fetchData {
   }
 
   async getJupiterReports(token) {
-    const response = await axios.get(`/data/jupiterData.json`);
-    // const HEADERS = {
-    //   Authorization: token,
-    // };
-    // const response = await axios.get(`${JUPITER_URL}`, {
-    //   headers: HEADERS,
-    // });
+    // const response = await axios.get(`/data/jupiterData.json`);
+    const HEADERS = {
+      Authorization: token,
+    };
+    const response = await axios.get(`${JUPITER_URL}`, {
+      headers: HEADERS,
+    });
     const result = response.data;
     return result;
   }
@@ -82,18 +82,11 @@ class fetchData {
 
   async signIn(refs) {
     const response = await axios.post(`${ADMIN_URL}/signin`, {
-      username: refs.userName,
       email: refs.email,
       password: refs.pw,
     });
     const result = response.data;
     return Object.keys(result);
-  }
-
-  async cumulativeSubscription() {
-    const response = await axios.get(`/data/CumulativeSubscriptionData.json`);
-    const result = response.data;
-    return result;
   }
 }
 

@@ -5,6 +5,7 @@ import TamsArticle from './TamsArticle';
 import Balance from './Balance';
 import fetchData from '../../service/data-fetch';
 import styled from 'styled-components';
+import SearchContext from '../../context/Search.context';
 import OpenContext from '../../context/Open.context';
 
 const Tams = props => {
@@ -12,14 +13,15 @@ const Tams = props => {
   const location = useLocation();
   const dataIdx = location.state?.clicked;
 
-  console.log(dataIdx);
-
   // states
   const token = sessionStorage.getItem('token');
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
-  const [searchValue, setValue] = useState();
-  const value = useContext(OpenContext);
+
+  // context API
+  const stateValue = useContext(OpenContext);
+  const searchedValue = useContext(SearchContext);
+  const { controlValue } = useContext(SearchContext);
 
   // fetch data
   const data = new fetchData();
@@ -32,14 +34,18 @@ const Tams = props => {
   };
 
   const getSearchResult = () => {
-    if (searchValue) {
+    if (searchedValue.searchValue) {
       if (dataIdx === 1) {
-        data.getTamWalletSearch(searchValue).then(item => setInfo(item));
+        data
+          .getTamWalletSearch(searchedValue.searchValue)
+          .then(item => setInfo(item));
       } else {
-        data.getTamUserSearch(searchValue).then(item => setInfo(item));
+        data
+          .getTamUserSearch(searchedValue.searchValue)
+          .then(item => setInfo(item));
       }
-      setValue('');
-    } else if (searchValue === '') {
+      controlValue('');
+    } else if (searchedValue.searchValue === '') {
       data.getTamUsers(1, token).then(item => setInfo(item));
     }
   };
@@ -130,10 +136,8 @@ const Tams = props => {
   };
 
   return (
-    <Section className={value.isNavOpened ? '' : 'expand'}>
+    <Section className={stateValue.isNavOpened ? '' : 'expand'}>
       <TamsArticle
-        searchValue={searchValue}
-        setValue={setValue}
         getSearchResult={getSearchResult}
         format={dataIdx === 1 ? WALLETDATA : USERDATA}
         getData={() => {

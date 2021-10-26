@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Buttons from '../../components/Buttons';
 import styled from 'styled-components';
+import SearchContext from '../../context/Search.context';
 
-const Search = ({ getData, setValue, searchValue, getSearchResult }) => {
-  const handleChange = e => {
+const Search = ({ getData, getSearchResult }) => {
+  // context API
+  const { controlValue } = useContext(SearchContext);
+  const searchedValue = useContext(SearchContext);
+
+  const handleInputChange = e => {
     e.preventDefault();
-    const { value } = e.target;
-    setValue(value);
+    controlValue(e.target.value);
   };
 
   return (
@@ -19,8 +23,10 @@ const Search = ({ getData, setValue, searchValue, getSearchResult }) => {
       <SearchInput
         type="text"
         placeholder="Search Email..."
-        value={searchValue || ''}
-        onChange={handleChange}
+        value={searchedValue.searchValue || ''}
+        onChange={e => {
+          handleInputChange(e);
+        }}
       />
       <Buttons title="Search" size="Big" type="submit" />
       <Buttons
