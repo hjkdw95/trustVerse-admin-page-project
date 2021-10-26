@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 
 const useDashBoardArr = (defaultArr, keyName, valueName) => {
-  const [arr, setArr] = useState(defaultArr);
+  // const [arr, setArr] = useState(defaultArr);
+  const arr = defaultArr;
 
   const ArrKeys = arr.map(key => key[keyName]);
   const ArrValues = arr.map(value => value[valueName]);
