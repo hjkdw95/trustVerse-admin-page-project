@@ -7,7 +7,7 @@ const useDashBoardArr = (defaultArr, keyName, valueName) => {
   const ArrValues = arr.map(value => value[valueName]);
 
   const switchNull = arr => {
-    const itemIndex = arr.indexOf('Undefined');
+    const itemIndex = arr.indexOf('');
     if (itemIndex !== -1) {
       arr[itemIndex] = 'Others';
     }
@@ -15,6 +15,8 @@ const useDashBoardArr = (defaultArr, keyName, valueName) => {
   };
 
   const AllKeyArr = switchNull(ArrKeys);
+
+  console.log(AllKeyArr);
 
   return { AllKeyArr, ArrValues };
 };

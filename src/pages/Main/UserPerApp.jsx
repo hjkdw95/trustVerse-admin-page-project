@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserPerApp = ({ ratio }) => {
-  const appDataArr = useDashBoardArr(ratio, 'appname', 'user_ratio');
+  const appDataArr = useDashBoardArr(ratio, 'appname', 'app_ratio');
 
   const APP_DATA = {
     labels: appDataArr.AllKeyArr,

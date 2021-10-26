@@ -19,6 +19,8 @@ const Main = props => {
     dataFactory.getDashBoard().then(data => setDashBoardData(data));
   }, []);
 
+  console.log(dashBoardData);
+
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>
       {dashBoardData && (

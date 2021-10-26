@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2';
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserStatusJoinType = ({ types }) => {
-  const SocialData = useDashBoardArr(types, 'social_type', 'type_count');
+  const SocialData = useDashBoardArr(types, 'social_type', 'social_type_num');
 
   const options = {
     plugins: {

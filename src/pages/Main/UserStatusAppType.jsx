@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import useDashBoardArr from '../../utils/useDashBoardArr';
 
 const UserStatusAppType = ({ appType }) => {
-  const appTypeArr = useDashBoardArr(appType, 'appname', 'user_count');
+  const appTypeArr = useDashBoardArr(appType, 'appname', 'app_num');
 
   const options = {
     plugins: {
