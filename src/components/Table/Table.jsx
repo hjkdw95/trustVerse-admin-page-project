@@ -35,7 +35,9 @@ const Table = ({ columns, data }) => {
 
 export default Table;
 
-const TableSheet = styled.table``;
+const TableSheet = styled.table`
+  overflow: scroll;
+`;
 
 const TableHead = styled.thead`
   padding-bottom: 1rem;

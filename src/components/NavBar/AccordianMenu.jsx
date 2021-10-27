@@ -51,7 +51,7 @@ export default AccordianMenu;
 
 const Nav = styled.nav`
   width: 20rem;
-  height: 100vh;
+  height: 130vh;
   position: fixed;
   top: 0;
   left: 0;

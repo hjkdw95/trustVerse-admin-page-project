@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
 const Modal = ({ coinData, setModalOn, data }) => {
   const { name, rowIdx } = coinData;
   const [info, setInfo] = useState();
+
+  //context API
+  const navStatus = useContext(OpenContext);
 
   const TITLE = 'Coin Details';
 
@@ -23,7 +27,10 @@ const Modal = ({ coinData, setModalOn, data }) => {
   const balance = +rawBalance;
 
   return (
-    <Container onClick={handleWindow}>
+    <Container
+      onClick={handleWindow}
+      className={navStatus.isNavOpened ? '' : 'expand'}
+    >
       <ModalContainer className="modal">
         <H1>{TITLE}</H1>
         <Dl>
@@ -47,8 +54,20 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  margin-left: 15%;
+  margin-left: 20rem;
   z-index: 100000;
+
+  @media screen and (max-width: 1024px) {
+    margin-left: 0;
+  }
+
+  &.expand {
+    margin-left: 0;
+
+    @media screen and (max-width: 1024px) {
+      margin-left: 20rem;
+    }
+  }
 `;
 
 const ModalContainer = styled.div`

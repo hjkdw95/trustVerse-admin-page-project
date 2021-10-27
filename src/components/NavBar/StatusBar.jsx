@@ -37,15 +37,13 @@ const StatusBar = () => {
       </IconWrapper>
       {isLogin ? (
         <StatusWrapper>
-          <TitleWrapper>
-            안녕하세요, <span>Admin</span>님
-          </TitleWrapper>
-          <Buttons title="Log Out" clickAction={handleLogOut} />
+          <TitleWrapper>Good Day</TitleWrapper>
+          <Buttons title="Log Out" clickEvent={handleLogOut} />
         </StatusWrapper>
       ) : (
         <StatusWrapper>
           <TitleWrapper>로그인을 진행해주세요</TitleWrapper>
-          <Buttons title="Log In" clickAction={() => history.push('/signIn')} />
+          <Buttons title="Log In" clickEvent={() => history.push('/signIn')} />
         </StatusWrapper>
       )}
     </BarWrapper>
@@ -86,11 +84,7 @@ const TitleWrapper = styled.div`
   margin-right: 1.5rem;
   font-size: 1.8rem;
   line-height: 1.8rem;
-
-  span {
-    font-size: 1.8rem;
-    font-weight: 700;
-  }
+  font-weight: 700;
 `;
 
 const IconWrapper = styled.div`

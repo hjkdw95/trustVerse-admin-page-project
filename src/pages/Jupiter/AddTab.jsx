@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
 const AddTab = ({ showModal, closeModal, getData }) => {
+  //context API
+  const navStatus = useContext(OpenContext);
+
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -23,8 +27,8 @@ const AddTab = ({ showModal, closeModal, getData }) => {
   const postReport = event => {
     event.preventDefault();
     if (
-      values.title > 9 &&
-      values.description > 9 &&
+      values.title.length > 9 &&
+      values.description.length > 9 &&
       values.cover &&
       values.content
     ) {
@@ -34,15 +38,18 @@ const AddTab = ({ showModal, closeModal, getData }) => {
       formData.append('content', values.content, values.content.name);
       formData.append('type', values.content.type);
 
+      console.log(values.cover, values.content);
+
       let requestOptions = {
         method: 'POST',
         body: formData,
         redirect: 'follow',
       };
-      fetch(
-        `https://cors-anywhere.herokuapp.com/https://jupiterapiserver-dev.azurewebsites.net/main/reports?title=${values.title}&description=${values.description}`,
-        requestOptions
-      );
+
+      // fetch(
+      //   `https://cors-anywhere.herokuapp.com/https://jupiterapiserver-dev.azurewebsites.net/main/reports?title=${values.title}&description=${values.description}`,
+      //   requestOptions
+      // );
 
       setTimeout(() => {
         getData();
@@ -59,7 +66,7 @@ const AddTab = ({ showModal, closeModal, getData }) => {
       {showModal[0] ? (
         <Background onClick={closeModal}>
           <Section onClick={e => e.stopPropagation()}>
-            <AddTabBox>
+            <AddTabBox className={navStatus.isNavOpened ? '' : 'expand'}>
               <AddTabBoxTitle>Upload Report</AddTabBoxTitle>
               <AddTabBoxArticle>
                 <Form onSubmit={postReport}>
@@ -110,7 +117,7 @@ const AddTab = ({ showModal, closeModal, getData }) => {
                       *please upload a .pdf file of the report content
                     </Caution>
                   </div>
-                  <UpLoadBnt type="submit" onClick={postReport}>
+                  <UpLoadBnt disabled type="submit" onClick={postReport}>
                     UpLoad
                   </UpLoadBnt>
                 </Form>
@@ -136,12 +143,10 @@ const Background = styled.div`
 
 const AddTabBox = styled.div`
   position: fixed;
-  left: 57%;
+  left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 80rem;
-  margin: 0 auto;
-  margin-top: 5rem;
   text-align: center;
   background-color: white;
   border: 1px rgba(0, 0, 0, 0.2) solid;
@@ -149,6 +154,15 @@ const AddTabBox = styled.div`
   overflow: hidden;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+  @media screen and (max-width: 1024px) {
+    width: 70%;
+
+    &.expand {
+      width: 60%;
+      margin-left: 100px;
+    }
+  }
 `;
 
 const Form = styled.form``;
@@ -217,6 +231,10 @@ const UpLoadBnt = styled.button`
 
   &:hover {
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 32rem;
   }
 `;
 

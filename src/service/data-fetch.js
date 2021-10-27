@@ -9,8 +9,13 @@ import {
 
 class fetchData {
   // 헤더 넣어줘야함
-  async getDashBoard() {
-    const response = await axios.get(`${DASHBOARD_URL}`);
+  async getDashBoard(token) {
+    const HEADERS = {
+      Authorization: token,
+    };
+    const response = await axios.get(`${DASHBOARD_URL}`, {
+      headers: HEADERS,
+    });
     const result = response.data.result;
     return result;
   }
@@ -27,11 +32,13 @@ class fetchData {
     return result;
   }
 
-  async getTamUserSearch(item) {
-    // const HEADERS = {
-    //   Authorization: token,
-    // };
-    const response = await axios.get(`${USER_URL}?keyword=${item}`);
+  async getTamUserSearch(token, item) {
+    const HEADERS = {
+      Authorization: token,
+    };
+    const response = await axios.get(`${USER_URL}?keyword=${item}`, {
+      headers: HEADERS,
+    });
     const result = response.data.results;
     return result;
   }
@@ -48,18 +55,19 @@ class fetchData {
     return result;
   }
 
-  async getTamWalletSearch(item) {
-    // const HEADERS = {
-    //   Authorization: token,
-    // };
+  async getTamWalletSearch(token, item) {
+    const HEADERS = {
+      Authorization: token,
+    };
 
-    const response = await axios.get(`${WALLET_URL}?keyword=${item}`);
+    const response = await axios.get(`${WALLET_URL}?keyword=${item}`, {
+      headers: HEADERS,
+    });
     const result = response.data.results;
     return result;
   }
 
   async getJupiterReports(token) {
-    // const response = await axios.get(`/data/jupiterData.json`);
     const HEADERS = {
       Authorization: token,
     };
@@ -73,7 +81,7 @@ class fetchData {
   async signUp(refs) {
     const response = await axios.post(`${ADMIN_URL}/signup`, {
       email: refs.email,
-      username: refs.userName,
+      name: refs.userName,
       password: refs.pw,
     });
     const result = response.data;
@@ -86,7 +94,7 @@ class fetchData {
       password: refs.pw,
     });
     const result = response.data;
-    return Object.keys(result);
+    return result;
   }
 }
 

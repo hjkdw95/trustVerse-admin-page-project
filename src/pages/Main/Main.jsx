@@ -12,14 +12,13 @@ import styled from 'styled-components';
 const Main = props => {
   const dataFactory = new fetchData();
   const value = useContext(OpenContext);
+  const token = sessionStorage.getItem('token');
 
   const [dashBoardData, setDashBoardData] = useState();
 
   useEffect(() => {
-    dataFactory.getDashBoard().then(data => setDashBoardData(data));
+    dataFactory.getDashBoard(token).then(data => setDashBoardData(data));
   }, []);
-
-  console.log(dashBoardData);
 
   return (
     <Section className={value.isNavOpened ? '' : 'expand'}>

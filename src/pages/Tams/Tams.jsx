@@ -14,7 +14,6 @@ const Tams = props => {
   const dataIdx = location.state?.clicked;
 
   // states
-  const token = sessionStorage.getItem('token');
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
 
@@ -25,6 +24,7 @@ const Tams = props => {
 
   // fetch data
   const data = new fetchData();
+  const token = sessionStorage.getItem('token');
   const getTamWallet = (page, token) => {
     data.getTamWallet(page, token).then(item => setInfo(item));
   };
@@ -37,11 +37,11 @@ const Tams = props => {
     if (searchedValue.searchValue) {
       if (dataIdx === 1) {
         data
-          .getTamWalletSearch(searchedValue.searchValue)
+          .getTamWalletSearch(token, searchedValue.searchValue)
           .then(item => setInfo(item));
       } else {
         data
-          .getTamUserSearch(searchedValue.searchValue)
+          .getTamUserSearch(token, searchedValue.searchValue)
           .then(item => setInfo(item));
       }
       controlValue('');

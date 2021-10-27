@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import OpenContext from '../../context/Open.context';
 
 const EditTab = ({ showModal, closeModal, reportId, getData }) => {
   const [values, setValues] = useState({
@@ -7,38 +8,41 @@ const EditTab = ({ showModal, closeModal, reportId, getData }) => {
     description: '',
   });
 
+  //context API
+  const navStatus = useContext(OpenContext);
+
   const handleChange = event => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   };
 
   const editReport = () => {
-    if (values.title > 9 && values.description > 9) {
-      fetch('http://192.168.1.238:8000/jupiter/edit', {
-        method: 'PUT',
-        headers: {
-          Authorization: localStorage.getItem('token'),
-        },
-        body: JSON.stringify({
-          report_id: reportId,
-          title: values.title,
-          brief: values.description,
-        }),
-      });
-      setTimeout(() => {
-        getData();
-      }, 1000);
-      closeModal();
-    } else {
-      alert('Title, Description 10글자 이상 입력해주세요.');
-    }
+    // if (values.title.length > 9 && values.description.length > 9) {
+    //   fetch('http://192.168.1.238:8000/jupiter/edit', {
+    //     method: 'PUT',
+    //     headers: {
+    //       Authorization: sessionStorage.getItem('token'),
+    //     },
+    //     body: JSON.stringify({
+    //       report_id: reportId,
+    //       title: values.title,
+    //       brief: values.description,
+    //     }),
+    //   });
+    //   setTimeout(() => {
+    //     getData();
+    //   }, 1000);
+    //   closeModal();
+    // } else {
+    //   alert('Title, Description 10글자 이상 입력해주세요.');
+    // }
   };
   return (
     <>
       {showModal[1] ? (
         <Background onClick={closeModal}>
           <Section onClick={e => e.stopPropagation()}>
-            <EditTabBox>
+            <EditTabBox className={navStatus.isNavOpened ? '' : 'expand'}>
               <EditTabBoxTitle>Edit Report</EditTabBoxTitle>
               <EditTabBoxArticle>
                 <Form onSubmit={editReport} method="put">
@@ -69,7 +73,7 @@ const EditTab = ({ showModal, closeModal, reportId, getData }) => {
                       required
                     />
                   </div>
-                  <UpdateBnt type="submit" onClick={editReport}>
+                  <UpdateBnt disabled type="submit" onClick={editReport}>
                     Update
                   </UpdateBnt>
                 </Form>
@@ -100,18 +104,26 @@ const Background = styled.div`
 
 const EditTabBox = styled.div`
   position: fixed;
-  left: 57%;
+  left: 50%;
   top: 50%;
-  width: 80rem;
   transform: translate(-50%, -50%);
-
-  border: 1px rgba(0, 0, 0, 0.2) solid;
-  border-radius: 5px;
+  width: 80rem;
   text-align: center;
   background-color: white;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+  @media screen and (max-width: 1024px) {
+    width: 80%;
+
+    &.expand {
+      width: 50%;
+      margin-left: 100px;
+    }
+  }
 `;
 
 const Form = styled.form``;
@@ -128,6 +140,10 @@ const EditTabBoxTitle = styled.div`
 
 const EditTabBoxArticle = styled.div`
   padding: 0 10rem;
+
+  @media screen and (max-width: 1024px) {
+    padding: 0 3rem;
+  }
 `;
 
 const InputTitle = styled.label`
@@ -165,12 +181,20 @@ const UpdateBnt = styled.button`
   &:hover {
     cursor: pointer;
   }
+
+  @media screen and (max-width: 1024px) {
+    width: 32rem;
+  }
 `;
 
 const Caution = styled.div`
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: red;
+
+  @media screen and (max-width: 1024px) {
+    margin: 0 30px 30px;
+  }
 `;
 
 export default EditTab;

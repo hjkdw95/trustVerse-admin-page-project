@@ -27,18 +27,18 @@ const ReportTab = ({ reports, getData }) => {
   };
 
   const deleteReport = (id, title) => {
-    if (window.confirm(`${title} 정말로 삭제하시겠습니까?`)) {
-      fetch('http://192.168.1.238:8000/jupiter/delete', {
-        method: 'DELETE',
-        headers: { Authorization: localStorage.getItem('token') },
-        body: JSON.stringify({
-          report_id: id,
-        }),
-      });
-      setTimeout(() => {
-        getData();
-      }, 1500);
-    }
+    // if (window.confirm(`${title} 정말로 삭제하시겠습니까?`)) {
+    //   fetch('http://192.168.1.238:8000/jupiter/delete', {
+    //     method: 'DELETE',
+    //     headers: { Authorization: sessionStorage.getItem('token') },
+    //     body: JSON.stringify({
+    //       report_id: id,
+    //     }),
+    //   });
+    //   setTimeout(() => {
+    //     getData();
+    //   }, 1500);
+    // }
   };
 
   return (
@@ -142,6 +142,7 @@ const ReportTableContainer = styled.div`
   flex-direction: column;
   background-color: #fff;
   padding: 3rem;
+  overflow: scroll;
 `;
 
 const ReportTable = styled.table`
