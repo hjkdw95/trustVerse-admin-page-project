@@ -18,12 +18,12 @@ export default class Routes extends Component {
         <Router>
           <NavBar />
           <Switch>
-            <Route exact path="/" component={Main} />
+            <PrivateRoutes exact path="/" component={Main} />
             <PublicRoutes exact path="/signUp" component={SignUp} />
             <PublicRoutes exact path="/signIn" component={SignIn} />
-            <Route exact path="/jupiter" component={Jupiter} />
+            <PrivateRoutes exact path="/jupiter" component={Jupiter} />
             <SearchValueProvider>
-              <Route exact path="/tams" component={Tams} />
+              <PrivateRoutes exact path="/tams" component={Tams} />
             </SearchValueProvider>
           </Switch>
         </Router>
