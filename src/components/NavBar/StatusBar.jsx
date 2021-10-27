@@ -63,8 +63,16 @@ const BarWrapper = styled.div`
   padding: 2.65rem 3rem;
   transition: all 300ms ease-in-out;
 
+  @media screen and (max-width: 1024px) {
+    margin-left: 0;
+  }
+
   &.expand {
     margin-left: 0;
+
+    @media screen and (max-width: 1024px) {
+      margin-left: 20rem;
+    }
   }
 `;
 

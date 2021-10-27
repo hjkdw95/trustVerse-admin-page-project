@@ -61,8 +61,17 @@ const Nav = styled.nav`
   z-index: 1000;
   transition: all 300ms ease-in-out;
 
+  @media screen and (max-width: 1024px) {
+    width: 0;
+  }
+
   &.closed {
     width: 0;
+
+    @media screen and (max-width: 1024px) {
+      width: 20rem;
+      position: absolute;
+    }
   }
 `;
 

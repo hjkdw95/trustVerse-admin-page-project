@@ -155,7 +155,15 @@ const Section = styled.section`
   padding-left: 20rem;
   transition: all 300ms ease-in-out;
 
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+  }
+
   &.expand {
     padding-left: 0;
+
+    @media screen and (max-width: 1024px) {
+      padding-left: 20rem;
+    }
   }
 `;

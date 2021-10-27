@@ -36,5 +36,10 @@ const Title = styled.h3`
 const DescContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  align-items: center;
+  padding-top: 15%;
+
+  @media screen and (max-width: 1024px) {
+    padding: 0;
+  }
 `;
