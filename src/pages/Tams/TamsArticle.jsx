@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import TableData from './Table/TableData';
+import TableData from '../../components/Table/TableData';
 import Pagination from '../../utils/Pagination';
 import styled from 'styled-components';
+import Search from './Search';
 
-const TamsArticle = ({ format, getData }) => {
-  const { title, page, setPage, data, rowData } = format;
+const TamsArticle = ({ format, getData, getSearchResult }) => {
+  const { title, page, page_count, setPage, data, rowData } = format;
 
   useEffect(() => {
     getData();
@@ -12,12 +13,20 @@ const TamsArticle = ({ format, getData }) => {
 
   return (
     <Wrapper>
-      <H1>{title}</H1>
+      <TitleWrapper>
+        <Title>{title}</Title>
+        <Search getData={getData} getSearchResult={getSearchResult} />
+      </TitleWrapper>
       <Container>
         {data && (
           <>
-            <TableData data={data.trv_user} rowData={rowData} />
-            <Pagination info={data} page={page} setPage={setPage} />
+            <TableData data={data} rowData={rowData} />
+            <Pagination
+              info={data}
+              page={page}
+              setPage={setPage}
+              page_count={page_count}
+            />
           </>
         )}
       </Container>
@@ -31,8 +40,13 @@ const Wrapper = styled.div`
   padding: 3rem;
 `;
 
-const H1 = styled.h1`
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 2rem;
+`;
+
+const Title = styled.h1`
   ${({ theme }) => theme.title()}
 `;
 

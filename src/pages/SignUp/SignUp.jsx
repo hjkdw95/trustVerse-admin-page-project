@@ -7,9 +7,10 @@ import axios from 'axios';
 const data = new fetchData();
 const SignUp = ({ history }) => {
   const [values, setValues] = useState({
-    id: '',
+    userName: '',
     pw: '',
     checkPw: '',
+    email: '',
   });
 
   const handleChange = event => {
@@ -29,7 +30,7 @@ const SignUp = ({ history }) => {
   };
 
   const resetInfo = () => {
-    setValues({ id: '', pw: '', checkPw: '' });
+    setValues({ userName: '', pw: '', checkPw: '', email: '' });
     alert('가입 정보를 다시 확인해 주세요');
   };
 
@@ -39,13 +40,14 @@ const SignUp = ({ history }) => {
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
 
     const formCheck =
-      values.id.length > 7 &&
-      values.id.length < 17 &&
+      values.userName.length > 7 &&
+      values.userName.length < 51 &&
+      values.email.length < 201 &&
+      values.email.indexOf('@') &&
+      values.pw.length >= 8 &&
       str.test(values.pw) &&
       special.test(values.pw) &&
-      values.pw.length >= 8 &&
       values.checkPw === values.pw;
-
     formCheck ? postSignUp() : resetInfo();
   };
 
@@ -55,15 +57,25 @@ const SignUp = ({ history }) => {
         <SingUpTitle>Admin Sign Up</SingUpTitle>
         <SingUpArticle>
           <Form onsubmit="return false;">
+            <Caution>50글자 미만</Caution>
+            <Input
+              placeholder="UserName"
+              onChange={handleChange}
+              minLength="1"
+              required
+              name="userName"
+              value={values.userName}
+            ></Input>
             <div>
-              <Caution>8자 이상 16글자 미만</Caution>
+              <Caution>200글자 미만</Caution>
               <Input
-                placeholder="Id"
+                placeholder="Email"
                 onChange={handleChange}
-                minLength="8"
-                maxLength="16"
-                name="id"
+                minLength="3"
+                maxLength="50"
+                name="email"
                 required
+                value={values.email}
               ></Input>
             </div>
             <div>
@@ -75,6 +87,7 @@ const SignUp = ({ history }) => {
                 minLength="8"
                 name="pw"
                 required
+                value={values.pw}
               ></Input>
             </div>
             <div>
@@ -85,6 +98,7 @@ const SignUp = ({ history }) => {
                 minLength="8"
                 name="checkPw"
                 required
+                value={values.checkPw}
               ></Input>
             </div>
             <SignUpBnt onClick={checkLogin}>Sign Up</SignUpBnt>

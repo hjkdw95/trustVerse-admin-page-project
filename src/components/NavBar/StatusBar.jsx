@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router';
 import { BsList } from 'react-icons/bs';
 import styled from 'styled-components';
 import OpenContext from '../../context/Open.context';
+import Buttons from '../Buttons';
 
 const StatusBar = () => {
   // history
@@ -39,16 +40,12 @@ const StatusBar = () => {
           <TitleWrapper>
             안녕하세요, <span>Admin</span>님
           </TitleWrapper>
-          <Button type="button" onClick={handleLogOut}>
-            Log Out
-          </Button>
+          <Buttons title="Log Out" clickAction={handleLogOut} />
         </StatusWrapper>
       ) : (
         <StatusWrapper>
           <TitleWrapper>로그인을 진행해주세요</TitleWrapper>
-          <Button type="button" onClick={() => history.push('/signIn')}>
-            Log In
-          </Button>
+          <Buttons title="Log In" clickAction={() => history.push('/signIn')} />
         </StatusWrapper>
       )}
     </BarWrapper>
@@ -61,7 +58,7 @@ const BarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 10%;
+  margin-left: 20rem;
   background-color: #fff;
   padding: 2.65rem 3rem;
   transition: all 300ms ease-in-out;
@@ -96,19 +93,5 @@ const IconWrapper = styled.div`
 
   &:hover {
     cursor: pointer;
-  }
-`;
-
-const Button = styled.button`
-  display: inline-block;
-  background-color: #373063;
-  padding: 0.5rem 1rem;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: all 150ms ease-in-out;
-  &:hover {
-    background-color: #373063e6;
   }
 `;

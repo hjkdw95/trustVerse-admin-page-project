@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Modal from './Modal/Modal';
+import Modal from '../../components/Modal/Modal';
 
 const Balance = ({ values, data }) => {
   const [isModalOn, setModalOn] = useState(false);
@@ -22,7 +22,7 @@ const Balance = ({ values, data }) => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <TagWrapper>
       {values?.map((coin, idx) => {
         return (
           <Tags key={idx} onClick={handleClick}>
@@ -30,12 +30,22 @@ const Balance = ({ values, data }) => {
           </Tags>
         );
       })}
-      {isModalOn && <Modal coinData={coinData} setModalOn={setModalOn} />}
-    </div>
+      {isModalOn && (
+        <Modal
+          coinData={coinData}
+          setModalOn={setModalOn}
+          data={data.wallets}
+        />
+      )}
+    </TagWrapper>
   );
 };
 
 export default Balance;
+
+const TagWrapper = styled.div`
+  text-align: center;
+`;
 
 const Tags = styled.span`
   background-color: #00d82c;

@@ -50,7 +50,7 @@ const AccordianMenu = props => {
 export default AccordianMenu;
 
 const Nav = styled.nav`
-  width: 10%;
+  width: 20rem;
   height: 100vh;
   position: fixed;
   top: 0;

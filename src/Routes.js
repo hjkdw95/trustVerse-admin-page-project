@@ -8,7 +8,8 @@ import SignIn from './pages/SignIn/SignIn';
 import Tams from './pages/Tams/Tams';
 import PrivateRoutes from './components/PrivateRoutes';
 import PublicRoutes from './components/PublicRoutes';
-import StatusProvider from './components/StatusProvider.js/StatusProvider';
+import StatusProvider from './components/Providers/StatusProvider';
+import SearchValueProvider from './components/Providers/SearchValueProvider';
 
 export default class Routes extends Component {
   render() {
@@ -21,7 +22,9 @@ export default class Routes extends Component {
             <PublicRoutes exact path="/signUp" component={SignUp} />
             <PublicRoutes exact path="/signIn" component={SignIn} />
             <PrivateRoutes exact path="/jupiter" component={Jupiter} />
-            <PrivateRoutes exact path="/tams" component={Tams} />
+            <SearchValueProvider>
+              <PrivateRoutes exact path="/tams" component={Tams} />
+            </SearchValueProvider>
           </Switch>
         </Router>
       </StatusProvider>
