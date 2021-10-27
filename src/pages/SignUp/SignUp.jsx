@@ -1,11 +1,15 @@
-import { React, useState } from 'react';
+import { React, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fetchData from '../../service/data-fetch';
 import axios from 'axios';
+import OpenContext from '../../context/Open.context';
 
 const data = new fetchData();
 const SignUp = ({ history }) => {
+  // context API
+  const statusValue = useContext(OpenContext);
+
   const [values, setValues] = useState({
     userName: '',
     pw: '',
@@ -23,7 +27,7 @@ const SignUp = ({ history }) => {
       if ((res.message = 'SUCCESS')) {
         alert('가입 축하드립니다.');
         return history.push('/signIn');
-      } else if (res.MESSAGE === 'DUPLICATED ADMIN NAME') {
+      } else if (res.message === 'DUPLICATED ADMIN NAME') {
         alert('이미 가입된 아이디 입니다.');
       }
     });
@@ -40,7 +44,7 @@ const SignUp = ({ history }) => {
     const special = /[~!@#$%^&*()_+|<>?:{}]/;
 
     const formCheck =
-      values.userName.length > 7 &&
+      values.userName &&
       values.userName.length < 51 &&
       values.email.length < 201 &&
       values.email.indexOf('@') &&
@@ -52,7 +56,7 @@ const SignUp = ({ history }) => {
   };
 
   return (
-    <Container>
+    <Container className={statusValue.isNavOpened ? '' : 'expand'}>
       <SingUpBox>
         <SingUpTitle>Admin Sign Up</SingUpTitle>
         <SingUpArticle>
@@ -76,7 +80,7 @@ const SignUp = ({ history }) => {
                 name="email"
                 required
                 value={values.email}
-              ></Input>
+              />
             </div>
             <div>
               <Caution>대문자, 특수문자 모두 포함 8자 이상</Caution>
@@ -114,7 +118,12 @@ const SignUp = ({ history }) => {
 
 const Container = styled.div`
   position: relative;
-  padding-left: 15%;
+  padding-left: 20rem;
+  transition: all 300ms ease-in-out;
+
+  &.expand {
+    padding-left: 0;
+  }
 `;
 
 const SingUpBox = styled.div`

@@ -1,11 +1,15 @@
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import fetchData from '../../service/data-fetch';
 import axios from 'axios';
+import OpenContext from '../../context/Open.context';
 
 const data = new fetchData();
 const SignIn = ({ history }) => {
+  // context API
+  const statusValue = useContext(OpenContext);
+
   const [values, setValues] = useState({
     email: '',
     pw: '',
@@ -45,7 +49,7 @@ const SignIn = ({ history }) => {
   };
 
   return (
-    <Container>
+    <Container className={statusValue.isNavOpened ? '' : 'expand'}>
       <SingInBox>
         <SingInTitle>Admin Sign In</SingInTitle>
         <SingInArticle>
@@ -59,7 +63,7 @@ const SignIn = ({ history }) => {
                 required
                 name="email"
                 value={values.email}
-              ></Input>
+              />
             </div>
             <Caution>대문자, 특수문자 모두 포함 8자 이상</Caution>
             <div>
@@ -83,9 +87,15 @@ const SignIn = ({ history }) => {
     </Container>
   );
 };
+
 const Container = styled.div`
   position: relative;
-  padding-left: 15%;
+  padding-left: 20rem;
+  transition: all 300ms ease-in-out;
+
+  &.expand {
+    padding-left: 0;
+  }
 `;
 
 const SingInBox = styled.div`
