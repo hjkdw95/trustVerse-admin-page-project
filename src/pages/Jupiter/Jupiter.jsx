@@ -31,8 +31,16 @@ const Section = styled.section`
   padding-left: 20rem;
   transition: all 300ms ease-in-out;
 
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+  }
+
   &.expand {
     padding: 0;
+
+    @media screen and (max-width: 1024px) {
+      padding-left: 20rem;
+    }
   }
 `;
 export default Jupiter;

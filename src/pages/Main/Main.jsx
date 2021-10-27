@@ -25,20 +25,26 @@ const Main = props => {
     <Section className={value.isNavOpened ? '' : 'expand'}>
       {dashBoardData && (
         <Container>
-          <Header>
+          <div className="grid">
             <UserPerApp ratio={dashBoardData.User_Appratio} />
+          </div>
+          <div className="grid">
             <UserStatusJoinType types={dashBoardData.User_Socialtype} />
+          </div>
+          <div className="grid">
             <UserCountry countries={dashBoardData.Country} />
-          </Header>
-          <Middle>
+          </div>
+          <div className="grid">
             <TotalAccount accounts={dashBoardData.Total} />
+          </div>
+          <div className="grid">
             <UserStatusAppType appType={dashBoardData.User_App} />
-          </Middle>
-          <Footer>
+          </div>
+          <div className="grid">
             <CumulativeSubscription
               subscriptions={dashBoardData.Monthly_User}
             />
-          </Footer>
+          </div>
         </Container>
       )}
     </Section>
@@ -50,35 +56,46 @@ export default Main;
 const Section = styled.section`
   padding-left: 20rem;
   transition: all 300ms ease-in-out;
-  ${({ theme }) => theme.flexMixin()};
   ${({ theme }) => theme.title()};
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+  }
 
   &.expand {
     padding-left: 0;
+
+    @media screen and (max-width: 1024px) {
+      padding-left: 20rem;
+    }
   }
 `;
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 400px 400px 400px;
+  grid-template-rows: repeat(3, 0.25fr);
+  grid-template-columns: repeat(6, 0.5fr);
   gap: 20px 20px;
-  margin-top: 20px;
-`;
+  padding: 3rem;
 
-const Header = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px 20px;
-`;
-
-const Middle = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 20px;
-`;
-
-const Footer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px 20px;
+  .grid {
+    &:nth-child(1) {
+      grid-column: 1 / span 2;
+    }
+    &:nth-child(2) {
+      grid-column: 3 / span 2;
+    }
+    &:nth-child(3) {
+      grid-column: 5 / span 2;
+    }
+    &:nth-child(4) {
+      grid-column: 1 / span 3;
+    }
+    &:nth-child(5) {
+      grid-column: 4 / span 3;
+    }
+    &:nth-child(6) {
+      grid-column: 1 / 7;
+    }
+  }
 `;

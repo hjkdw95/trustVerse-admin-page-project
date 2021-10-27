@@ -57,4 +57,6 @@ const Td = styled.td`
   ${({ theme }) => theme.tableFont()};
   text-align: center;
   word-break: break-all;
+  white-space: nowrap;
+  overflow: scroll;
 `;
